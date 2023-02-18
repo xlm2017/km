@@ -1,0 +1,101 @@
+<html>
+
+<head>
+  <base>
+</head>
+<title>测试通知</title>
+</head>
+
+<body>
+  <video id="videoEL" controls autoplay crossorigin="anonymous"
+    src="https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4" width="500"></video>
+
+</body>
+<script>
+  function doNotify(title, options = {}, events = {}) {
+    const notification = new Notification(title, options);
+    for (let event in events) {
+      notification[event] = events[event];
+    }
+  }
+
+  function notify(title, options = {}, events = {}) {
+    if (!("Notification" in window)) {
+      return console.error("This browser does not support desktop notification");
+    }
+    else if (Notification.permission === "granted") {
+      doNotify(title, options, events);
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then(function (permission) {
+        if (permission === "granted") {
+          doNotify(title, options, events);
+        }
+      });
+    }
+  }
+  notify("中奖提示", {
+    icon: "https://sf1-ttcdn-tos.pstatp.com/img/user-avatar/f1a9f122e925aeef5e4534ff7f706729~300x300.image",
+    body: "恭喜你，掘金签到一等奖",
+    tag: "prize"
+  }, {
+    onclick(ev) {
+      console.log(ev);
+      ev.target.close();
+      window.focus();
+    }
+  })
+
+
+
+  // 截频
+  function captureVideo(videoEl) {
+    let canvasEl;
+    let dataUrl;
+    try {
+      const cps = window.getComputedStyle(videoEl);
+      const width = +cps.getPropertyValue("width").replace("px", "");
+      const height = +cps.getPropertyValue("height").replace("px", "");
+
+      canvasEl = document.createElement("canvas");
+      canvasEl.style.cssText = `position:fixed;left:-9999px`;
+      canvasEl.height = height;
+      canvasEl.width = width;
+
+      document.body.appendChild(canvasEl);
+
+      const ctx = canvasEl.getContext("2d");
+      ctx.drawImage(videoEl, 0, 0, width, height);
+      // const image = canvas.toDataURL("image/png");
+      dataUrl = canvasEl.toDataURL();
+
+      document.body.removeChild(canvasEl);
+      canvasEl = null;
+      return dataUrl;
+    } finally {
+      if (canvasEl) {
+        document.body.removeChild(canvasEl);
+      }
+      if (dataUrl) {
+        return dataUrl;
+      }
+    }
+  }
+
+
+  function download(url) {
+    const aEl = document.createElement("a");
+    aEl.href = url;
+    aEl.download = "视频.png";
+    aEl.click();
+  }
+
+
+  function doCaptureVideo() {
+    const url = captureVideo(videoEL);
+    download(url);
+  }
+
+  doCaptureVideo()
+</script>
+
+</html>

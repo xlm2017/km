@@ -1,0 +1,25 @@
+<body>
+    非零（Nonzero Rule）
+    <div>
+        <canvas id="myCanvas"></canvas>
+    </div>
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        canvas.height = 300
+        var context = canvas.getContext("2d");
+
+        context.strokeStyle = "rgb(0,0,0)";
+        context.fillStyle = "rgb(250,0,0)"
+
+        context.beginPath();
+        context.moveTo(100, 0);
+        context.lineTo(100 + Math.cos(Math.PI * 3 / 10) * 100, 100 + Math.sin(Math.PI * 3 / 10) * 100);
+        context.lineTo(100 - Math.cos(Math.PI * 1 / 10) * 100, 100 - Math.sin(Math.PI * 1 / 10) * 100);
+        context.lineTo(100 + Math.cos(Math.PI * 1 / 10) * 100, 100 - Math.sin(Math.PI * 1 / 10) * 100);
+        context.lineTo(100 - Math.cos(Math.PI * 3 / 10) * 100, 100 + Math.sin(Math.PI * 3 / 10) * 100);
+        context.lineTo(100, 0);
+        context.fill('nonzero');
+        context.stroke();
+        context.closePath();
+    </script>
+</body>

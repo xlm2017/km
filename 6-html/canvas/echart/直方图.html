@@ -1,0 +1,95 @@
+<head>
+    <meta charset="UTF-8">
+    <title>直方图</title>
+</head>
+<style>
+    #canvas {
+        /* border: 1px solid black; */
+    }
+</style>
+
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas")
+        let ctx = canvas.getContext("2d")
+        ctx.font = "bold 26px PingFang sc";
+        ctx.fillText("直方图", 10, 30)
+        ctx.strokeStyle = "red"
+        ctx.lineWidth = 2
+        ctx.save()
+        // 画出x轴和y轴
+        function drawAxis() {
+            ctx.strokeStyle = "black"
+            ctx.lineWidth = 2
+            ctx.beginPath()
+            ctx.moveTo(0, 0)
+            ctx.lineTo(0, 400)
+            // 注释掉下面一行则变成三角形了
+            ctx.moveTo(0, 400)
+            ctx.lineTo(600, 400)
+            ctx.closePath()
+            ctx.stroke()
+            ctx.restore()
+        }
+        drawAxis()
+        // 画出刻度线
+        function drawAxisScale() {
+            ctx.strokeStyle = "blue"
+            ctx.lineWidth = 1
+            // x轴刻度线
+            for (let i = 1; i < (400) / 50; i++) {
+                ctx.beginPath()
+                ctx.moveTo(0, i * 50)
+                ctx.lineTo(10, i * 50)
+                ctx.closePath()
+                ctx.stroke()
+            }
+            // y轴刻度线
+            for (let i = 0; i < (600) / 50; i++) {
+                ctx.beginPath()
+                ctx.moveTo(i * 50, 400)
+                ctx.lineTo(i * 50, 390)
+                ctx.closePath()
+                ctx.stroke()
+            }
+            ctx.restore()
+        }
+        drawAxisScale()
+        // 画出x轴上方的标准线
+        function drawLineX() {
+            ctx.strokeStyle = "grey"
+            ctx.lineWidth = 1
+            // ctx.setLineWidth(0.5)
+            ctx.beginPath()
+            for (let i = 1; i < (400) / 50; i++) {
+                ctx.moveTo(0, i * 50)
+                ctx.lineTo(600, i * 50)
+            }
+            ctx.closePath();
+            ctx.stroke()
+        }
+        drawLineX()
+
+        // 绘制直方图的柱子
+        function drawPillar() {
+            // for (let i = 1; i < 600 / 50; i++) {
+            //     let points = []
+            //     ctx.fillStyle = 'green';
+            //     let height = Math.random() * 400
+            //     // ctx.fillRect(25 + i * 50, 100, 50, 400-100);
+            //     //一阶直方图, 太窄了
+            //     // ctx.fillRect(i * 50 - 25, 400 - height, 30, height);
+            //     //二阶直方图, 调整宽度
+            //     ctx.fillRect(i * 50 * 2 - 75, 400 - height, 50, height);
+            // }
+            for (let i = 1; i <= 300 / 50; i++) {
+                let points = []
+                ctx.fillStyle = 'green';
+                let height = Math.random() * 400
+                ctx.fillRect(i * 50 * 2 - 75, 400 - height, 50, height);
+            }
+        }
+        drawPillar()
+    </script>
+</body>

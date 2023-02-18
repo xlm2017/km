@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="father">
+    <img src="../images/test1.jpg" />
+    <p class="animal">
+      小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,
+      小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,
+      小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,
+      小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,
+      小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1,小猫1
+    </p>
+  </div>
+  <hr />
+  <div>浮动元素具有包裹性和流体布局破坏性</div>
+  <div>overflow:hidden;形成BFC,彻底清除浮动带来的影响</div>
+</body>
+<style>
+  .father {
+    overflow: hidden;
+  }
+
+  .father>img {
+    width: 60px;
+    height: 64px;
+    float: left;
+    /* object-fit: contain; */
+    /* object-fit: fill; */
+    outline: 1px solid red;
+  }
+
+  .animal {
+    margin-left: 70px;
+  }
+</style>
+
+</html>

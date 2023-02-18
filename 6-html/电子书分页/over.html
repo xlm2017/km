@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta content="text/html;" charset="utf-8" http-equiv="Content-Type" />
+  <!-- <link rel="stylesheet" type="text/css" href="css/stylesheet.css" /> -->
+  <meta name="GENERATOR" content="MSHTML 8.00.6001.19120" />
+  <title>产后瘦身四部曲——肥妈咪变身苗条妹</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/touchjs/0.2.14/touch.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script src="./js/turn.js"></script>
+
+  <!-- 添加分页样式 -->
+  <style>
+  body{
+    background: rgb(250, 242, 210);
+    /* padding-left: 20px; */
+    /* padding-right: 20px; */
+    overflow: hidden;
+    /* border: 1px solid red; */
+  }
+   *{
+    margin: 0;
+  } 
+  .text{
+    font-size: 14px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    /* column-gap: 30px; */
+    /* column-width: calc(50vh - 40px); */
+    column-rule-width: thick;
+    height: calc(100vh - 60px);
+    text-align: justify;
+    /* overflow: hidden; */
+   }
+   .left-btn{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    color: white;
+    background: red;
+    writing-mode: vertical-lr;
+    padding: 5px 0;
+    z-index: 100;
+   } 
+   .right-btn{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    color: white;
+    background: red;
+    writing-mode: vertical-lr;
+    padding: 5px 0;
+    z-index: 100;
+   }
+   .placeholder-box{
+    height: 100vh;
+   }
+   img{
+    width: 100%;
+   }
+
+   .iframe{
+    width: 100vw;
+    height: 100vh;
+   }
+  </style>
+  <script>
+    let index = 0
+    let step = 0
+    function pagepre() {
+      console.log("上一页");
+      let dom = document.querySelector('.text');
+      // let dom = document.body;
+      index--
+      // dom.scrollTo(index * step, 500)
+      // dom.scrollTo(200, 0)
+      // dom.scrollLeft = 200
+      dom.style = `transform: translateX(-${index * (step + 30)}px); transition: transform 0.5s;`
+    }
+    function pagenext() {
+      console.log("下一页");
+      let dom = document.querySelector('.text');
+      // let dom = document.body;
+      index++
+      // dom.scrollTo(index * step, 500)
+      // dom.scrollTo(200, 0)
+      // dom.scrollLeft = 200
+      dom.style = `transform: translateX(-${index * (step + 30)}px); transition: transform 0.5s;`
+    }
+    function initPage() {
+      let dom = document.querySelector('.text');
+      console.log("scrollWidth:", document.body.scrollWidth);
+      // console.log("dom:", dom.style);
+      // console.log("屏幕信息:", window.screen);
+      console.log("body:", document.body.clientWidth);
+      let scrollWidth = document.body.scrollWidth
+      let clientWidth = document.body.clientWidth
+      let pageNo = (scrollWidth + 30)/(clientWidth + 30)
+      step = clientWidth
+      console.log("初始化");
+      console.log("总页数:", pageNo);
+      let total = Math.round(pageNo); 
+      let decimal = (pageNo+'').split('.')[1]
+      if(decimal > 4 && decimal < 6){
+        console.log("需要补页")
+      }
+      console.log("总页数:", pageNo, total);
+
+
+    // 获取可视区域的宽度
+    const width = document.body.offsetWidth
+    // 引入touch.js 来绑定左滑和右滑手势
+    touch.on('#text', 'swipeleft', function () {
+      pagepre(1)
+    })
+    touch.on('#text', 'swiperight', function () {
+      pagenext()
+    })
+    }
+
+    setTimeout(() => {
+      initPage()
+    }, 2000);
+  </script> 
+</head>
+
+<body>
+    <iframe src="./source.html" class="iframe"></iframe>
+</body>
+</html>

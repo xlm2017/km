@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box1">
+    <div class="child1">
+      子元素
+    </div>
+  </div>
+  <hr />
+  <div class="box2">
+    <div class="child2">
+      子元素
+    </div>
+</body>
+<style>
+  .box1 {
+    height: 160px;
+    padding: 30px;
+    box-sizing: border-box;
+    background: wheat;
+  }
+
+  .child1 {
+    height: 100%;
+    background: black;
+  }
+
+  .box2 {
+    height: 160px;
+    padding: 30px;
+    box-sizing: border-box;
+    background: wheat;
+    position: relative;
+  }
+
+  .child2 {
+    height: 100%;
+    width: 100%;
+    background: black;
+    position: absolute;
+  }
+</style>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>图片下面产生间隙, 实际上, 是"幽灵空白节点", line-height和vertical-align属性共同作用的结果</div>
+  <div>vertical-align的百分比是相对于line-height的高度</div>
+  <div>
+    <h4>间隙示意:</h4>
+    <div class="box">
+      <img src="../images/test1.jpg" />x
+    </div>
+  </div>
+  <div>
+    <h4>图片block块状- 清除间隙:</h4>
+    <div class="box box1">
+      <img src="../images/test1.jpg" />
+    </div>
+  </div>
+  <div>
+    <h4>容器line-height: 0; - 清除间隙:</h4>
+    <div class="box box2">
+      <img src="../images/test1.jpg" />
+    </div>
+  </div>
+  <div>
+    <h4>font-size: 0; 清除间隙:</h4>
+    <div class="box box3">
+      <img src="../images/test1.jpg" />
+    </div>
+  </div>
+  <div>
+    <h4>图片vertial-align设置,:</h4>
+    <div class="box box4">
+      <img src="../images/test1.jpg" />
+    </div>
+  </div>
+
+</body>
+<style>
+  .box {
+    width: 280px;
+    outline: 1px solid #aaa;
+  }
+
+  .box img {
+    height: 96px;
+  }
+
+  .box1 img {
+    display: block;
+  }
+
+  .box2 {
+    line-height: 0;
+  }
+
+  .box3 {
+    font-size: 0;
+  }
+
+  .box4 img {
+    vertical-align: bottom;
+  }
+</style>
+
+</html>

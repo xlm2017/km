@@ -1,0 +1,63 @@
+<body>
+    <canvas id="canvas" width="400" height="300"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas")
+        let ctx = canvas.getContext("2d")
+
+        ctx.lineWidth = 0.8
+        // 绘制x轴
+        // ctx.beginPath()
+        // ctx.moveTo(0, 0)
+        // ctx.lineTo(300, 0)
+        // ctx.fillStyle = "red"
+        // ctx.stroke()
+
+        // 绘制y轴
+        ctx.beginPath()
+        ctx.moveTo(0, 0)
+        ctx.lineTo(0, 300)
+        ctx.fillStyle = "red"
+        ctx.stroke()
+
+        // 绘制圆
+        // ctx.beginPath()
+        // ctx.arc(0, 0, 50, 0, Math.PI * 2, true)
+        // ctx.closePath()
+        // ctx.fillStyle = 'blue'
+        // ctx.fill()
+
+        ctx.scale(1, -1)
+        ctx.translate(0, -canvas.height)
+
+        let heightOne = 30
+        let widthOfOn = 50
+        // 画多行
+        for (let i = 0; i < 7; i++) {
+            ctx.beginPath()
+            ctx.moveTo(0, 0)
+            ctx.lineTo(canvas.width, 0)
+            ctx.fillStyle = "red"
+            // ctx.strokeStyle = "blue"
+            ctx.strokeStyle = "black"
+            ctx.closePath()
+            ctx.stroke()
+            ctx.translate(0, heightOne)
+        }
+
+        ctx.restore()
+
+        ctx.translate(0, 400)
+        // 绘制x轴的刻度
+        ctx.save()
+        ctx.lineWidth = 0.1
+        for (let j = 0; j < 8; j++) {
+            ctx.beginPath()
+            ctx.moveTo(0, 0)
+            ctx.lineTo(0, -5)
+            ctx.closePath()
+            ctx.stroke()
+            ctx.translate(widthOfOn, 0)
+        }
+        ctx.restore()
+    </script>
+</body>

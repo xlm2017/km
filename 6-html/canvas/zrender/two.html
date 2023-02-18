@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"
+        ,maximum-scale=1.0,minimum-scale=1.0>
+    <script src="https://cdn.jsdelivr.net/npm/zrender@4.3.0/dist/zrender.js"></script>
+    <title>zrender入门</title>
+</head>
+
+<body>
+
+    <div id="container" style="width: 800px; height: 800px;"></div>
+
+    <script>
+        var zr = zrender.init(document.getElementById('container'));
+
+        /* 绘制一个矩形 */
+        var rect = new zrender.Rect({
+            // 形状
+            shape: {
+                x: 0,
+                y: 0,
+                width: 50,
+                height: 50
+            },
+            style: {
+                fill: 'red',
+                // 边框宽度
+                lineWidth: 0
+            }
+        });
+
+        /* 绘制一条线 */
+        var line = new zrender.Polyline({
+            shape: {
+                points: [
+                    [100, 100],
+                    [300, 200],
+                    [150, 500]
+                ]
+            },
+            style: {
+                stroke: '#0000ff',
+                lineWidth: 3
+            }
+        });
+
+        /* 绘制一个圆 */
+        var circle = new zrender.Circle({
+            shape: {
+                cx: 366,
+                cy: 366,
+                r: 50
+            },
+            style: {
+                fill: '#0fa400',
+                stroke: '#eeaa45',
+                lineWidth: 2
+            }
+        });
+
+        zr.add(rect);
+        zr.add(line);
+        zr.add(circle);
+    </script>
+</body>
+
+</html>

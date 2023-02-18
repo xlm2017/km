@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta content="text/html;" charset="utf-8" http-equiv="Content-Type" />
+  <!-- <link rel="stylesheet" type="text/css" href="css/stylesheet.css" /> -->
+  <meta name="GENERATOR" content="MSHTML 8.00.6001.19120" />
+  <title>vue随机页覆盖</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/touchjs/0.2.14/touch.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+  <!-- 添加分页样式 -->
+  <style>
+  body{
+    background: rgb(250, 242, 210);
+    /* padding-left: 20px; */
+    /* padding-right: 20px; */
+    /* border: 1px solid red; */
+    /* overflow: hidden; */
+  }
+   *{
+    margin: 0;
+  } 
+  .text{
+    font-size: 14px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: calc(100vh - 60px);
+    text-align: justify;
+    /* column-gap: 30px; */
+    /* column-width: calc(100vw + 30px); */
+   }
+   .left-btn{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    color: white;
+    background: red;
+    writing-mode: vertical-lr;
+    padding: 5px 0;
+    z-index: 100;
+   } 
+   .right-btn{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    color: white;
+    background: red;
+    writing-mode: vertical-lr;
+    padding: 5px 0;
+    z-index: 100;
+   }
+   .placeholder-box{
+    height: 100vh;
+   }
+   img{
+    width: 100%;
+   }
+
+   .page{
+    position: absolute;
+    top: 0vh;
+    left: 0vw;
+    height: 100vh;
+    width: 100vw;
+    background: white;
+   }
+   
+   #second{
+    box-shadow: 
+                1px 0px 2px 0px #888888,
+                2px 0px 4px 0px #888888,
+                4px 0px 6px 0px #888888,
+                8px 0px 8px 0px #888888;
+   }
+   #third{
+    left: -100vw;
+    box-shadow: 
+                1px 0px 2px 0px #888888,
+                2px 0px 4px 0px #888888,
+                4px 0px 6px 0px #888888,
+                8px 0px 8px 0px #888888;
+   }
+
+  </style>
+  
+</head>
+
+<body>
+    <div id="app">
+      <div class="left-btn" @click="pagepre()">上一页</div>
+      <div class="right-btn" @click="pagenext()">下一页</div>
+      <div class="text" id="text">
+
+
+        <template v-for="(item, index) in pageList" v-show="isShow">
+          <!-- <div class="page" v-if="index == 0" id="first" v-html="firstContent" style="z-index: 3;">
+            
+          </div>
+          
+          <div class="page" v-if="index == 1" id="second" v-html="secondContent" style="z-index: 2;">
+            
+          </div>
+
+          <div class="page" v-if="index == 1" id="third" v-html="thirdContent" style="z-index: 1;">
+            
+          </div> -->
+          <div class="page" 
+           v-html="item" 
+           :id="'pageNo' + index">
+          </div>
+          <!-- :style="index === curIndex ? 'z-index: 3;' : 'z-index: 1;'"> -->
+        </template>
+
+      </div>
+    </div>
+   
+    <script>
+      let vm = new Vue({
+        el: '#app',
+        data: {
+          msg: '学习MVVM实现原理',
+          firstContent: `<h1 id="h0001"><span class="BOLD">产后瘦身四部曲——肥妈咪变身苗条妹</span></h1>
+          <p>“新生命的诞生过程是多么奇妙，这个生命也会改变你的人生。”</p>
+          <p>
+            这句话听起来多有趣，看着宝宝慢慢成长，变得一天比一天更漂亮，这个时候，妈妈心中盛满了浓浓的幸福。可是面对产后的臃肿身材，又会变得烦恼不已。我在生下小水晶后，被问到最多的问题是：“大虹，你究竟用了什么方法？吃了什么灵丹妙药？能够在这么短的时间里，把身材恢复到产前状态甚至更好呢？”
+          </p>
+          <p>
+            要我说啊，灵丹妙药可真没有，方法倒有一个，那就是动起来。在这里，我要感谢我的先生，研习运动营养学的他，从得知我怀孕的那天起，就开始实施准爸爸计划了。比如：计算营养餐的热量啦，监督我循序渐进做运动啦，可别小看了这些程序，它们可为产后恢复打下了坚实的基础。
+          </p>`,
+          secondContent: `<p class="image_para"><img id="img0002" alt="图" src="../image/test5.jpg"></img></p>
+          <h2 id="h0002"><span class="BOLD">瘦身一部曲：减肥观念对对碰</span></h2>
+          <p>
+            很多时候，瘦身达不到预期目标，不是因为不努力，而是用错了方法，多走了弯路，导致最后难以达到预期目的。产后瘦身和平时减肥看似一样，但实施起来却有天壤之别，适用于普通减肥的方法，未必就同样适合产后瘦身哦！稍有不慎，很可能会影响妈妈和宝宝的健康。那么，让我们来看看，在产后瘦身的环节中，都有着怎样的陷阱和误区呢？
+          </p>`,
+          thirdContent: `<p>
+            通过那段时间的努力，我在进产房前体重64.5公斤，小水晶刚出生的体重是6斤7两，母女俩的体重都很达标哦！常有些怀孕的女性朋友，害怕委屈腹中的宝宝，于是往肚子里“囤积”了不少好吃的。可是你想过没有，这些美味的食物，除了提供给妈妈和宝宝必需的营养元素之外，很大一部分食物都会转化成热量，悄悄在体内囤积下来，形成厚厚的脂肪。很多刚生产完的妈妈们，体重也随着幸福感一路飙升，这时候再想减肥塑身，就会难上加难哦！大虹提醒：
+          </p>
+          <p>
+            要想让产后瘦身达到良好的效果，最重要的是找到一位热心的监督者。他能及时纠正你的错误，给你鼓励，在你想偷吃零食的时候，断然告诉你——“NO！”别小看这些措施，肉肉就是在细小的疏忽中，慢慢长起来的。所以，拉上你的老公吧，让他做你的拉拉队员，顺便培养夫妻感情，何乐而不为呢？
+          </p>`,
+          step: 0,
+          
+          pageList: [ 
+
+            `<h1 id="h0001"><span class="BOLD">产后瘦身四部曲——肥妈咪变身苗条妹</span></h1>
+            <p>“新生命的诞生过程是多么奇妙，这个生命也会改变你的人生。”</p>
+            <p>
+              这句话听起来多有趣，看着宝宝慢慢成长，变得一天比一天更漂亮，这个时候，妈妈心中盛满了浓浓的幸福。可是面对产后的臃肿身材，又会变得烦恼不已。我在生下小水晶后，被问到最多的问题是：“大虹，你究竟用了什么方法？吃了什么灵丹妙药？能够在这么短的时间里，把身材恢复到产前状态甚至更好呢？”
+            </p>
+            <p>
+              要我说啊，灵丹妙药可真没有，方法倒有一个，那就是动起来。在这里，我要感谢我的先生，研习运动营养学的他，从得知我怀孕的那天起，就开始实施准爸爸计划了。比如：计算营养餐的热量啦，监督我循序渐进做运动啦，可别小看了这些程序，它们可为产后恢复打下了坚实的基础。
+            </p>`,
+
+            `<p class="image_para"><img id="img0002" alt="图" src="../image/test5.jpg"></img></p>
+            <h2 id="h0002"><span class="BOLD">瘦身一部曲：减肥观念对对碰</span></h2>
+            <p>
+              很多时候，瘦身达不到预期目标，不是因为不努力，而是用错了方法，多走了弯路，导致最后难以达到预期目的。产后瘦身和平时减肥看似一样，但实施起来却有天壤之别，适用于普通减肥的方法，未必就同样适合产后瘦身哦！稍有不慎，很可能会影响妈妈和宝宝的健康。那么，让我们来看看，在产后瘦身的环节中，都有着怎样的陷阱和误区呢？
+            </p>`,
+
+            `<p>
+              通过那段时间的努力，我在进产房前体重64.5公斤，小水晶刚出生的体重是6斤7两，母女俩的体重都很达标哦！常有些怀孕的女性朋友，害怕委屈腹中的宝宝，于是往肚子里“囤积”了不少好吃的。可是你想过没有，这些美味的食物，除了提供给妈妈和宝宝必需的营养元素之外，很大一部分食物都会转化成热量，悄悄在体内囤积下来，形成厚厚的脂肪。很多刚生产完的妈妈们，体重也随着幸福感一路飙升，这时候再想减肥塑身，就会难上加难哦！大虹提醒：
+            </p>
+            <p>
+              要想让产后瘦身达到良好的效果，最重要的是找到一位热心的监督者。他能及时纠正你的错误，给你鼓励，在你想偷吃零食的时候，断然告诉你——“NO！”别小看这些措施，肉肉就是在细小的疏忽中，慢慢长起来的。所以，拉上你的老公吧，让他做你的拉拉队员，顺便培养夫妻感情，何乐而不为呢？
+            </p>`,
+
+            `<p>
+              嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻洗衣一一一 ，小水晶刚出生的体重是6斤7两，母女俩的体重都很达标哦！常有些怀孕的女性朋友，害怕委屈腹中的宝宝，于是往肚子里“囤积”了不少好吃的。可是你想过没有，这些美味的食物，除了提供给妈妈和宝宝必需的营养元素之外，很大一部分食物都会转化成热量，悄悄在体内囤积下来，形成厚厚的脂肪。很多刚生产完的妈妈们，体重也随着幸福感一路飙升，这时候再想减肥塑身，就会难上加难哦！大虹提醒：
+            </p>
+            <p>
+              要想让产后瘦身达到良好的效果，最重要的是找到一位热心的监督者。他能及时纠正你的错误，给你鼓励，在你想偷吃零食的时候，断然告诉你——“NO！”别小看这些措施，肉肉就是在细小的疏忽中，慢慢长起来的。所以，拉上你的老公吧，让他做你的拉拉队员，顺便培养夫妻感情，何乐而不为呢？
+            </p>`,
+
+          ],
+
+          curIndex: 0,
+
+          isShow: false, // 是否显示页面
+        },
+        mounted(){
+          this.initPage()
+          for (let i = 0; i < this.pageList.length; i++) {
+            const element = this.pageList[i];
+            if(i < this.curIndex){
+              let prePage = document.querySelector("#pageNo" + i)
+              prePage.style.transform = `translateX(-${this.step}px)`;
+            }else if(i > this.curIndex){
+              // let lastPage = document.querySelector("#pageNo" + i)
+              // lastPage.style.transform = `translateX(${this.step}px)`;
+            }else if(i === this.curIndex) {
+              let curPage = document.querySelector("#pageNo" + i)
+              curPage.style = `z-index:3;`;
+            }
+          }
+        },
+        methods: {
+          handlerClick() {
+            console.log("点击事件", this)
+          },
+          initPage() {
+            let dom = document.querySelector('.text');
+            console.log("scrollWidth:", document.body.scrollWidth);
+            console.log("body:", document.body.clientWidth);
+            let scrollWidth = document.body.scrollWidth
+            let clientWidth = document.body.clientWidth
+            let pageNo = (scrollWidth + 30)/(clientWidth + 30)
+            this.step = clientWidth
+            // step = document.body.clientHeight
+            console.log("初始化");
+            console.log("总页数:", pageNo);
+            let total = Math.round(pageNo); 
+            let decimal = (pageNo+'').split('.')[1]
+            if(decimal > 4 && decimal < 6){
+              console.log("需要补页")
+            }
+            console.log("总页数:", pageNo, total);
+          },
+
+          pagepre() {
+            if(this.curIndex === 0){
+              return
+            }
+            console.log("上一页");
+            this.curIndex--
+            let curPage = document.querySelector("#pageNo" + (this.curIndex))
+            let second = document.querySelector("#pageNo" + (this.curIndex + 1))
+            curPage.style = `z-index:3; transform: translateX(${(0)}px); transition: transform 1s;`
+            curPage.style.zIndex = 10
+            curPage.style.boxShadow = "1px 0px 2px 0px #888888,2px 0px 4px 0px #888888,4px 0px 6px 0px #888888,8px 0px 8px 0px #888888 ";
+            setTimeout(() => {
+              second.style.zIndex = 1
+              curPage.style.zIndex = 3
+              curPage.style.boxShadow = 'uset'
+            }, 1000);
+          },
+
+          pagenext() {
+            if(this.curIndex >= 2){
+              return
+            }
+            console.log("下一页", this.step);
+            this.curIndex++
+            // 动画移除上面的一页
+            let curPage = document.querySelector("#pageNo"+ (this.curIndex - 1))
+            let second = document.querySelector("#pageNo" + this.curIndex)
+            curPage.style = `transform: translateX(-${(this.step)}px); transition: transform 1s;`
+            curPage.style.boxShadow = "1px 0px 2px 0px #888888,2px 0px 4px 0px #888888,4px 0px 6px 0px #888888,8px 0px 8px 0px #888888 ";
+            curPage.style.zIndex = 10
+            second.style.zIndex = 3
+            setTimeout(() => {
+              curPage.style.zIndex = 1
+              curPage.style.boxShadow = 'unset'
+            }, 1000);
+          }
+
+        },
+      })
+    </script>
+</body>
+<style>
+  .s{
+    color: #f8f1f1;
+  }
+</style>
+</html>

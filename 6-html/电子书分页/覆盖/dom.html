@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dom操作api</title>
+</head>
+
+<body>
+  <h3 class="bodycontent-second-title">
+    <span class="st1">
+      <font>0</font>
+      <font>5</font>
+    </span>
+    <br />
+    <span class="st2">
+      <font>屠</font>
+      <font>屠</font>
+    </span>
+  </h3>
+</body>
+
+<script>
+  setTimeout(() => {
+
+  }, 1000);
+
+  window.onload = () => {
+    console.log("dom可操作");
+    let body = document.body;
+    let isSub = body.hasChildNodes();
+    console.log("body是否有子节点:", isSub);
+    // let firstChild = body.firstChild;
+    let firstChild = body.firstElementChild;
+    console.log("body的第一个子节点:", firstChild);
+    // 循环子节点的相邻节点
+    // let cur = firstChild.nextElementSibling;  // <script>
+    let cur = firstChild.firstElementChild;
+    console.log(cur);
+    while (cur) {
+      if (cur.firstElementChild) {
+        cur = cur.firstElementChild;
+        // firstElementChild
+        console.log("有子节点:", cur, cur.firstElementChild, cur.tagName);
+      } else {
+        if (cur.tagName === 'FONT') {
+          // console.log("一个字:", cur.outerHTML); // <font>0</font>
+          console.log("一个字:", cur.outerText);
+          if (cur.nextElementSibling && cur.nextElementSibling.tagName === 'FONT') {
+            cur = cur.nextElementSibling;
+            console.log("父节点:", cur.parentNode, cur.parentNode.parentNode);
+            continue;
+          }
+        }
+        break;
+      }
+    }
+  }
+
+</script>
+
+<script>
+
+</script>
+
+</html>

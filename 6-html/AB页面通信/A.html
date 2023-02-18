@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A</title>
+</head>
+
+<body>
+  <h1>A 页面</h1>
+  <button type="button" onclick="openB()">B</button>
+  <script>
+    window.name = 'A'
+    function openB() {
+      window.open("B.html", "B")
+    }
+
+    window.addEventListener('hashchange', function () {// 监听 hash
+      alert(window.location.hash)
+    }, false);
+
+
+    // postMessage通信
+    window.addEventListener("message", receiveMessage, false);
+    function receiveMessage(event) {
+      console.log('收到消息：', event.data)
+    }
+
+    // localStorage
+    // WebSocket
+
+    // SharedWorker
+
+    var sharedworker = new SharedWorker('worker.js')
+    sharedworker.port.start()
+    sharedworker.port.onmessage = evt => {
+      // evt.data
+      console.log(evt.data) // hello A
+    }
+
+    // Service Worker
+    // 注册
+    navigator.serviceWorker.register('./sw.js').then(function () {
+      console.log('Service Worker 注册成功');
+    })
+    navigator.serviceWorker.addEventListener('message', function (e) {
+      console.log(e.data)
+    });
+  </script>
+</body>
+
+</html>

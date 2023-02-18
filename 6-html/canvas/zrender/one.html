@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"
+        ,maximum-scale=1.0,minimum-scale=1.0>
+    <script src="https://cdn.jsdelivr.net/npm/zrender@4.3.0/dist/zrender.js"></script>
+    <title>zrender入门</title>
+</head>
+
+<body>
+
+    <div id="container" style="width: 800px; height: 800px;"></div>
+
+    <script>
+        /**
+ * 创建圆形布局的算法
+ * @paramas {Object} center 中心点坐标
+ * @paramas {Number} a 长半轴的长度
+ * @paramas {Number} b 短半轴的长度
+ * @paramas {Number} n 网元个数
+ * 
+ * 
+ */
+
+        var zr = zrender.init(document.getElementById('container'));
+        function createEllipse(center, a, b, n) {
+            const tP = 2 * Math.PI;
+            Array(...Array(n)).forEach((value, index) => {
+                const angle = (tP * index) / n;
+                const x = center.x + a * Math.cos(angle);
+                const y = center.y + b * Math.sin(angle);
+
+                var circle = new zrender.Circle({
+                    shape: {
+                        cx: x,
+                        cy: y,
+                        r: 20
+                    },
+                    style: {
+                        fill: "#0eafd1"
+                    },
+                    z: 1
+                });
+                zr.add(circle);
+
+
+                var ellipse = new zrender.Ellipse({
+                    shape: {
+                        cx: center.x,
+                        cy: center.y,
+                        rx: a,
+                        ry: b,
+                        // r: 20
+                    },
+                    style: {
+                        fill: "#0eafd100",
+                        stroke: "red"
+                    },
+                });
+                zr.add(ellipse);
+            });
+        }
+        const a = 300;
+        const b = 150;
+        const o = { x: 400, y: 200 };
+        createEllipse(o, a, b, 10);
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canvas签名</title>
+</head>
+
+<body>
+  <div class="container">
+    <canvas width="350" height="150" id="canvas"></canvas>
+    <div>移动端生效</div>
+  </div>
+
+</body>
+<script>
+  const writing = (beginX,
+    beginY,
+    stopX,
+    stopY,
+    ctx,
+  ) => {
+    ctx.beginPath(); // 开启一条新路径
+    ctx.globalAlpha = 1; // 设置图片的透明度
+    ctx.lineWidth = 3; // 设置线宽
+    ctx.strokeStyle = 'red'; // 设置路径颜色
+    ctx.moveTo(beginX, beginY); // 从(beginX, beginY)这个坐标点开始画图
+    ctx.lineTo(stopX, stopY); // 定义从(beginX, beginY)到(stopX, stopY)的线条（该方法不会创建线条）
+    ctx.closePath(); // 创建该条路径
+    ctx.stroke(); // 实际地绘制出通过 moveTo() 和 lineTo() 方法定义的路径。默认颜色是黑色。
+  };
+  let beginX, beginY;
+  const canvas = document.querySelector("canvas");
+  console.log("canvas:", canvas)
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  canvas.addEventListener('touchstart', function (event) {
+    event.preventDefault(); // 阻止在canvas画布上签名的时候页面跟着滚动
+    beginX = event.touches[0].clientX - this.offsetLeft;
+    beginY = event.touches[0].pageY - this.offsetTop;
+  });
+  canvas.addEventListener('touchmove', (event) => {
+    event.preventDefault(); // 阻止在canvas画布上签名的时候页面跟着滚动
+    event = event.touches[0];
+    let stopX = event.clientX - canvas.offsetLeft;
+    let stopY = event.pageY - canvas.offsetTop;
+    writing(beginX, beginY, stopX, stopY, ctx);
+    beginX = stopX; // 这一步很关键，需要不断更新起点，否则画出来的是射线簇
+    beginY = stopY;
+  });
+
+</script>
+<style>
+  #canvas {
+    border: 1px solid red;
+  }
+</style>
+
+</html>

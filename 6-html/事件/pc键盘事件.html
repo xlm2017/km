@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>onkeydown</title>
+</head>
+<body>
+  <script>
+    window.onload = function()  //文档加载完毕
+  {
+    document.onkeydown = function(e)  //键盘按键控制
+    { 
+          e = e || window.event;
+          if ((e.metaKey && e.keyCode == 82) || //组合键：Command+R
+              e.keyCode == 116)  //按键：F5
+          { 
+              alert("已阻止刷新！");     
+              return false;
+          }
+      }
+  };
+
+
+  // 阻止一切键盘事件
+  window.onkeydown = window.onkeyup = window.onkeypress = function () {  
+    window.event.returnValue = false;  
+    return false;  
+  }
+
+
+  document.onkeydown = function(evt){
+    var e = evt || event;
+    if(e.metaKey){
+      console.log("command 或 win键被按下")
+    }
+  }
+  </script>
+</body>
+</html>

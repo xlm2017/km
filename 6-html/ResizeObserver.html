@@ -1,0 +1,21 @@
+<!-- ResizeObserver 接口可以监听到 Element 的内容区域或 SVGElement的边界框改变
+
+ResizeObserver避免了在自身回调中调整大小，从而触发的无限回调和循环依赖。
+它仅通过在后续帧中处理DOM中更深层次的元素来实现这一点。
+如果（浏览器）遵循规范，只会在绘制前或布局后触发调用
+复制代码妥妥就是我要的api了，还是上面的例子
+省略...
+// 新建obsever对象
+const resizeObserver = new ResizeObserver(entries => {
+	for (let entry of entries) {
+		console.log(entry.target.offsetWidth)
+	}
+});
+开始监听，传入dom对象
+resizeObserver.observe(targetNode);
+复制代码console执行了！打印出父元素宽度变化后targetNode的宽度！！
+
+作者：酒阑人散
+链接：https://juejin.cn/post/6844904065059536909
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 -->

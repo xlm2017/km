@@ -1,0 +1,45 @@
+<canvas id="canvas"></canvas>
+<style>
+    #canvas {
+        border: 1px solid red;
+    }
+</style>
+<script>
+    let canvas = document.getElementById("canvas")
+    canvas.width = 600
+    canvas.height = 600
+    let ctx = canvas.getContext("2d")
+    ctx.moveTo(0, 0)
+    ctx.lineTo(150, 50)
+    ctx.lineTo(250, 350)
+    ctx.lineTo(550, 450)
+    ctx.stroke()
+    let arr = [
+        {
+            x: 0,
+            y: 0
+        },
+        {
+            x: 150,
+            y: 50
+        },
+        {
+            x: 250,
+            y: 350
+        },
+        {
+            x: 550,
+            y: 450
+        },
+    ]
+    function animate(arr) {
+        ctx.moveTo(0, 0)
+        tx.beginPath()
+        ctx.arc(0, 0, 10, 0, Math.PI * 2)
+        ctx.stroke()
+        ctx.fillStyle = "blue"
+        ctx.fill()
+        ctx.closePath()
+    }
+    animate(arr)
+</script>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="father">
+    <div class="float">123</div>
+  </div>
+  <div>content属性生成的内容属于置换元素</div>
+  <div class="content" test="属性值内容生成"></div>
+</body>
+<style>
+  .float {
+    float: left;
+  }
+
+  .father {
+    /* BFC */
+    /* display: flow-root; */
+  }
+
+  .father::after {
+    display: block;
+    clear: both;
+    content: '';
+  }
+
+  .content::after {
+    content: attr(test);
+  }
+</style>
+
+</html>

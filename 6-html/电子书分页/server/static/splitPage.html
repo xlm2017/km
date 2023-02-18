@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta content="text/html;" charset="utf-8" http-equiv="Content-Type" />
+  <!-- <link rel="stylesheet" type="text/css" href="css/stylesheet.css" /> -->
+  <meta name="GENERATOR" content="MSHTML 8.00.6001.19120" />
+  <title>vue分割为iframe后</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/touchjs/0.2.14/touch.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+  <!-- 添加分页样式 -->
+  <style>
+  body{
+    background: rgb(250, 242, 210);
+    /* padding-left: 20px; */
+    /* padding-right: 20px; */
+    /* border: 1px solid red; */
+    /* overflow: hidden; */
+  }
+   *{
+    margin: 0;
+  } 
+  .text{
+    font-size: 14px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: calc(100vh - 60px);
+    text-align: justify;
+    /* column-gap: 30px; */
+    /* column-width: calc(100vw + 30px); */
+   }
+   .left-btn{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    color: white;
+    background: red;
+    writing-mode: vertical-lr;
+    padding: 5px 0;
+    z-index: 100;
+   } 
+   .right-btn{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    color: white;
+    background: red;
+    writing-mode: vertical-lr;
+    padding: 5px 0;
+    z-index: 100;
+   }
+   .placeholder-box{
+    height: 100vh;
+   }
+   img{
+    width: 100%;
+   }
+
+   .page{
+    position: absolute;
+    top: 0vh;
+    left: 0vw;
+    height: 100vh;
+    width: 100vw;
+    /* background: white; */
+    background: rgb(250, 242, 210);
+    overflow: hidden;
+   }
+   #hidden-iframe{
+    /* position: absolute;
+    top: -10000px;
+    left: -10000px; */
+    z-index: 10000;
+    width: 100vw;
+    height: 100vh;
+  }
+  </style>
+  
+</head>
+
+<body>
+    <div id="app">
+      <div class="left-btn" @click="pagepre()">上一页</div>
+      <div class="right-btn" @click="pagenext()">下一页</div>
+      <!-- :srcdoc="pageContent"  -->
+      <iframe id="hidden-iframe" 
+        @load="hiddenIframeLoad"
+        src="./source.html" 
+        frameBorder="0"
+        :width="width"
+        :height="height"
+      ></iframe>
+
+      <div class="text" id="text">
+        <template v-for="(item, index) in pageList" v-show="isShow">
+         
+          <!-- <div class="page" 
+           v-html="item" 
+           :id="'pageNo' + index">
+          </div> -->
+
+          <!-- <iframe class="page" 
+           :srcdoc="item" 
+           :id="'pageNo' + index">
+          </iframe> -->
+
+          <!-- :srcdoc="item"  -->
+          <iframe 
+            class="page" 
+            frameBorder="0"
+            :srcdoc="pageContent" 
+            :id="'pageNo' + index"
+          >
+
+          </iframe>
+        </template>
+      </div>
+    </div>
+   
+    <script type="module">
+      import { pageContent } from './source.js';
+      let vm = new Vue({
+        el: '#app',
+        data: {
+          msg: '学习MVVM实现原理',
+          step: 0,
+
+          pageList: [ 
+
+          ],
+
+          curIndex: 0,
+
+          isShow: false, // 是否显示页面
+
+          pageContent,
+
+          width: 0,
+          height: 0,
+
+        },
+        mounted(){
+          this.width = document.body.clientWidth
+          this.height = document.body.clientHeight
+          console.log(this.width, this.height)
+          // console.log('pageContent', pageContent)
+          // this.createIframe()
+  
+
+          // this.$nextTick(()=>{
+          //   setTimeout(() => {
+          //     this.handleIframe()
+          //   }, 2000);
+          // })
+
+          // this.getPageTotal()
+        },
+        methods: {
+          // 监听隐藏dom加载完成事件
+          hiddenIframeLoad(){
+            console.log("监听隐藏dom加载完成事件")
+            this.handleIframe()
+          },
+
+          // 获取iframe信息
+          handleIframe(){
+
+            let x = document.querySelector("#hidden-iframe").contentWindow;
+            // x = window.frames[0];
+            // console.log("xx:", x, x.document, x.document.getElementsByTagName('head'))
+            
+            let style = this.createCss()
+            x.document.getElementsByTagName('head')[0].appendChild(style)
+            
+            // 初始化页面, 计算总页数
+            let pageTotal = this.getPageTotal(x.document)
+
+            
+            // 注入js脚本, 修改translate位置
+            // let script = this.createScript(2)
+            // x.document.body.appendChild(script);
+
+            // pageTotal = 1
+
+            let oldDom = document.querySelector('#hidden-iframe').contentWindow.document;
+            oldDom.getElementsByTagName('head')[0].appendChild(style)
+
+            let script = this.createScript(1)
+            x.document.body.appendChild(script)
+            console.log("documentElement.outerHTML:", x.document.documentElement.outerHTML)
+
+            this.pageList.push(x.document.documentElement.outerHTML)
+            return
+
+            for (let i = 0; i < pageTotal; i++) {
+              let script = this.createScript(i)
+              console.log("当前i:", i, pageTotal)
+              console.dir(x.document)
+              
+              // x.document.body.appendChild(script)
+              // this.pageList.push(x.document.documentElement.outerHTML)
+              
+              // this.pageContent = x.document.documentElement.outerHTML
+ 
+              // this.pageList.push(x.document.body.outerHTML)
+
+              let newDom = oldDom.cloneNode(true);
+              newDom.body.appendChild(script);
+
+              // this.pageList.push(newDom.documentElement.innerHTML);
+              this.pageList.push(newDom.documentElement.outerHTML);
+
+              console.log("doc:", this.pageList)
+              // console.log("全文挡:", newDom.outerHTML)
+              // console.log("全文挡:", newDom.documentElement.innerText)
+
+              console.dir(newDom)
+
+              // if(i > 0){
+                // console.log("x.document:", x.document)
+                // x.document.getElementById("scriptr" + (i-1)).remove()
+                // let last = x.document.querySelector("scriptr" + (i-1)).remove()
+                // x.document.body.removeChild(last)
+              // }
+
+              // x.document.body.appendChild(script)
+              // this.pageList.push(x.document.body.outerHTML)
+            }
+             
+          },
+
+          handleList(){
+            for (let i = 0; i < this.pageList.length; i++) {
+              let element = this.pageList[i];
+              if(i < this.curIndex){
+                let prePage = document.querySelector("#pageNo" + i)
+                prePage.style.transform = `translateX(-${this.step}px)`;
+              }else if(i > this.curIndex){
+              }else if(i === this.curIndex) {
+                let curPage = document.querySelector("#pageNo" + i)
+                curPage.style = `z-index:3;`;
+              }
+            }
+          },
+
+          createCss() {
+            let style = document.createElement('style');
+            style.type = "text/css"
+            style.innerText = `
+              body{
+                background: rgb(250, 242, 210);
+                // background: red;
+                /* padding-left: 20px; */
+                /* padding-right: 20px; */
+                overflow: hidden;
+                /* border: 1px solid red; */
+              }
+              *{
+                margin: 0;
+              } 
+              .text{
+                font-size: 14px;
+                padding-top: 30px;
+                padding-bottom: 30px;
+                column-gap: 30px;
+                column-width: calc(50vh - 40px);
+                column-rule-width: thick;
+                height: calc(100vh - 60px);
+                text-align: justify;
+                /* overflow: hidden; */
+              }
+              .left-btn{
+                position: fixed;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 10px;
+                color: white;
+                background: red;
+                writing-mode: vertical-lr;
+                padding: 5px 0;
+                z-index: 100;
+              } 
+              .right-btn{
+                position: fixed;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 10px;
+                color: white;
+                background: red;
+                writing-mode: vertical-lr;
+                padding: 5px 0;
+                z-index: 100;
+              }
+              .placeholder-box{
+                height: 100vh;
+              }
+              img{
+                width: 100%;
+              }
+            `
+            console.log("style:", style)
+            return style
+          },
+          createScript(index) {
+            let script = document.createElement('script');
+            script.type = "text/javascript";
+            script.id = "script" + index;
+            // script.src = 'demo.js';
+            // dom.style = 'transform: translateX(-${index * (step + 30)}px); transition: transform 0.5s;'
+            script.text = `
+              console.log("createScript-加载完成")
+              let dom = document.querySelector('.text');
+              let step = document.body.clientWidth
+              let index = ${index};
+              dom.style = 'transform: translateX(' + (-index * (step + 30)) + 'px);'
+            `;
+            return script
+          },
+
+          // 创建iframe
+          createIframe() {
+            
+            // iframe对象
+            let iframe = document.createElement('iframe')
+            iframe.srcdoc = pageContent
+            iframe.frameBorder = 0
+            iframe.overflow = 'hidden'
+            iframe.height = document.body.clientHeight
+            iframe.width = document.body.clientWidth
+            iframe.id = 'doc_iframe'
+            iframe.scrollLeft = document.body.clientWidth
+            
+
+            // for (const key in iframe) {
+            //   // console.log('11:', key, iframe[key])
+            //   if (Object.hasOwnProperty.call(iframe, key)) {
+            //     const element = iframe[key];
+            //     console.log(key, element)
+            //   }
+            // }
+
+            // this.pageList.push(iframe.outerHTML)
+          },
+
+          getPageTotal(dom) {
+            let domText = dom.querySelector('.text');
+            console.log("总长度:", dom.body.scrollWidth);
+            console.log("宽度:", dom.body.clientWidth);
+            let scrollWidth = dom.body.scrollWidth
+            let clientWidth = document.body.clientWidth
+            let pageNo = (scrollWidth + 30)/(clientWidth + 30)
+            this.step = clientWidth
+            let total = Math.round(pageNo); 
+            let decimal = (pageNo+'').split('.')[1]
+            if(decimal > 4 && decimal < 6){
+              console.log("需要补页")
+            }
+            console.log("总页数:", pageNo, total);
+            return total
+          },
+
+          pagepre() {
+            if(this.curIndex === 0){
+              return
+            }
+            console.log("上一页");
+            this.curIndex--
+            let curPage = document.querySelector("#pageNo" + (this.curIndex))
+            let second = document.querySelector("#pageNo" + (this.curIndex + 1))
+            curPage.style = `z-index:3; transform: translateX(${(0)}px); transition: transform 1s;`
+            curPage.style.zIndex = 10
+            curPage.style.boxShadow = "1px 0px 2px 0px #888888,2px 0px 4px 0px #888888,4px 0px 6px 0px #888888,8px 0px 8px 0px #888888 ";
+            setTimeout(() => {
+              second.style.zIndex = 1
+              curPage.style.zIndex = 3
+              curPage.style.boxShadow = 'unset'
+            }, 1000);
+          },
+
+          pagenext() {
+            if(this.curIndex >= 2){
+              return
+            }
+            console.log("下一页", this.step);
+            this.curIndex++
+            // 动画移除上面的一页
+            let curPage = document.querySelector("#pageNo"+ (this.curIndex - 1))
+            let second = document.querySelector("#pageNo" + this.curIndex)
+            curPage.style = `transform: translateX(-${(this.step)}px); transition: transform 1s;`
+            curPage.style.boxShadow = "1px 0px 2px 0px #888888,2px 0px 4px 0px #888888,4px 0px 6px 0px #888888,8px 0px 8px 0px #888888 ";
+            curPage.style.zIndex = 10
+            second.style.zIndex = 3
+            setTimeout(() => {
+              curPage.style.zIndex = 1
+              curPage.style.boxShadow = 'unset'
+            }, 1000);
+          }  
+        }
+      })
+    </script>
+</body>
+</html>

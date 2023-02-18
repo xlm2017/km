@@ -1,0 +1,88 @@
+<body>
+    <canvas id="canvas"></canvas>
+    <img src="one.jpeg" />
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        canvas.width = 1000;
+        canvas.height = 1000;
+        const width = 1000;
+        const height = 1000;
+
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(0, 0, 1000, 1000);
+
+        function drawGrids() {
+            drawGrid('x');
+            drawGrid('y');
+        }
+
+        function drawGrid(direction) {
+            var i, maxLength, step = 100;
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+            if (direction == 'x') {
+                maxLength = height;
+            } else if (direction == 'y') {
+                maxLength = width;
+            }
+            ctx.beginPath();
+            for (i = 100; i < maxLength; i += step) {
+                if (direction == 'x') {
+                    ctx.moveTo(0, i);
+                    ctx.lineTo(width, i);
+                } else if (direction == 'y') {
+                    ctx.moveTo(i, 0);
+                    ctx.lineTo(i, height);
+                    console.log("画竖线:", i)
+                }
+            }
+            ctx.closePath();
+            ctx.stroke();
+        }
+        drawGrids()
+
+        let image = new Image();
+        image.src = "./one.jpeg";
+        image.onload = () => {
+            // ctx.drawImage(this, 100, 100, 300, 300);
+            // ctx.drawImage(image, 50, 50);
+            // ctx.drawImage(image, 50, 50, 200, 200);
+            // ctx.drawImage(image, 50, 50, 1000, 1000, 400, 400, 400, 400);
+            ctx.drawImage(image, 200, 200, 300, 300, 100, 100, 400, 200);
+
+
+
+            ctx.translate(300, 300);
+            ctx.drawImage(image, 200, 200, 300, 300, 100, 100, 400, 200);
+            ctx.strokeRect(100, 100, 400, 200);
+            // 默认的， 在 canvas 中一个单位实际上就是一个像素。例如，如果我们将0.5作为缩放因子，最终的单位会变成0.5像素，
+            // x参数
+            // 水平方向的缩放因子。A negative value flips pixels across the vertical axis. A value of 1 results in no horizontal scaling.
+            // y参数
+            // 垂直方向的缩放因子。A negative value flips pixels across the horizontal axis. A value of 1 results in no vertical scaling.
+            // y轴
+            // 你可以使用 ctx.scale(-1, 1) 水平翻转上下文，使用 ctx.scale(1, -1) 垂直翻转上下文。
+            ctx.save()
+            ctx.scale(1, -1);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = 'blue';
+            ctx.drawImage(image, 200, 200, 300, 300, 100, 100, 400, 200);
+            ctx.strokeRect(100, 100, 400, 200);
+            // 返回来
+            ctx.restore()
+            // 水平翻转
+            ctx.scale(-1, 1);
+            ctx.drawImage(image, 200, 200, 300, 300, 100, 100, 400, 200);
+            ctx.strokeRect(100, 100, 400, 200);
+
+        }
+    </script>
+    <style>
+        #canvas {
+            margin: 0 auto;
+            width: 1000px;
+            display: block;
+        }
+    </style>
+</body>

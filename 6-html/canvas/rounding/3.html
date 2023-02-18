@@ -1,0 +1,29 @@
+<body>
+    非零（Nonzero Rule）
+    <div>
+        <canvas id="myCanvas"></canvas>
+    </div>
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        canvas.width = 600
+        canvas.height = 600
+        var ctx = canvas.getContext("2d");
+
+        function torus() {
+            ctx.shadowOffsetX = 8;
+            ctx.shadowOffsetY = 8;
+            ctx.shadowColor = 'black';
+            ctx.shadowBlur = 10;
+            ctx.beginPath();
+            ctx.moveTo(250, 250);
+
+            // 圆的路径一正一反
+            ctx.arc(250, 250, 150, 0, 2 * Math.PI, false);
+            ctx.arc(250, 250, 120, 0, 2 * Math.PI, true);
+
+            ctx.fillStyle = 'orange';
+            ctx.fill();
+        }
+        torus();
+    </script>
+</body>

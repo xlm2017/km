@@ -1,0 +1,501 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title>页容器</title>
+  <link href="flow0001.css" rel="stylesheet" type="text/css" />
+  <!-- <script src="./dom6.js"></script> -->
+
+  <script type="text/javascript" src="./extras/jquery.min.1.7.js"></script>
+  <script type="text/javascript" src="./extras/jquery-ui-1.8.20.custom.min.js"></script>
+  <script type="text/javascript" src="./extras/modernizr.2.5.3.min.js"></script>
+  <script type="text/javascript" src="./lib/hash.js"></script>
+  <script type="text/javascript" src="./lib/zoom.min.js"></script>
+  <script src="../js/turn.js"></script>
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      /* background-color: wheat; */
+      /* margin: 0; */
+      /* padding: 0 16px; */
+      /* box-sizing: border-box; */
+    }
+
+    #container {
+      /* padding: 0 16px; */
+    }
+
+    #page .turn-page {
+      background: #fff;
+      /* padding-left: 20px; */
+    }
+
+
+    #page {
+      /* display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh; */
+
+      /* width: 100% !important; */
+      /* padding: 0 16px; */
+      /* box-sizing: border-box; */
+      width: calc(100vw - 32px);
+      margin: 0 auto;
+    }
+
+    #page>div {
+      /* width: 100vw; */
+      /* height: 100vh; */
+      /* background: blue; */
+    }
+
+    #page .p1 {
+      background-color: greenyellow;
+    }
+
+    #page .p2 {
+      background-color: red;
+    }
+
+    #page .p3 {
+      background-color: green;
+    }
+
+    #page .p3 {
+      background-color: blue;
+    }
+
+    #page .p4 {
+      background-color: skyblue;
+    }
+
+    #page .p5 {
+      background-color: salmon;
+    }
+
+    #page .p6 {
+      background-color: gold;
+    }
+
+    #page .p7 {
+      background-color: hotpink;
+    }
+
+    #page .p8 {
+      background-color: yellow;
+    }
+
+    #page .p9 {
+      background-color: turquoise;
+    }
+
+    #page .p10 {
+      background-color: rebeccapurple;
+    }
+
+    #page .p11 {
+      background-color: red;
+    }
+
+    p {
+      /* margin: 0; */
+    }
+
+    body {
+      /* font-size: 30px; */
+    }
+  </style>
+  <style>
+    /* body {
+      width: 94vw;
+      margin: 0 auto;
+    } */
+
+    /* #page div:nth-of-type(1) {
+      background-color: greenyellow;
+    }
+
+    #page div:nth-of-type(2) {
+      background-color: red;
+    }
+
+    #page div:nth-of-type(3) {
+      background-color: green;
+    }
+
+    #page div:nth-of-type(4) {
+      background-color: blue;
+    }
+
+    #page div:nth-of-type(5) {
+      background-color: skyblue;
+    }
+
+    #page div:nth-of-type(6) {
+      background-color: salmon;
+    }
+
+    #page div:nth-of-type(7) {
+      background-color: gold;
+    }
+
+    #page div:nth-of-type(8) {
+      background-color: hotpink;
+    }
+
+    #page div:nth-of-type(9) {
+      background-color: yellow;
+    }
+
+    #page div:nth-of-type(10) {
+      background-color: turquoise;
+    }
+
+    #page div:nth-of-type(11) {
+      background-color: rebeccapurple;
+    }
+
+    #page div:nth-of-type(11) {
+      background-color: red;
+    } */
+  </style>
+
+</head>
+
+<body>
+
+  <!-- iframe -->
+
+  <!-- <iframe frameborder="0" src="./iframe6-html.html" id="book-iframe" width="100vw" height="100vh"></iframe> -->
+  <!-- <iframe frameborder="0" scrolling="no" src="./iframe6-html.html" id="book-iframe"></iframe> -->
+  <!-- <iframe frameborder="0" src="./iframe6-html.html" id="book-iframe"></iframe> -->
+  <style>
+    #book-iframe {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+
+      let ifr = document.createElement('iframe');
+      ifr.id = 'book-iframe';
+      ifr.src = "./iframe6-html.html";
+      ifr.frameBorder = "0";
+      document.body.append(ifr);
+
+      let script1 = document.createElement('script');
+      script1.src = "./dom6.js";
+      console.log('iframe对象:', ifr);
+      console.dir(ifr);
+      document.getElementById('book-iframe').contentDocument.body.appendChild(script1);
+
+      var ifrDocument = document.getElementById('book-iframe').contentDocument;
+
+
+      // ifr.onload = function () {
+      //   console.log("加载完成后注入css", document, ifrDocument);
+      //   // 注入css
+      //   let style = ifrDocument.createElement("style");
+      //   // style.type = "text/css";
+      //   let cssStr = `
+      //   html{
+      //     background: blue !important;
+      //   }
+      //   * {
+      //     // padding: 0;
+      //     // margin: 0;
+      //     background: red !important;
+      //   }
+      //   `
+      //   // style.innerHTML = cssStr;
+      //   // console.log('iframe-head源文件', ifrDocument);
+      //   // let head = ifrDocument.getElementsByTagName("head")[0];
+      //   // head.appendChild(style);
+      //   // console.log('iframe-head:', head);
+
+      //   // let title = ifrDocument.getElementsByTagName("title")[0];
+      //   // console.log("title:", title);
+      // }
+
+
+      // 直接更改元素
+      // ifrDocument.body.style = "background: red !important;";
+      // ifrDocument.body.className = "test";
+
+
+
+      var script = document.getElementById('book-iframe').contentDocument.createElement('script');
+      // var documentMain = document.getElementById('book-iframe').contentWindow.document;
+      // console.log("document-body:", documentMain);
+
+
+      // let ifr2 = document.createElement('iframe');
+      // ifr.id = 'book-iframe';
+      // ifr.src = "./iframe6-html-js.html";
+      // console.dir(ifr2);
+      // getPageViewHeight api,需要提前注入进去
+
+
+
+      // let str = "body{ background: red!important; }";
+
+      // let str = `body { 
+      // padding: 0;
+      // margin: 0;
+      // background: red!important;
+      // }`;
+
+      let str = 'body { \
+      padding: 0;\
+      margin: 0;\
+      background: red!important;\
+      }';
+
+      script.innerHTML = `
+
+    window.onload = () => {
+
+      // 注入css
+      let css = document.createElement("style");
+      css.type = "text/css";
+
+      // css.innerHTML = "
+      // body {
+      //   padding: 0;
+      //   margin: 0;
+      //   background: red!important;
+      // }
+      // ";
+
+      // css.innerHTML = "\`${str}\`";
+
+      css.innerHTML = "${str}";
+      // css.innerHTML = "body{ background: red!important; }";
+
+      console.log('iframe-head源文件', document);
+      let head = document.getElementsByTagName("head")[0];
+      head.appendChild(css);
+      console.log('iframe-head:', head);
+
+
+
+      var o = document.getElementsByTagName("html");
+      var totalHeight = o[0].offsetHeight; //html总高度
+      let pageHeight = getPageViewHeight() - 16;
+      console.log("页面高度:", pageHeight);
+      let body = document.body;
+      console.log('body:', body);
+      let totalPage = Math.ceil(totalHeight / pageHeight);
+
+      // 存储分页的div
+      let arr = new Array(totalPage).fill().map(() => new Array());
+
+      let curElement = body.firstElementChild;
+
+      // 元素自身高度
+      let elementHeight = curElement.getBoundingClientRect().height;
+      let top = curElement && curElement.getBoundingClientRect().top;
+      let index = Math.floor((top + elementHeight) / pageHeight);
+
+      while (curElement.nextElementSibling && curElement.nextElementSibling.tagName !== 'SCRIPT' && curElement.nextElementSibling.tagName !== 'STYLE') {
+        // console.log("进入循环");
+        let nextElementSibling = curElement.nextElementSibling;
+        let elementHeight2 = nextElementSibling.getBoundingClientRect().height;
+        // let elementHeight2 = 0;
+        let top2 = nextElementSibling.getBoundingClientRect().top;
+        // let top2 = getMonitorWallTop(nextElementSibling);
+        let index2 = Math.floor((top2 + elementHeight2) / pageHeight);
+
+        curElement = nextElementSibling;
+        if (index === index2) {
+          console.log(index);
+          // 收集当前元素
+          arr[index].push(curElement);
+          // break;
+          // 
+        } else {
+          // console.log("下一页了", index2)
+          index = index2
+          // 收集下一页第一个div
+          arr[index2].push(curElement);
+        }
+      }
+      console.log("循环之前,当前分页:", arr);
+
+      // 处理最后一个元素的分页问题
+      // 第二页起, 第一个元素可能包含上一页的文字
+      for (let i = 1; i < arr.length; i++) {
+        let element = arr[i];
+        if (i == 2) {
+          // debugger;
+        }
+        if (i >= 1) {
+          // 当前一个元素拆分的页
+          let newArr = [];
+          // 整个dom归属的页码
+          let endIndex = i;
+
+          // 推测元素的范围, 第一个元素的顶部的所在页
+          let startTop = element[0].getBoundingClientRect().top;
+          let startIndex = Math.floor((startTop) / pageHeight);
+          // 元素页码范围 0-1
+          if (endIndex === startIndex) {
+            console.log("当前分页合理, 无需拆分");
+            continue;
+          }
+          // 存储第一层dom
+          let stack = [];
+          let boxCopy = element[0].cloneNode();
+          stack.push(boxCopy);
+          let curPageDom = stack[0].cloneNode();
+
+          // 前一个元素所在页面的下标
+          let preElePageIndex = startIndex;
+
+          // 广度优先搜索
+          let queue = Array.from(element[0].children);
+          while (queue.length) {
+            let ele = queue.shift();
+            let tagName = ele.tagName;
+            let length = ele.outerText.length;
+            if (tagName === 'FONT' && length === 1) {
+              // 当前元素底部所在页
+              let index2 = getPageIndexByDom(ele, pageHeight);
+              // console.log("最小单位了, 无需向内递归", index2);
+              // 都是同一页
+              if (index2 === preElePageIndex) {
+                if (index2 !== startIndex) {
+                  // 不是头页的时候
+                  // curPageDom.style.margin = "0";
+                  curPageDom.style.textIndent = "0";
+
+                  // 将上一个div
+                }
+                curPageDom.append(' ');
+                curPageDom.appendChild(ele.cloneNode(true));
+                if (!queue.length) {
+                  // newArr[index2] = curPageDom;
+                  newArr.push(curPageDom);
+                  console.log(i, "收集最后一次", curPageDom);
+                  console.log("子元素遍历完成, 开始分页", i, newArr);
+                  // i == 2  可能分页结果 0 1 2
+                  for (let k = newArr.length - 1; k >= 0; k--) {
+                    if (k === newArr.length - 1) {
+                      // 当前页
+                      arr[i].shift();
+                      arr[i].unshift(newArr[k]);
+                    } else if (k > 0) {
+                      // 中间页
+                      arr[i - (newArr.length - 1 - k)] = newArr[k];
+                    } else if (k === 0) {
+                      // 头页
+                      arr[i - (newArr.length - 1)].push(newArr[k]);
+                    }
+                  }
+                  console.log("子页分完之后的结果:", i, arr);
+                }
+              } else {
+                // 不是同一页了, 第一件事就是收集好上一页的dom
+                // newArr[preElePageIndex] = curPageDom;
+                console.log(i, "收集一次", curPageDom);
+                newArr.push(curPageDom);
+                curPageDom = stack[0].cloneNode();
+                curPageDom.append(' ');
+                curPageDom.appendChild(ele.cloneNode(true));
+                preElePageIndex = index2;
+              }
+
+            } else {
+              // 判断这个含有子元素节点的dom是否只在一个页面
+              if (isOnePageElement(ele)) {
+                // console.log("当前元素有子元素:", ele, '在一个页面内');
+                curPageDom.appendChild(ele.cloneNode(true));
+              } else {
+                console.log("当前元素不再一个页面内, 需要查找子元素递归");
+                // 拷贝当前元素
+                let eleCopy = ele.cloneNode(false);
+                stack.push(eleCopy);
+                // console.log("拷贝第二层:", eleCopy);
+                // 拷贝第N层
+              }
+            }
+          }
+        }
+      }
+
+      // 全部结束后, 查看分页
+      console.log("全部结束后, 分页结果:", arr);
+      setTimeout(() => {
+        let page = document.getElementById("page");
+        for (let i = 0; i < arr.length; i++) {
+          let div = document.createElement('div');
+          // div.style.padding = '0 16px';
+          for (let j = 0; j < arr[i].length; j++) {
+            div.appendChild(arr[i][j]);
+          }
+          // div.appendChild(...arr[i]);
+          div.style.background = "wheat";
+          div.style.boxSizing = "border-box";
+          div.style.display = "flow-root";
+          div.className = "page-item";
+          if (i % 2 === 0) {
+            // div.style.paddingLeft = "36px";
+            // div.style.paddingRight = "16px";
+          } else {
+            // div.style.paddingRight = "36px";
+            // div.style.paddingLeft = "16px";
+          }
+          // 会导致翻页的样式位置变化
+          // div.style.paddingLeft = "16px";
+          // div.style.paddingRight = "16px";
+          page.appendChild(div);
+        }
+
+        // page.style.padding = '0 16px';
+
+        let container = document.createElement('div');
+        container.id = "container";
+        container.appendChild(page);
+
+
+        document.body.innerHTML = "";
+        document.body.style.width = '100vw';
+        document.body.style.padding = '0';
+        document.body.style.boxSizing = 'border-box';
+
+
+        document.body.appendChild(container);
+
+
+
+        // 使用turn.js
+
+
+
+
+      }, 1000);
+
+    }
+
+      `;
+      document.getElementById('book-iframe').contentDocument.body.appendChild(script);
+    }
+
+  </script>
+</body>
+
+<script>
+  // document.getElementById("myframe").contentDocument.
+</script>
+
+
+</html>

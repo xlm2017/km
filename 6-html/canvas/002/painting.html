@@ -1,0 +1,18 @@
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas")
+        let ctx = canvas.getContext("2d")
+        ctx.beginPath()
+        ctx.moveTo(50, 50)
+        // CanvasRenderingContext2D.lineTo() 是 Canvas 2D API 使用直线连接子路径的终点到x，y坐标的方法（并不会真正地绘制）。
+        ctx.lineTo(100, 100)
+        ctx.lineWidth = 10
+        ctx.strokeStyle = "red"
+        // 真正的绘制
+        ctx.stroke()
+
+        // 转换坐标系
+        
+    </script>
+</body>

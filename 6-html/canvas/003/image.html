@@ -1,0 +1,30 @@
+<body>
+    <canvas id="canvas"></canvas>
+    <img id="image" src="one.jpeg" />
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        canvas.width = 800;
+        canvas.height = 600;
+        const width = 800;
+        const height = 600;
+
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(0, 0, 800, 600);
+
+        let image = new Image();
+        image.src = "./one.jpeg";
+
+        let image2 = document.getElementById("image");
+
+        // 然而实际在运行中图片是不显示的，这是比较坑的问题，解决方法是将drawImage放入
+        // img.onload或者window.onload中。
+        setTimeout(() => {
+            ctx.drawImage(image2, 300, 300, 104, 124, 21, 20, 87, 104);
+        }, 1000)
+        setTimeout(() => {
+            ctx.drawImage(image, 200, 200, 300, 300);
+        }, 1000)
+        // ctx.strokeRect(200, 200, 200, 100);
+    </script>
+</body>

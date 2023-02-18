@@ -1,0 +1,38 @@
+<canvas id="canvas"></canvas>
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    /**
+ * 绘制一条曲线路径
+ * @param  {CanvasRenderingContext2D} ctx
+ * @param  {Array<number>} start 起点
+ * @param  {Array<number>} end 终点
+ * @param  {number} curveness 曲度(0-1)
+ */
+    function drawCurvePath(ctx, start, end, curveness) {
+        // 计算中间控制点
+        var cp = [
+            (start[0] + end[0]) / 2 - (start[1] - end[1]) * curveness,
+            (start[1] + end[1]) / 2 - (end[0] - start[0]) * curveness
+        ];
+        ctx.moveTo(start[0], start[1]);
+        ctx.quadraticCurveTo(
+            cp[0], cp[1],
+            end[0], end[1]
+        );
+    }
+
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#ff0000';
+    ctx.beginPath();
+
+    drawCurvePath(
+        ctx,
+        [100, 100],
+        [200, 300],
+        0.5
+    );
+
+    ctx.stroke();
+</script>

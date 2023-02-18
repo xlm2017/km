@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box">
+    <div class="header">头部</div>
+    <div class="content">中间</div>
+    <div class="footer">尾部</div>
+  </div>
+</body>
+<style>
+  * {
+    /* margin: 0; */
+  }
+
+  /* 滚动条整体部分 */
+  ::-webkit-scrollbar {
+    /* 对垂直方向滚动条 */
+    width: 6px;
+
+    /* 对水平方向滚动条 */
+    height: 16px;
+  }
+
+  /* 滚动的滑块 */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+
+    /* 滚动条的颜色 */
+    background-color: red;
+  }
+
+  /* 内层滚动槽 */
+  ::-webkit-scrollbar-track-piece {
+    background-color: yellow;
+  }
+
+  .box {
+    overflow: auto;
+  }
+
+  .header {
+    height: 45vh;
+    background: grey;
+  }
+
+  .content {
+    display: inline;
+    padding: 100px;
+  }
+
+  .footer {
+    height: 45vh;
+    background: black;
+  }
+</style>
+
+</html>

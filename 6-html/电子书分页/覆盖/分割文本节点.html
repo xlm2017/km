@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>分割dom节点</title>
+</head>
+
+<body>
+  <div id="box">
+    <p>
+      <font>张</font>
+      <font>三</font>
+      <span>
+        <font>大</font>
+        <font>哥</font>
+        <font>大</font>
+        <font>爷</font>
+      </span>
+    </p>
+    <p>
+      <font>狂</font>
+      <font>徒</font>
+      <span>
+        <font id="split" style="color: red">法</font>
+        <font>外</font>
+        <font>西</font>
+        <font>装</font>
+        <font>暴</font>
+        <font>徒</font>
+      </span>
+      <span>
+        <font>后</font>
+      </span>
+    </p>
+  </div>
+  <footer class="box2">测试删除</footer>
+</body>
+<script>
+  window.onload = () => {
+
+    // 分割dom节点, 返回分割后的dom数组
+    function splitElement (box, split) {
+      let res = [];
+      let boxCopy = box.cloneNode(true)
+      console.log(box, boxCopy);
+      while (split.nextElementSibling) {
+        let parent = split.nextElementSibling.parentNode
+        console.log("标签名字:", split.tagName);
+        console.log("父节点:", parent);
+        parent.removeChild(split.nextElementSibling);
+        // split = split.nextElementSibling
+      }
+      return res;
+    }
+
+    let box = document.getElementById("box");
+    let split = document.getElementById("split");
+    let domList = splitElement(box, split);
+    console.log(domList);
+
+    // 预期目标
+
+    // <div>
+    //   <p>
+    //     <font>张</font>
+    //     <font>三</font>
+    //     <span>
+    //       <font>大</font>
+    //       <font>哥</font>
+    //       <font>大</font>
+    //       <font>爷</font>
+    //     </span>
+    //   </p>
+    //   <p>
+    //     <font>狂</font>
+    //     <font>徒</font>
+    //     <span>
+    //       <font>法</font>
+    //     </span>
+    //   </p>
+    // </div>
+
+    // <div>
+    //   <p>
+    //     <span>
+    //       <font>外</font>
+    //       <font>西</font>
+    //       <font>装</font>
+    //       <font>暴</font>
+    //       <font>徒</font>
+    //     </span>
+    //   </p>
+    // </div>
+  }
+</script>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>外边距折叠</title>
+</head>
+<body>
+  <div class="father">
+    <div class="div0">第一个元素</div>
+  <div class="div1"></div>   
+  <!-- 1 -->
+  <div class="div2">第二个元素</div>
+  <div class="div2">第三个元素</div>
+  </div>
+  <style>
+    .div0{
+      width: 10%;
+      padding-top: 10%;
+      /* 防止内容过多，撑开高度 */
+      height: 0;
+      background: red;
+      margin-top: 100px;
+    }
+    .div1{
+      width: 10%;
+      padding-top: 10%;
+      /* 防止内容过多，撑开高度 */
+      height: 0;
+      background: red;
+      margin-top: 100px;
+      margin-bottom: 100px;
+    }
+    .div1::after{
+      content: '111';
+      display: block;
+    }
+    .father:after{
+      content: '2222';
+      display: block;
+    }
+    .div2{
+      width: 10%;
+      padding-top: 10%;
+      background: blue;
+      margin-top: 200px;
+    }
+  </style>
+</body>
+</html>

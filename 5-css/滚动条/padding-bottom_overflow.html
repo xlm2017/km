@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box0">
+    <div class="box">1111111111</div>
+  </div>
+</body>
+<style>
+  * {
+    margin: 0;
+  }
+
+  /* 滚动条整体部分 */
+  ::-webkit-scrollbar {
+    /* 对垂直方向滚动条 */
+    width: 40px;
+
+    /* 对水平方向滚动条 */
+    height: 20px;
+  }
+
+  /* 滚动的滑块 */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+
+    /* 滚动条的颜色 */
+    background-color: red;
+  }
+
+  /* 内层滚动槽 */
+  ::-webkit-scrollbar-track-piece {
+    background-color: yellow;
+  }
+
+  body {
+    overflow: scroll;
+  }
+
+  .box0 {
+    /* overflow: auto; */
+    overflow: scroll;
+    height: 120vh;
+  }
+
+  .box {
+    width: 120vw;
+    height: 100vh;
+    background: skyblue;
+    padding-bottom: 50vh;
+    /* outline: 20px solid blue; */
+    border: 10px solid green;
+    display: flex;
+
+    /* 盒子底部 */
+    align-items: flex-end;
+    /* align-items 是针对每一个子项起作用，它的基本单位是每一个子项，在所有情况下都有效果 */
+    /* align-items：应用于flex容器，设置flex子项在每个flex行的交叉轴上的默认对齐方式。
+    
+    */
+    /* align-content属性是将flex5ZQ子项作为一个整体起作用，它的基本单位是子项构成的行 */
+    /* align-content：只适用多行的flex容器（子项不止一行时该属性才761UIIIIIIIIIIIIIIIIIIII有效果）， */
+    /* 它的作用是当flex容器在交叉轴上有多余的空间时，将子项作为一个整体 */
+    /* （属性值为：flex-start、flex-end、center时）进行对齐。 */
+
+    /* 盒子水平中间 */
+    justify-content: center;
+    /* justfiy-content：应用于flex容器，设置flex子项（flex items）在主轴上的对齐方式。 */
+  }
+</style>
+
+</html>

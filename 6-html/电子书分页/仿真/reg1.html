@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>测试闭合标签</div>
+  <script>
+    // 处理html字符串
+    function handleHtml (htmlString) {
+      let s1 = "script>";
+      let strScript1 = "<script type='text/javascript' src='./jquery.min.1.7.js'></";
+      let strScript2 = "<script type='text/javascript' src='./turn.js'></";
+      let strEnd = "</head>";
+      let val = strScript1 + s1 + strScript2 + s1 + strEnd;
+      console.log("val:", val);
+      htmlString = htmlString.replace("</head>", val)
+    };
+    let str = ifr.contentDocument.documentElement.outerHTML;
+    handleHtml(str);
+</script>
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+<!-- 自定义坐标变换包括两个方法：transform 和 setTransform。这两者大体相同， transform 方法和 setTransform 方法的区别在于，
+后者一旦执行会完全重置已有的变换， transform 方法则是累加。 -->
+
+<!-- context.transform(a, b, c, d, e, f);
+各个参数含义和作用如下：
+
+a 水平缩放
+b 水平斜切
+c 垂直斜切
+d 垂直缩放
+e 水平位移
+f 垂直位移 -->
+
+
+<!-- transform 和 setTransform 的优点是能实现可能的任何效果，缺点则是不够直观。
+    上述的translate()，scale()，rotate()，这三个方法，都可以使用的 transform 方法来实现。 -->
+
+<!-- ctx.translate(x, y);
+    ctx.transform(1, 0, 0, 1, x, y);
+
+    ctx.scale(x, y);
+    ctx.transform(x, 0, 0, y, 0, 0);
+
+    ctx.rotate(angle);
+    sin = Math.sin(angle);
+    cos = Math.cos(angle);
+    ctx.transform(cos, sin, -sin, cos, 0, 0); -->
+
+
+
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        canvas.width = 1000;
+        canvas.height = 1000;
+        const width = 1000;
+        const height = 1000;
+
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(0, 0, 1000, 1000);
+
+        function drawGrids() {
+            drawGrid('x');
+            drawGrid('y');
+        }
+
+        function drawGrid(direction) {
+            var i, maxLength, step = 100;
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+            if (direction == 'x') {
+                maxLength = height;
+            } else if (direction == 'y') {
+                maxLength = width;
+            }
+            ctx.beginPath();
+            for (i = 100; i < maxLength; i += step) {
+                if (direction == 'x') {
+                    ctx.moveTo(0, i);
+                    ctx.lineTo(width, i);
+                } else if (direction == 'y') {
+                    ctx.moveTo(i, 0);
+                    ctx.lineTo(i, height);
+                    console.log("画竖线:", i)
+                }
+            }
+            ctx.closePath();
+            ctx.stroke();
+        }
+        drawGrids()
+        var points = [{
+            x: 200,
+            y: 400,
+        },
+        {
+            x: 500,
+            y: 300,
+        },
+        {
+            x: 600,
+            y: 400,
+        },
+        {
+            x: 300,
+            y: 500,
+        },
+        ];
+
+        function drawPath(points) {
+            var p0 = points[0],
+                p1 = points[1],
+                p2 = points[2],
+                p3 = points[3];
+            ctx.save();
+            ctx.beginPath();
+            ctx.strokeStyle = '#e00';
+            ctx.moveTo(p0.x, p0.y);
+            ctx.lineTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.lineTo(p3.x, p3.y);
+            ctx.lineTo(p0.x, p0.y);
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+        }
+        drawPath(points)
+
+        function drawImageInPoints(ctx, image, points) {
+            var xSize, ySize, xTan, yTan,
+                width = 100,
+                height = 100,
+                transform = {},
+                p0 = points[0],
+                p1 = points[1],
+                p3 = points[3];
+
+            // 根据图片左上角的坐标 设置e和f
+            transform.e = p0.x;
+            transform.f = p0.y;
+
+            // 根据进行斜切之前的矩形和图片尺寸的大小关系 设置a和d
+            xSize = p1.x - p0.x;
+            transform.a = xSize / width;
+            ySize = p3.y - p0.y;
+            transform.d = ySize / height;
+
+            // 根据图片是否需要斜切，来设置 设置b和d
+            // 水平斜切，水平线旋转到目标线的角度的正切值，角度以顺时针旋转为正
+            // 垂直斜切，垂直线旋转到目标线的角度的正切值，角度以逆时针旋转为正
+            if (p1.x == p0.x) {
+                transform.b = 0;
+                console.log('不应该相等');
+            } else {
+                xTan = (p1.y - p0.y) / (p1.x - p0.x);
+                transform.b = xTan * transform.a;
+            }
+
+            if (p3.y == p0.y) {
+                transform.c = 0;
+                console.log('不应该相等');
+            } else {
+                yTan = (p3.x - p0.x) / (p3.y - p0.y);
+                transform.c = yTan * transform.d;
+            }
+
+            ctx.save();
+            ctx.transform(transform.a, transform.b, transform.c, transform.d, transform.e, transform.f);
+            ctx.strokeStyle = '#6cf';
+            ctx.drawImage(image, 0, 0, width, height);
+            ctx.restore();
+        }
+
+        let image = new Image()
+        image.src = './one.jpeg'
+        image.onload = () => {
+            drawImageInPoints(ctx, image, points)
+        }
+
+    </script>
+    <style>
+        #canvas {
+            margin: 0 auto;
+            width: 1000px;
+            display: block;
+        }
+    </style>
+</body>

@@ -1,0 +1,69 @@
+
+<!-- 利用图层遮盖解决的方法
+这是群里的另一个朋友给出的解决方法，出乎我的意料。因为我们没有沟通，他看到我的题目就直接去做去了，
+给出了完全不同于我的思路的解决方法。虽然在结果看来，代码冗余，但是其思路非常新颖！ -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>RunJS</title>
+    </head>
+    <body>
+
+        <div class="holder">
+            <div class="center">
+                <p class="title">
+                    短标题
+                </p>
+                <p class="shadow">
+                    短标题
+                </p>
+            </div>
+            <div class="center">
+                <p class="title">
+                    长标题就是长标题很长的长标题
+                </p>
+                <p class="shadow">
+                    长标题就是长标题很长的长标题
+                </p>
+            </div>
+            <div class="center">
+                <p class="title">
+                    长标题就是长标题很长的长标题想短也短不了的长标题
+                </p>
+                <p class="shadow">
+                    长标题就是长标题很长的长标题想短也短不了的长标题
+                </p>
+            </div>
+        </div>
+
+    </body>
+    <style>
+      body{background:#fff;}
+      div, p{margin:0; padding:0;}
+
+      .holder .center{
+          float: left;
+          margin: 10px;
+      }
+      .center{
+          width:140px; 
+          height:60px; 
+          position: relative;
+          font:normal 14px/20px "Microsoft Yahei";
+      }
+      .center .title{
+
+      }
+      .center .shadow{
+          position: absolute;
+          text-align: center;
+          background: #fff;
+          overflow: hidden;
+          height: 20px;
+          top: 0;
+          left: 0;
+          width: 100%;
+      }
+    </style>
+</html>

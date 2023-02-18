@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue实例</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <div>{{msg}}</div> -->
+    <div class="animateWrap">
+      <div class="animate">
+        <div class="tx"><img src="tx" alt="" /></div><span>李老师上线</span>
+      </div>
+      <div class="animate">
+        <div class="tx"><img src="tx" alt="" /></div><span>李老师上线</span>
+      </div>
+      <div class="animate">
+        <div class="tx"><img src="tx" alt="" /></div><span>李老师上线</span>
+      </div>
+    </div>
+  </div>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '学习MVVM实现原理',
+      },
+      methods: {
+        handlerClick() {
+          console.log("点击事件", this)
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

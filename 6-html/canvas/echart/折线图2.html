@@ -1,0 +1,152 @@
+<head>
+    <meta charset="UTF-8">
+    <title>折线图</title>
+</head>
+<style>
+    #canvas {
+        border: 1px solid rgb(245, 245, 245);
+        /* width: 600px; */
+        /* height: 400px; */
+    }
+</style>
+
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas")
+        let ctx = canvas.getContext("2d")
+        ctx.font = "bold 26px PingFang sc";
+        ctx.fillText("折线图", 10, 30)
+        ctx.strokeStyle = "red"
+        ctx.lineWidth = 2
+        // 保存最开始的设置
+        ctx.translate(0, 0)
+        ctx.save()
+        // ctx.translate(50, 50 )
+        // 画出x轴和y轴
+        function drawAxis() {
+            ctx.strokeStyle = "black"
+            ctx.lineWidth = 2
+            ctx.beginPath()
+            // y轴
+            // ctx.moveTo(50, 50)
+            // ctx.lineTo(50, 350)
+            // x轴 注释掉下面一行则变成三角形了
+            ctx.moveTo(50, 350)
+            ctx.lineTo(550, 350)
+            ctx.closePath()
+            ctx.stroke()
+            ctx.restore()
+        }
+
+        // 画出刻度线
+        function drawAxisScale() {
+            ctx.strokeStyle = "blue"
+            ctx.lineWidth = 1
+            ctx.translate(50, 50)
+            //Y轴刻度线
+            for (let i = 1; i <= (300) / 50; i++) {
+                ctx.beginPath()
+                // 去掉刻度线, 打上刻度值
+                ctx.font = "7pt Calibri";
+                const textWidth = ctx.measureText(300 * 2 - i * 50 * 2);
+                ctx.fillText(300 * 2 - i * 50 * 2, -textWidth.width - 5, i * 50 + 3);
+                ctx.closePath()
+                ctx.stroke()
+            }
+            ctx.restore()
+            ctx.translate(-100, -100)
+            // X轴刻度线
+            for (let i = 1; i <= 600 / 100; i++) {
+                ctx.beginPath()
+                ctx.moveTo(i * 50 * 2, 400)
+                ctx.lineTo(i * 50 * 2, 410)
+                ctx.closePath()
+                ctx.stroke()
+            }
+            ctx.restore()
+        }
+
+        // 画出x轴上方的标准线
+        function drawLineX() {
+            ctx.strokeStyle = "grey"
+            // 下面一行设置宽度有用,可以设置10就能看到明显改变
+            ctx.font = "1px Calibri";
+            ctx.lineWidth = 0.2
+            ctx.translate(100, 100)
+            // ctx.fillRect(0, 0, 100, 100)
+            ctx.beginPath()
+            for (let i = 1; i < (300) / 50; i++) {
+                ctx.moveTo(0, i * 50)
+                ctx.lineTo(500, i * 50)
+            }
+            ctx.closePath();
+            ctx.stroke()
+            ctx.restore()
+        }
+
+        // 绘制x轴上的文字
+        function drawAxisXText() {
+            ctx.translate(0, -100)
+            for (let i = 1; i < 300 / 50; i++) {
+                const xText = new Array("一月", "二月", "三月", "四月", "五月", "六月");
+                ctx.fillStyle = 'black';
+                ctx.font = "7pt Calibri";
+                const textWidth = ctx.measureText(xText[i - 1]);
+                ctx.fillText(xText[i - 1], (i * 50 * 2 - 75 - 10) + (70 - textWidth.width) / 2, 420);
+            }
+            // ctx.save()
+        }
+
+        // 绘制折线图的样式
+        function drawBrokenLine() {
+            // ctx.restore()
+            // ctx.translate(0, 50)
+            ctx.translate(0, 150)
+            // ctx.beginPath()
+            // 圆的结束的位置与最近的moveTo位置相连，如果没有定义moveTo,那么连向零点，也就是canvas的左上角。
+            // console.log("结束位置:", Math.PI * 2)
+            // ctx.arc(50, 50, 10, 0, Math.PI * 2)
+            // ctx.closePath()
+            // ctx.fillStyle = "red"
+            // ctx.fill()
+            // ctx.stroke();        
+            let arr = []
+            ctx.strokeStyle = "blue"
+            ctx.lineWidth = 2
+            // ctx.beginPath()
+            for (let i = 1; i < 600 / 100; i++) {
+                ctx.strokeStyle = "blue"
+                ctx.lineWidth = 2
+                ctx.beginPath()
+                let item = {
+                    x: i * 100 - 50,
+                    y: Math.random() * 250
+                }
+                arr.push(item)
+                ctx.lineTo(item.x, item.y)
+                ctx.stroke();
+                ctx.closePath()
+
+                // ctx.beginPath()
+                // ctx.arc(item.x, item.y, 5, 0, Math.PI * 2)
+                // ctx.fillStyle = "red"
+                // ctx.fill()
+                // ctx.moveTo(item.x, item.y)
+                // ctx.closePath()
+            }
+            // 画完再闭合, 不然会变成多边形
+            // ctx.stroke()
+            // ctx.closePath()
+        }
+
+        function init() {
+            drawAxis()
+            drawAxisScale()
+            drawLineX()
+            drawAxisXText()
+            drawBrokenLine()
+        }
+        init()
+    </script>
+</body>

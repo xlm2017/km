@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box">
+
+  </div>
+  <div>正方形</div>
+  <div>padding的百分比计算, 基于父级宽度计算的</div>
+  <div class="box2">
+    <div class="box3"></div>
+  </div>
+  <div class="h">应用于内联元素,应用于内联元素</div>
+  <hr />
+  <span class="box4">内联元素会产生断行问题,内联元素会产生断行问题,内联元素会产生断行问题,内联元素会产生断行问题</span>
+  <div>位置不会受到影响</div>
+  <div>padding, margin的百分比值相对于宽度计算的</div>
+</body>
+<style>
+  .box {
+    width: 20%;
+    /* padding-top: 200px; */
+    padding-top: 20%;
+    background: skyblue;
+    /* float: left; */
+    /* position: absolute; */
+  }
+
+  .box2 {
+    width: 100px;
+  }
+
+  .box3 {
+    padding: 50%;
+    background: black;
+  }
+
+  .h {
+    background: red;
+  }
+
+  .box4 {
+    padding: 2% 10%;
+    background: green;
+  }
+</style>
+
+</html>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta content="text/html;" charset="utf-8" http-equiv="Content-Type" />
+  <!-- <link rel="stylesheet" type="text/css" href="css/stylesheet.css" /> -->
+  <meta name="GENERATOR" content="MSHTML 8.00.6001.19120" />
+  <title>上下分页</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/touchjs/0.2.14/touch.js"></script>
+
+  <!-- 添加分页样式 -->
+  <style>
+  body{
+    background: rgb(250, 242, 210);
+    /* padding-left: 20px; */
+    /* padding-right: 20px; */
+    /* border: 1px solid red; */
+    /* overflow: hidden; */
+  }
+   *{
+    margin: 0;
+  } 
+  .text{
+    font-size: 14px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: calc(100vh - 60px);
+    text-align: justify;
+    /* column-gap: 30px; */
+    /* column-width: calc(100vw + 30px); */
+   }
+   .left-btn{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    color: white;
+    background: red;
+    writing-mode: vertical-lr;
+    padding: 5px 0;
+    z-index: 100;
+   } 
+   .right-btn{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    color: white;
+    background: red;
+    writing-mode: vertical-lr;
+    padding: 5px 0;
+    z-index: 100;
+   }
+   .placeholder-box{
+    height: 100vh;
+   }
+   img{
+    width: 100%;
+   }
+  </style>
+  <script>
+    let index = 0
+    let step = 0
+    function pagepre() {
+      console.log("上一页");
+      let dom = document.querySelector('.text');
+      // let dom = document.body;
+      index--
+      // dom.scrollTo(index * step, 500)
+      // dom.scrollTo(200, 0)
+      // dom.scrollLeft = 200
+      dom.style = `transform: translateY(-${index * (step)}px); transition: transform 0.5s;`
+    }
+    function pagenext() {
+      console.log("下一页");
+      let dom = document.querySelector('.text');
+      // let dom = document.body;
+      index++
+      // dom.scrollTo(index * step, 500)
+      // dom.scrollTo(200, 0)
+      // dom.scrollLeft = 200
+      dom.style = `transform: translateY(-${index * (step)}px); transition: transform 0.5s;`
+    }
+    function initPage() {
+      let dom = document.querySelector('.text');
+      console.log("scrollWidth:", document.body.scrollWidth);
+      // console.log("dom:", dom.style);
+      // console.log("屏幕信息:", window.screen);
+      console.log("body:", document.body.clientWidth);
+      let scrollWidth = document.body.scrollWidth
+      let clientWidth = document.body.clientWidth
+      let pageNo = (scrollWidth + 30)/(clientWidth + 30)
+      // step = clientWidth
+      step = document.body.clientHeight
+      console.log("初始化");
+      console.log("总页数:", pageNo);
+      let total = Math.round(pageNo); 
+      let decimal = (pageNo+'').split('.')[1]
+      if(decimal > 4 && decimal < 6){
+        console.log("需要补页")
+      }
+      console.log("总页数:", pageNo, total);
+
+
+    // 获取可视区域的宽度
+    const width = document.body.offsetWidth
+    // 引入touch.js 来绑定左滑和右滑手势
+    touch.on('#text', 'swipeleft', function () {
+      pagepre(1)
+    })
+    touch.on('#text', 'swiperight', function () {
+      pagenext()
+    })
+    }
+
+    setTimeout(() => {
+      initPage()
+    }, 1000);
+  </script> 
+</head>
+
+<body>
+    <div class="left-btn" onclick="pagepre()">上一页</div>
+    <div class="right-btn" onclick="pagenext()">下一页</div>
+    <div class="text" id="text">
+      <h1 id="h0001"><span class="BOLD">产后瘦身四部曲——肥妈咪变身苗条妹</span></h1>
+      <p>“新生命的诞生过程是多么奇妙，这个生命也会改变你的人生。”</p>
+      <p>
+        这句话听起来多有趣，看着宝宝慢慢成长，变得一天比一天更漂亮，这个时候，妈妈心中盛满了浓浓的幸福。可是面对产后的臃肿身材，又会变得烦恼不已。我在生下小水晶后，被问到最多的问题是：“大虹，你究竟用了什么方法？吃了什么灵丹妙药？能够在这么短的时间里，把身材恢复到产前状态甚至更好呢？”
+      </p>
+      <p>
+        要我说啊，灵丹妙药可真没有，方法倒有一个，那就是动起来。在这里，我要感谢我的先生，研习运动营养学的他，从得知我怀孕的那天起，就开始实施准爸爸计划了。比如：计算营养餐的热量啦，监督我循序渐进做运动啦，可别小看了这些程序，它们可为产后恢复打下了坚实的基础。
+      </p>
+      <p>
+        通过那段时间的努力，我在进产房前体重64.5公斤，小水晶刚出生的体重是6斤7两，母女俩的体重都很达标哦！常有些怀孕的女性朋友，害怕委屈腹中的宝宝，于是往肚子里“囤积”了不少好吃的。可是你想过没有，这些美味的食物，除了提供给妈妈和宝宝必需的营养元素之外，很大一部分食物都会转化成热量，悄悄在体内囤积下来，形成厚厚的脂肪。很多刚生产完的妈妈们，体重也随着幸福感一路飙升，这时候再想减肥塑身，就会难上加难哦！大虹提醒：
+      </p>
+      <p>
+        要想让产后瘦身达到良好的效果，最重要的是找到一位热心的监督者。他能及时纠正你的错误，给你鼓励，在你想偷吃零食的时候，断然告诉你——“NO！”别小看这些措施，肉肉就是在细小的疏忽中，慢慢长起来的。所以，拉上你的老公吧，让他做你的拉拉队员，顺便培养夫妻感情，何乐而不为呢？
+      </p>
+      <p>
+        记得在怀孕期间，老公兼“健身顾问”刘伦浩先生，几乎是24小时贴身监督，偶尔想吃块蛋糕还得偷偷摸摸的，就像回到了读书时，背着老师做小动作似的。虽然抱怨一大堆，归根结底还是得佩服加屈服于老公的专业能力。正是因为孕期控制得当，为产后瘦身打下了坚实的基础。在他的严格要求下，我交了一份合格的瘦身成绩单：3个月减了15斤。注意，这里的15斤可不是体重，大多数是脂肪！最重要的是，减掉肉肉以后，好气色一点儿都没被减掉，真是苦尽甘来呀！
+      </p>
+      <p class="image_para"><img id="img0001" alt="图" src="image/test4.jpg"></img></p>
+      <p>所以呢，大虹建议各位准妈妈们，在孕期做好准备工作，未雨绸缪，就能让产后恢复变得事半功倍。</p>
+      <p>
+        很多朋友说，生完孩子老得快。我想，很大程度上是因为操心，且疏于锻炼与保养造成的。很多人抱怨，生完孩子就变成了“陀螺”：下班赶回去喂奶，晚上睡觉又有孩子吵夜，别说去健身房减肥了，连休息的时间都没有！如果长时间疏于打理，很快就会在岁月的蹉跎下变成欧巴桑、黄脸婆，别说老公看着不舒服，自己照镜子都觉得像个大怨妇。
+      </p>
+      <p>
+        其实，在大虹看来，生完宝宝照样可以做美女，就看你有没有一个好心态。都说世界上没有丑女人，只有懒女人，在做称职的好妈咪的同时，也要做一个时尚美丽的俏辣妈。只要积极一点儿、勇敢一点儿、心态好一点儿，慢慢累积下去，瘦下来其实一点儿都不难。聪明的女人，就是要和脂肪斤斤计较！相信在你的努力下，有一分耕耘就有一分收获。既然我能做到，你没理由做不到，大虹为你加油！
+      </p>
+      <p class="image_para"><img id="img0002" alt="图" src="image/test5.jpg"></img></p>
+      <h2 id="h0002"><span class="BOLD">瘦身一部曲：减肥观念对对碰</span></h2>
+      <p>
+        很多时候，瘦身达不到预期目标，不是因为不努力，而是用错了方法，多走了弯路，导致最后难以达到预期目的。产后瘦身和平时减肥看似一样，但实施起来却有天壤之别，适用于普通减肥的方法，未必就同样适合产后瘦身哦！稍有不慎，很可能会影响妈妈和宝宝的健康。那么，让我们来看看，在产后瘦身的环节中，都有着怎样的陷阱和误区呢？
+      </p>
+      <!-- <div class="placeholder-box"></div> -->
+    </div>
+</body>
+</html>

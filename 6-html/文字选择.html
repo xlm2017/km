@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文字选择</title>
+</head>
+<body>
+  <div id="box">
+    <div class="one">这是第一段文字</div>
+    <div class="two">数据结构和算法</div>
+    <div class="three">编程语法和生态</div>
+  </div>
+</body>
+<script>
+  const selection = window.getSelection();
+  selection.removeAllRanges();
+  const range = document.createRange();
+  const node = document.querySelector(".two");
+  // range.selectNodeContents(node); // 需要选中的dom节点
+  range.setStart(node, 3);
+  range.setEnd(node, 5);
+  selection.addRange(range);
+
+  document.getElementById("box").onclick = function () {
+      // var txt = window.getSelection ? window.getSelection() : document.selection.createRange().text;
+      var txt = window.getSelection();
+      // console.log("txt:",  txt.toString())
+      if(txt.type === 'Range' || txt.isCollapsed){
+        // alert(txt);//alert默认调用了toString()
+      }
+      console.log("txt:",  txt)
+  }
+</script>
+</html>

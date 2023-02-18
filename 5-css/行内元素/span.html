@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="div">
+    div
+    <span class="span">
+      span
+    </span>
+  </div>
+  <div>padding对行内元素的尺寸有效, 影响背景色等, 但是不会对上下元素的原本布局产生影响.</div>
+  <hr />
+  <div>其他不影响其他元素布局而出现层叠效果的现象, 例如: relative, box-shadow, outline等</div>
+</body>
+<style>
+  * {
+    margin: 0;
+  }
+
+  .div {
+    width: 100px;
+    height: 100px;
+    border: 1px red solid;
+  }
+
+  .span {
+    background: rebeccapurple;
+    /* left: 10px; */
+    /* position: relative; */
+    /* margin-left: 10px; */
+    /* margin: auto; */
+    /* display: inline-block; */
+    /* position: absolute; */
+    /* left: 0; */
+    width: 50px;
+    height: 50px;
+    /* 脱离文档流, 宽高生效 */
+    float: left;
+  }
+</style>
+
+</html>

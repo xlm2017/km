@@ -1,0 +1,24 @@
+<!-- CanvasRenderingContext2D.createLinearGradient()方法创建一个沿参数坐标指定的直线的渐变。 -->
+<!-- CanvasGradient ctx.createLinearGradient(x0, y0, x1, y1); -->
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas")
+        let ctx = canvas.getContext("2d")
+        console.log(canvas, ctx)
+        ctx.fillStyle = 'blue'
+        let gradient = ctx.createLinearGradient(0, 0, 300, 0)
+        // 该方法返回一个线性 CanvasGradient对象。想要应用这个渐变，需要把这个返回值赋值给 fillStyle 或者 strokeStyle。
+        // CanvasGradient.addColorStop()
+        // 添加一个由偏移(offset)和颜色(color)定义的断点到渐变中。如果偏移值不在0到1之间，将抛出INDEX_SIZE_ERR错误，
+        // 如果颜色值不能被解析为有效的CSS颜色值 <color>，将抛出SYNTAX_ERR错误。
+        // gradient.addColorStop(1, "red")
+        // gradient.addColorStop(0.5, "blue")
+
+        gradient.addColorStop(0, "green");
+        gradient.addColorStop(1, "white");
+        ctx.fillStyle = gradient
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    </script>
+</body>

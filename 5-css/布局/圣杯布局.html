@@ -1,0 +1,105 @@
+<!-- 什么是圣杯布局？
+圣杯布局是为了讨论「三栏液态布局」的实现，最早的完美实现是由 Matthew Levine 在 2006 年写的
+一篇文章 《In Search of the Holy Grail》 ，它主要讲述了网页中关于最佳圣杯的实现方法。
+
+它有以下几点要求：
+
+上部(header)和下部(footer)各自占领屏幕所有宽度。
+上下部之间的部分(container)是一个三栏布局。
+三栏布局两侧宽度不变，中间部分自动填充整个区域。
+中间部分的高度是三栏中最高的区域的高度。
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="header">
+        <h4>header</h4>
+    </div>
+
+    <div class="container">
+        <div class="middle">
+            <h4>middle</h4>
+            <p>middle-content</p>
+        </div>
+
+        <div class="left">
+            <h4>left</h4>
+            <p>left-content</p>
+        </div>
+
+        <div class="right">
+            <h4>right</h4>
+            <p>right-content</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h4>footer</h4>
+    </div>
+</body>
+<style>
+    .header,
+    .footer {
+        border: 1px solid #333;
+        background: #ccc;
+        text-align: center;
+    }
+
+    .footer {
+        clear: both;
+    }
+
+    .container {
+        padding: 0 220px 0 200px;
+        overflow: hidden;
+    }
+
+    .left,
+    .middle,
+    .right {
+        position: relative;
+        float: left;
+        min-height: 130px;
+    }
+
+    .middle {
+        width: 100%;
+        background: blue;
+    }
+
+    .left {
+        margin-left: -100%;
+        left: -200px;
+        width: 200px;
+        background: red;
+    }
+
+    .right {
+        margin-left: -220px;
+        right: -220px;
+        width: 220px;
+        background: green;
+    }
+</style>
+
+</html>
+
+<!-- 解析一下思路：
+
+在html中，先定义好header和footer的样式，使之横向撑满。
+在container中的三列设为浮动和相对定位(后面会用到)，middle要放在最前面，footer清除浮动。
+三列的左右两列分别定宽200px和220px，中间部分middle设置100%撑满
+这样因为浮动的关系，middle会占据整个container，左右两块区域被挤下去了
+接下来设置left的 margin-left: -100%;，让left回到上一行最左侧
+但这会把middle给遮住了，所以这时给外层的container设置 padding: 0 220px 0 200px;，给left空出位置
+这时left并没有在最左侧，因为之前已经设置过相对定位，所以通过 left: -200px; 把left拉回最左侧
+同样的，对于right区域，设置 margin-left: -220px; 把right拉回第一行
+这时右侧空出了220px的空间，所以最后设置 `right: -220px;##把right区域拉到最右侧就行了。 -->

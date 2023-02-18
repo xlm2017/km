@@ -1,0 +1,92 @@
+<!-- 实现方法2：flex弹性盒子 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="header">
+        <h4>header</h4>
+    </div>
+
+    <div class="container">
+        <div class="left">
+            <h4>left</h4>
+            <p>left-content</p>
+        </div>
+
+        <div class="middle">
+            <h4>middle</h4>
+            <p>middle-content</p>
+        </div>
+
+        <div class="right">
+            <h4>right</h4>
+            <p>right-content</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h4>footer</h4>
+    </div>
+</body>
+<style>
+    .header,
+    .footer {
+        border: 1px solid #333;
+        background: #ccc;
+        text-align: center;
+    }
+
+    .container {
+        display: flex;
+    }
+
+    .left {
+        width: 200px;
+        background: red;
+        /* min-height 和 max-height 属性会覆盖  height。 */
+        /* auto
+由浏览器为元素计算并选择一个高度。
+fill 
+根据文字方向，使用 fill-available 作为行大小或者块大小。
+max-content 
+设置为允许的最大高度。
+min-content 
+设置为允许的最小高度.
+available 
+包含块高度减去当前元素的边距，边框和填充。
+fit-content 
+将 fill-content 公式中的可用位置替换为特定的参数以进行使用，如：min(max-content, max(min-content, )) */
+    }
+
+    .middle {
+        flex: 1;
+        background: blue;
+    }
+
+    .right {
+        width: 220px;
+        background: green;
+    }
+</style>
+
+</html>
+
+<!-- 
+解析一下思路：
+
+header和footer同上面一样，横向撑满。footer不用再清浮动了
+container中的left、middle、right依次排布即可，不用特意将middle放置到最前面
+给container设置弹性布局 display: flex;
+left和right区域定宽，middle设置 flex: 1; 即可
+总结
+总的来说，弹性布局是最适合实现圣杯布局的方法了，相较浮动，弹性布局的结构更清楚，更好理解，也不用担心移动端的适配问题。
+
+而浮动的方法，在面试中可能会遇到，主要考察对布局的理解能力。所以，建议大家可以把浮动的例子拷贝下来，自行模拟一把，以便加深理解。
+ -->

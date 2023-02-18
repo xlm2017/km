@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box0">
+    <div class="box">
+      浮动无效
+    </div>
+  </div>
+  <div class="box2"></div>
+</body>
+<style>
+  .box0 {
+    position: relative;
+    border: 10px solid red;
+    /* display: flow-root; */
+    /* overflow: hidden; */
+    /* overflow: auto; */
+    /* overflow: scroll; */
+
+  }
+
+  .box0::after {
+    /* display: block;
+    content: '';
+    clear: both; */
+  }
+
+  .box {
+    width: 200px;
+    height: 200px;
+    background: black;
+    position: absolute;
+    left: 0;
+    right: 0;
+    float: left;
+  }
+
+  .box2 {
+    width: 500px;
+    background-color: skyblue;
+    z-index: 999;
+    position: relative;
+  }
+</style>
+
+</html>

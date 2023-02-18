@@ -1,0 +1,163 @@
+<canvas id="canvas" width="200px" height="200px"></canvas>
+<style>
+    #canvas {
+        text-align: center;
+        margin: 100px auto;
+        display: block;
+        border: 1px solid rgb(230, 230, 230);
+    }
+</style>
+<script>
+    let canvas = document.getElementById("canvas")
+    let ctx = canvas.getContext("2d")
+    let width = ctx.canvas.width
+    let height = ctx.canvas.height
+    let r = width / 2
+    function drawBackground() {
+        // ctx.arc(100, 100, 100, 0, 2 * Math.PI)
+        // ctx.arc(100, 100, 90, 0, 2 * Math.PI)
+        // ctx.stroke()
+        // ctx.fill()
+        ctx.translate(r, r)
+        ctx.beginPath()
+        // ctx.arc(0, 0, r, 0, 2 * Math.PI)
+        // ctx.arc(0, 0, r - 10, 0, 2 * Math.PI)
+        ctx.lineWidth = 10
+        ctx.arc(0, 0, r - 5, 0, 2 * Math.PI, false)
+        ctx.stroke()
+        // ctx.closePath()
+
+        let hourNumbers = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2]
+        // 设置字体
+        ctx.font = "18px Arial"
+        // 设置文本对齐
+        ctx.textAlign = "center"
+        // ctx.textBaseLine = "middle"
+        ctx.textBaseline = "middle"
+        hourNumbers.forEach((number, i) => {
+            // 弧度制  弧度 = 弧长 / 半径
+            // 1, 2 不见了(没写)
+            let radian = 2 * Math.PI / 12 * i
+            let x = Math.cos(radian) * (r - 30)
+            let y = Math.sin(radian) * (r - 30)
+            ctx.fillText(number, x, y)
+        })
+
+
+        // 绘制60个点
+        for (let i = 0; i < 60; i++) {
+            let randian = 2 * Math.PI / 60 * i
+            let x = Math.cos(randian) * (r - 18)
+            let y = Math.sin(randian) * (r - 18)
+            // 画圆之前开始路径
+            ctx.beginPath()
+            // ctx.arc(x, y, 2, 0, 2 * Math.PI, false)
+            if (i % 5 === 0) {
+                ctx.fillStyle = "#000"
+                ctx.arc(x, y, 2, 0, 2 * Math.PI, false)
+            } else {
+                ctx.fillStyle = "#ccc"
+                ctx.arc(x, y, 2, 0, 2 * Math.PI, false)
+            }
+            ctx.fill()
+        }
+
+        // ctx.stroke()
+        // ctx.fill()
+    }
+
+    // 绘制时针
+    // 加参数, 带入分针引起的弧度
+    function drawHour(hour, minute) {
+        //保存状态再还原状态
+        ctx.save()
+        ctx.beginPath()
+        let randian = 2 * Math.PI / 12 * hour
+        // let mrad = 2 * Math.PI / 12 * minute / 60
+        let mrad = 2 * Math.PI / 12 / 60 * minute
+        ctx.rotate(randian + mrad)
+        ctx.lineWidth = 6
+        ctx.lineCap = "round"
+        ctx.moveTo(0, 10)
+        ctx.lineTo(0, -r / 2)
+        ctx.stroke()
+        ctx.restore()
+    }
+    // 绘制分针
+    function drawMinute(minute) {
+        ctx.save()
+        ctx.beginPath()
+        let randian = 2 * Math.PI / 60 * minute
+        ctx.rotate(randian)
+        ctx.lineWidth = 3
+        ctx.lineCap = "round"
+        ctx.moveTo(0, 10)
+        ctx.lineTo(0, -r + 30)
+        ctx.stroke()
+        ctx.restore()
+    }
+    // 绘制秒针
+    function drawSecond(second) {
+        ctx.save()
+        ctx.beginPath()
+        let randian = 2 * Math.PI / 60 * second
+        ctx.rotate(randian)
+        // 秒针不再画线, 而是画范围
+        // ctx.lineWidth = 3
+        // ctx.lineCap = "round"
+        // ctx.moveTo(0, 10)
+        // ctx.lineTo(0, -r + 30)
+        ctx.fillStyle = "#c14543"
+        ctx.moveTo(-2, 20)
+        ctx.lineTo(2, 20)
+        ctx.lineTo(1, -r + 18)
+        ctx.lineTo(-1, -r + 18)
+        ctx.fill()
+        // //
+        // ctx.stroke()
+        ctx.restore()
+    }
+    // 画出时针原点
+    function drawDot() {
+        ctx.beginPath()
+        ctx.arc(0, 0, 2, 0, 2 * Math.PI, false)
+        ctx.fill()
+    }
+    // drawBackground()
+    // drawHour(4, 30)
+    // drawMinute(30)
+    // drawSecond(50)
+    // drawDot()
+
+    // setInterval(() => {
+    //     ctx.clearRect()
+    //     let date = new Date()
+    //     let hour = date.getHours()
+    //     let minute = date.getMinutes()
+    //     let second = date.getSeconds()
+    //     ctx.save()
+    //     drawBackground()
+    //     drawDot()
+    //     drawHour(hour, minute)
+    //     drawMinute(minute)
+    //     drawSecond(second)
+    //     ctx.restore()
+    // }, 1000);
+    function draw() {
+        // ctx.clearRect()
+        ctx.clearRect(0, 0, width, height)
+        let date = new Date()
+        let hour = date.getHours()
+        let minute = date.getMinutes()
+        let second = date.getSeconds()
+        ctx.save()
+        drawBackground()
+        drawDot()
+        drawHour(hour, minute)
+        drawMinute(minute)
+        drawSecond(second)
+        ctx.restore()
+    }
+    draw()
+    setInterval(draw, 1000);
+</script>

@@ -1,0 +1,569 @@
+.fei2 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  font-size: .8em;
+  text-indent: 2em;
+}
+
+.k {}
+
+.ft2 {}
+
+.xinyou {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  font-size: .8em;
+  text-indent: 2em;
+  text-align: right;
+}
+
+.dingge {
+  font-size: .8em;
+  margin-left: 2em;
+  text-indent: 0;
+}
+
+.yuandian {
+  color: #9FA0A0;
+  font-size: 1rem;
+}
+
+.wuji {
+  margin-left: 0%;
+  border-left: 2px solid #9FA0A0;
+  margin: 0;
+  text-indent: -.5rem;
+  margin-left: 1em;
+  padding-top: 1em;
+}
+
+.yuefen {
+  background-color: #9FA0A0;
+  display: inline-block;
+  color: #fff;
+  margin-left: 0%;
+  padding: 5px;
+  box-shadow: 0 3px 0 #fff, 0 6px 0 #9FA0A0;
+  margin-top: 2em;
+  margin-bottom: 0em
+}
+
+.fei4 {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 3em;
+  margin-bottom: 2em;
+}
+
+.fei3 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  font-size: .8em;
+  text-indent: 2em;
+}
+
+.st1 {
+  font-weight: normal;
+  font-size: 1.5em;
+  color: #9FA0AF
+}
+
+.ft3 {
+  width: 50%;
+  margin-left: 50%;
+  margin-top: 0;
+  margin-bottom: 5px;
+  line-height: .5em
+}
+
+.zhangwen {
+  width: 50%;
+  margin-left: 50%;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.ft1 {
+  font-weight: normal;
+  font-size: .6em;
+}
+
+.yangshi1 {
+  text-align: center;
+  font-size: 1.3em;
+  background-color: #E9D09A;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+/* Global setting */
+/* 全局设定 */
+body {
+  font-size: 1em;
+  text-align: justify;
+  line-height: 1.5;
+  word-break: break-all;
+
+  margin: 0;
+  padding: 0;
+}
+
+div.tupian3 {
+  width: 30%;
+  margin: 1em auto 1em auto;
+  text-align: center;
+}
+
+div.tupian6 {
+  width: 60%;
+  margin: 1em auto 1em auto;
+  text-align: center;
+}
+
+/* TOC link color */
+/* 目录条目链接颜色 */
+a {
+  color: #0000CC;
+  text-decoration: none;
+}
+
+/* TOC Title */
+/* 目录标题 */
+.sgc-toc-title {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 1em;
+  letter-spacing: 1em;
+  text-align: center;
+  border-bottom: 1.5px dotted #000000;
+}
+
+/* Level 1 TOC */
+/* 一级标题 */
+.sgc-toc-level-1 {
+  margin-left: 0em;
+}
+
+/* Level 2 TOC */
+/* 二级标题 */
+.sgc-toc-level-2 {
+  margin-left: 2em;
+}
+
+/* Level 3 TOC */
+/* 三级标题 */
+.sgc-toc-level-3 {
+  margin-left: 4em;
+}
+
+/* Level 4 TOC */
+/* 四级标题 */
+.sgc-toc-level-4 {
+  margin-left: 4em;
+}
+
+/* Level 5 TOC */
+/* 五级标题 */
+.sgc-toc-level-5 {
+  margin-left: 4em;
+}
+
+/* Level 6 TOC */
+/* 六级标题 */
+.sgc-toc-level-6 {
+  margin-left: 4em;
+}
+
+div.tupian {
+  width: 80%;
+  margin: 1em auto 1em auto;
+  text-align: center;
+}
+
+div.tupianr {
+  width: 40%;
+  margin-left: 50%;
+  text-align: left;
+}
+
+div.tupian-g {
+  width: 100%;
+  margin: 1em auto -3em auto;
+  text-align: center;
+}
+
+div.tupian-test {
+  width: 7em;
+  margin: 1em auto 1em 0em;
+}
+
+div.tupian-3 {
+  width: 30%;
+  margin: 1em auto 1em auto;
+  text-align: center;
+}
+
+div.tupian-6f {
+  width: 60%;
+  margin: 1em auto 1em 0em;
+  text-align: center;
+}
+
+div.tupian-right {
+  text-align: right;
+  margin: 0.6em 0em 0.6em auto;
+  width: 20%;
+}
+
+div.tupian1 {
+  width: 100%;
+  margin: 1em auto 1em auto;
+  text-align: center;
+}
+
+div.tupian100 {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+}
+
+p.banquanxinxi {
+  font-weight: bold;
+}
+
+p.bodycontent-text-tushuo {
+  font-size: 0.8em;
+  text-align: center;
+  margin-top: 0.2em;
+}
+
+div.logo {
+  margin: auto;
+  text-align: center;
+}
+
+/*序*/
+.preface {
+  font-size: 1.5em;
+  margin-bottom: 2.5em;
+  margin-top: 0.5em;
+  text-align: right;
+}
+
+p.bodycontent-text1 {
+  text-indent: 2em;
+}
+
+.bodycontent-first-title-x {
+  font-size: 1.0em;
+  margin-bottom: 2.5em;
+  margin-bottom: 20%;
+  margin-top: 4%;
+  text-align: right;
+}
+
+/*1级标题 居右*/
+.bodycontent-first-title {
+  font-size: 1.5em;
+  width: 50%;
+  margin-left: 50%;
+  line-height: 1em;
+  text-align: left;
+  font-weight: normal;
+  margin-top: 0;
+}
+
+/*前言一级标题*/
+.bodycontent-first-title_qianyan {
+  font-size: 1.5em;
+  margin-bottom: 1.5em;
+  margin-top: 0.5em;
+  text-align: right;
+  margin-right: 0.5em;
+  margin-left: auto;
+}
+
+.bodycontent-first-title-30 {
+  font-size: 1.5em;
+  margin-bottom: 2.5em;
+  margin-top: 30%;
+  text-align: center;
+}
+
+.bodycontent-first-title3 {
+  font-size: 1.3em;
+  margin-bottom: 1em;
+  margin-top: 0.5em;
+  text-align: right;
+}
+
+.bodycontent-first-title2 {
+  font-size: 1.5em;
+  margin-bottom: 2.5em;
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+.bodycontent-second-title {
+  font-size: 1.3em;
+  margin-bottom: 3em;
+  margin-top: 1.5em;
+  text-align: right;
+}
+
+.bodycontent-second-title-x {
+  font-size: 1.3em;
+  margin-bottom: 0.8em;
+  margin-top: 1.5em;
+  text-align: center;
+}
+
+p.bodycontent-text_center-xb {
+  text-align: center;
+  margin-bottom: 1.5em;
+  margin-top: -0.8em;
+}
+
+.bodycontent-third-title {
+  font-size: 1.1em;
+  margin-bottom: 0.7em;
+  margin-top: 1em;
+  text-align: left;
+  text-indent: 0em;
+}
+
+.bodycontent-third-title1 {
+  font-size: 1.2em;
+  margin-bottom: 0.7em;
+  margin-top: 1em;
+}
+
+p.bodycontent-text-x {
+  margin-top: -0.9em;
+  border-top: 2px solid #939598;
+  text-indent: 0em;
+  font-size: 0.9em;
+}
+
+h4,
+h5,
+h6 {
+  text-align: left;
+  font-size: 1.1em;
+  margin: 1.0em 0em;
+}
+
+p.bodycontent-text-bold {
+  text-indent: 0em;
+  font-size: 1.1em;
+  margin-bottom: 0.7em;
+  margin-top: 1.5em;
+  font-weight: bold;
+}
+
+/* 版权信息页标题 */
+/* Copyright page title */
+.kindle-cn-copyright-title {
+  page-break-before: avoid;
+  font-size: 1.1em;
+  margin: 0.2em auto;
+  text-align: left;
+  text-indent: 0em;
+}
+
+/* 版权信息页正文 */
+/* Copyright page text */
+p.kindle-cn-copyright-text {
+  line-height: 1.5;
+  text-indent: 0em;
+}
+
+/* 版权信息页正文1 */
+/* Copyright page text1 */
+p.kindle-cn-copyright-text1 {
+  line-height: 1.5;
+  text-indent: 0em;
+}
+
+p.kindle-cn-copyright-text-center {
+  line-height: 1.5;
+  text-align: center;
+}
+
+div.logo {
+  margin: 40% auto auto;
+  text-align: center;
+  width: 80%;
+}
+
+img.logo {
+  width: 30%;
+}
+
+div.logo-1 {
+  margin: auto;
+  text-align: center;
+}
+
+img.logo-1 {
+  height: 2em;
+}
+
+/* Quote */
+/* 引用框 */
+blockquote.kindle-cn-blockquote {
+  background: #f9f9f9;
+  border-left: 0.5em solid #ccc;
+  margin: 1.5em;
+  padding: 0.5em;
+  text-indent: 2em;
+}
+
+/* 注释 */
+p.zhusi {
+  line-height: 1.5;
+  text-indent: 0em;
+  font-size: 0.8em;
+}
+
+p.bodycontent-text_yinwen {
+  line-height: 1.5;
+  text-indent: 2em;
+  font-size: 1em;
+}
+
+p.bodycontent-text_yinwen_kai {
+  line-height: 1.5;
+  font-size: 1em;
+  text-indent: 2em;
+}
+
+/* 数学上标字体 */
+span.math-super {
+  font-size: 0.7em;
+  vertical-align: super;
+}
+
+/* 数学上标倾斜字体 */
+span.math-super-italic {
+  font-size: 0.7em;
+  font-style: italic;
+  vertical-align: super;
+}
+
+/* 数学下标字体 */
+span.math-sub {
+  font-size: 0.7em;
+  vertical-align: sub;
+}
+
+/* 全屏图样式 */
+.athena_imgwrap_fullscreen {
+  display: block;
+  margin: 0em;
+  padding: 0em;
+  width: 100%;
+}
+
+/*一级标题 居中*/
+.bodycontent-first-title-z {
+  font-size: 1.5em;
+  margin-bottom: 2.5em;
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+.bodycontent-third-title-z {
+  font-size: 1.5em;
+  margin-bottom: 2.5em;
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+p.bodycontent-text_center {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+p.bodycontent-text {
+  text-indent: 2em;
+}
+
+span.yuedu1 {
+  color: #ffffff;
+  background-color: #9fa0a0;
+  padding: 0.2em;
+}
+
+p.bodycontent-text_d {
+  text-indent: 0em;
+}
+
+p.bodycontent-text_right {
+  text-align: right;
+  font-size: .8em;
+}
+
+p.bodycontent-text_noindent {
+  line-height: 1.5;
+  text-indent: 0em;
+  font-size: 1em;
+}
+
+/* 造字 */
+img.paralog {
+  height: 1.1em;
+  vertical-align: -0.2em;
+  margin: 0em 0.1em;
+}
+
+div.tupian-6 {
+  width: 80%;
+  margin: 1em auto 1em auto;
+  text-align: center;
+}
+
+img.image-alone {
+  width: 100%;
+}
+
+img.image-alone1 {
+  width: 100%;
+  margin-bottom: 0.2em;
+}
+
+/* 插图右浮动 */
+div.tupian-float-right {
+  float: right;
+  margin: 0.6em 0em 0.6em 1.17em;
+  width: 20vw;
+}
+
+div.tupian-float-right-c {
+  float: right;
+  margin: 0.6em 0em 0.6em 1.17em;
+  width: 10vw;
+}
+
+span.yuedu2 {
+  border-top: 1px dashed #9fa0a0;
+  border-right: 1px dashed #9fa0a0;
+  border-bottom: 1px dashed #9fa0a0;
+  padding: 0.2em;
+}
+
+/* 插图左浮动 */
+div.tupian-float-left {
+  float: left;
+  margin: 0.6em 1.17em 0.6em 0em;
+  width: 20vw;
+}
+
+.text-b {
+  font-weight: bold;
+}
+
+.text-i {
+  font-style: italic;
+}

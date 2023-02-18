@@ -1,0 +1,28 @@
+<!-- 径向渐变 -->
+<!-- 渐变的概念：渐变是指在填充时从一种颜色慢慢过渡到另外一种的颜色。 -->
+<!-- 径向渐变是指沿着圆形的半径方向向外进行扩散的渐变方式。譬如绘制 -->
+<!-- 太阳时，沿着太阳的半径方向向外扩散出去的光晕，就是一种径向渐变。 -->
+
+<!-- CanvasRenderingContext2D.createRadialGradient() 是 Canvas 2D API 根据参数确定两个圆的坐标，绘制放射性渐变的方法。这个方法返回 CanvasGradient。 -->
+<!-- CanvasGradient ctx.createRadialGradient(x0, y0, r0, x1, y1, r1); -->
+<!-- 增加开始圆半径和结束圆半径 -->
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas")
+        canvas.height = 200
+        let ctx = canvas.getContext("2d")
+        ctx.fillStyle = 'blue'
+        // let gradient = ctx.createRadialGradient(0, 0, 50, 300, 0, 100)
+        var gradient = ctx.createRadialGradient(100, 100, 50, 100, 100, 100);
+        // gradient.addColorStop(0, "green");
+        gradient.addColorStop(0.5, "yellow");
+        gradient.addColorStop(1, "red");
+        // 设定的颜色离开渐变起始点的偏移量。
+        ctx.fillStyle = gradient
+        // ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillRect(0, 0, 200, 200);
+        console.log(canvas, ctx)
+    </script>
+</body>

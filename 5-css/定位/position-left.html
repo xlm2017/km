@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <span class="father">
+    父元素span<span class="child">
+      <!-- 子元素span -->
+      子元素的宽度
+    </span>
+  </span>
+</body>
+<style>
+  .father {
+    /* position: absolute; */
+    position: relative;
+    /* display: block; */
+  }
+
+  .child {
+    /* position: relative;
+    top: 100px;
+    margin-right: 50px;
+    margin-left: 50px; */
+    position: absolute;
+    top: 0;
+    /* left: 0; */
+    background-color: red;
+    margin-left: 20px;
+  }
+</style>
+
+</html>

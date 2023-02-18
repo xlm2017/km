@@ -1,0 +1,31 @@
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas")
+        let ctx = canvas.getContext("2d")
+
+        ctx.scale(1, -1)
+        ctx.translate(0, -canvas.height)
+
+        // 绘制x轴
+        ctx.beginPath()
+        ctx.moveTo(0, 0)
+        ctx.lineTo(300, 0)
+        ctx.fillStyle = "red"
+        ctx.stroke()
+
+        // 绘制y轴
+        ctx.beginPath()
+        ctx.moveTo(0, 0)
+        ctx.lineTo(0, 150)
+        ctx.fillStyle = "red"
+        ctx.stroke()
+
+        // 绘制圆
+        ctx.beginPath()
+        ctx.arc(0, 0, 50, 0, Math.PI * 2, true)
+        ctx.closePath()
+        ctx.fillStyle = 'blue'
+        ctx.fill()
+    </script>
+</body>

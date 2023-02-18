@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title>页容器</title>
+  <link href="flow0001.css" rel="stylesheet" type="text/css" />
+  <script src="./dom6.js"></script>
+
+  <script type="text/javascript" src="./extras/jquery.min.1.7.js"></script>
+  <script type="text/javascript" src="./extras/jquery-ui-1.8.20.custom.min.js"></script>
+  <script type="text/javascript" src="./extras/modernizr.2.5.3.min.js"></script>
+  <script type="text/javascript" src="./lib/hash.js"></script>
+  <script type="text/javascript" src="./lib/zoom.min.js"></script>
+  <script src="../js/turn.js"></script>
+
+  <style>
+    body {
+      /* background-color: wheat; */
+      /* margin: 0; */
+      /* padding: 0 16px; */
+      /* box-sizing: border-box; */
+    }
+
+    #container {
+      /* padding: 0 16px; */
+    }
+
+    #page .turn-page {
+      background: #fff;
+      /* padding-left: 20px; */
+    }
+
+
+    #page {
+      /* display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh; */
+
+      /* width: 100% !important; */
+      /* padding: 0 16px; */
+      /* box-sizing: border-box; */
+      width: calc(100vw - 32px);
+      margin: 0 auto;
+    }
+
+    #page>div {
+      /* width: 100vw; */
+      /* height: 100vh; */
+      /* background: blue; */
+    }
+
+    #page .p1 {
+      background-color: greenyellow;
+    }
+
+    #page .p2 {
+      background-color: red;
+    }
+
+    #page .p3 {
+      background-color: green;
+    }
+
+    #page .p3 {
+      background-color: blue;
+    }
+
+    #page .p4 {
+      background-color: skyblue;
+    }
+
+    #page .p5 {
+      background-color: salmon;
+    }
+
+    #page .p6 {
+      background-color: gold;
+    }
+
+    #page .p7 {
+      background-color: hotpink;
+    }
+
+    #page .p8 {
+      background-color: yellow;
+    }
+
+    #page .p9 {
+      background-color: turquoise;
+    }
+
+    #page .p10 {
+      background-color: rebeccapurple;
+    }
+
+    #page .p11 {
+      background-color: red;
+    }
+
+    p {
+      /* margin: 0; */
+    }
+
+    body {
+      /* font-size: 30px; */
+    }
+  </style>
+  <style>
+    /* body {
+      width: 94vw;
+      margin: 0 auto;
+    } */
+
+    /* #page div:nth-of-type(1) {
+      background-color: greenyellow;
+    }
+
+    #page div:nth-of-type(2) {
+      background-color: red;
+    }
+
+    #page div:nth-of-type(3) {
+      background-color: green;
+    }
+
+    #page div:nth-of-type(4) {
+      background-color: blue;
+    }
+
+    #page div:nth-of-type(5) {
+      background-color: skyblue;
+    }
+
+    #page div:nth-of-type(6) {
+      background-color: salmon;
+    }
+
+    #page div:nth-of-type(7) {
+      background-color: gold;
+    }
+
+    #page div:nth-of-type(8) {
+      background-color: hotpink;
+    }
+
+    #page div:nth-of-type(9) {
+      background-color: yellow;
+    }
+
+    #page div:nth-of-type(10) {
+      background-color: turquoise;
+    }
+
+    #page div:nth-of-type(11) {
+      background-color: rebeccapurple;
+    }
+
+    #page div:nth-of-type(11) {
+      background-color: red;
+    } */
+  </style>
+
+</head>
+
+<body>
+
+  <!-- iframe -->
+
+  <!-- <iframe frameborder="0" src="./iframe6-html.html" id="book-iframe" width="100vw" height="100vh"></iframe> -->
+  <!-- <iframe frameborder="0" scrolling="no" src="./iframe6-html.html" id="book-iframe"></iframe> -->
+  <iframe frameborder="0" src="./iframe6-html.html" id="book-iframe"></iframe>
+  <style>
+    #book-iframe {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+
+      let documentBook = window.document.getElementById("book-iframe").contentWindow.document;
+
+      console.log('frame集合:', document.getElementById("book-iframe").contentWindow.document);
+      // 测试获取iframe中的内容
+      let text = document.getElementById("book-iframe").contentWindow.document.getElementsByTagName('h3')[0];
+
+      // let text = document.getElementById("book-iframe").contentWindow.document.getElementById("page");
+
+      console.log("h3:", text);
+      // 注入css
+      injectCss(documentBook);
+
+      // js如何处理?
+      let str = `
+      window.onload = () => {
+        // document.body.style.width = '50vw';
+        console.log("页面操作dom", document);
+        var o = document.getElementsByTagName("html");
+        var totalHeight = o[0].offsetHeight; //html总高度
+        let pageHeight = getPageViewHeight() - 32;
+        let body = document.body;
+        console.log('body:', body);
+        let totalPage = Math.ceil(totalHeight / pageHeight);
+  
+        // 存储分页的div
+        let arr = new Array(totalPage).fill().map(() => new Array());
+  
+        let curElement = body.firstElementChild;
+  
+        // 元素自身高度
+        let elementHeight = curElement.getBoundingClientRect().height;
+        let top = curElement && curElement.getBoundingClientRect().top;
+        let index = Math.floor((top + elementHeight) / pageHeight);
+  
+        while (curElement.nextElementSibling && curElement.nextElementSibling.tagName !== 'SCRIPT' && curElement.nextElementSibling.tagName !== 'STYLE') {
+          // console.log("进入循环");
+          let nextElementSibling = curElement.nextElementSibling;
+          let elementHeight2 = nextElementSibling.getBoundingClientRect().height;
+          // let elementHeight2 = 0;
+          let top2 = nextElementSibling.getBoundingClientRect().top;
+          // let top2 = getMonitorWallTop(nextElementSibling);
+          let index2 = Math.floor((top2 + elementHeight2) / pageHeight);
+  
+          curElement = nextElementSibling;
+          if (index === index2) {
+            console.log(index);
+            // 收集当前元素
+            arr[index].push(curElement);
+            // break;
+            // 
+          } else {
+            // console.log("下一页了", index2)
+            index = index2
+            // 收集下一页第一个div
+            arr[index2].push(curElement);
+          }
+        }
+        console.log("循环之前,当前分页:", arr);
+      }
+      `
+      injectJs(documentBook, str);
+
+      // js操作dom, 开启服务的时候可执行
+
+      // 注入js后不执行的原因
+      // HTML 4.01新增的安全策略。
+      // 改为动态创建方式, 这个作为备份
+    }
+
+  </script>
+</body>
+
+<script>
+  // document.getElementById("myframe").contentDocument.
+
+</script>
+
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #some-id {
+      width: 100%;
+      height: 100px;
+      background-color: aqua;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="width: 200px" id="parent">
+    <div id="some-id" class="test"></div>
+  </div>
+  <script>
+    var targetNode = document.getElementById('some-id')
+    var parentNode = document.getElementById('parent')
+    targetNode.innerHTML = `
+    <div class="text">批量设置</div>
+    <input class="input" style="left: 100px;width: 100px" />
+    <input class="input" style="left: 100px;width: 100px" />
+  `
+
+    // 先创建一个回调函数，mutation.type表示监听变化的类型
+    var callback = function (mutationsList) {
+      console.log("MutationObserver:", mutationsList)
+      for (var mutation of mutationsList) {
+        if (mutation.type == 'attributes') {
+          console.log('The ' + mutation.attributeName + ' attribute was modified.');
+        } else if (mutation.type == 'childList') {
+          console.log('A child node has been added or removed.');
+        }
+      }
+    }
+
+    // 创建对象实例
+    var observer = new MutationObserver(callback)
+
+    // config 包含需要监听的类型
+    var config = { attributes: true, childList: true, subtree: true }
+
+    // 开始执行监听，传入监听的dom对象与config
+    // observer.observe(targetNode, config)
+    observer.observe(parentNode, config)
+    // 先注释掉
+    // 阻止 MutationObserver 实例继续接收的通知
+    // observer.disconnect()
+
+    setTimeout(() => {
+      parentNode.style.width = '400px'
+      parentNode.className = "main";
+      const inputNodes = targetNode.getElementsByTagName('input')
+      console.log(inputNodes[0].offsetLeft)
+      setTimeout(()=>{
+        parentNode.style.width = '200px'
+        parentNode.className = "main test";
+      }, 3000)
+    }, 2000)
+
+  </script>
+</body>
+
+</html>

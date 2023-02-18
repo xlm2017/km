@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div style="overflow: hidden;">
+    <img src="../images/test1.jpg" style="position: absolute;" />
+  </div>
+  <div style="margin-top: 400px;">overflow元素父级是定位元素也不会裁剪,例如:</div>
+  <div style="position: relative;">
+    <div style="overflow: hidden;">
+      <img src="../images/test1.jpg" style="position: absolute;" />
+    </div>
+  </div>
+  <div style="margin-top: 400px;">如果overflow属性所在的元素同时也是定位元素, 里面的绝对定位元素会被裁剪</div>
+  <div>如果overflow元素和绝对定位元素之间有定位元素, 里面的绝对定位元素会被裁剪</div>
+</body>
+
+</html>

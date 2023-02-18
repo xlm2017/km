@@ -1,0 +1,80 @@
+<!-- MutationObserver API 用来监视 DOM 变更。DOM 的任何变动，
+比如节点的增减、属性的变动、文本内容的变动，这个 API 都可以得到通知。
+
+类似一个监听事件，不同之处是异步触发，也就是说，当DOM操作结束后方才调用。 -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DEMO</title>
+</head>
+<body>
+    <h1>新码笔记</h1>
+    <div>
+        <input type="text" value="18888888888"/>
+        <input type="button" value="查询"/>
+    </div>
+    <main>页面主题内容</main>
+    <footer>By DeathGhost</footer>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>DEMO</title>
+</head>
+
+<body>
+  <h1>新码笔记</h1>
+  <div>
+    <input type="text" value="18888888888" />
+    <input type="button" value="查询" />
+  </div>
+  <div>
+    <!-- 开始::第三方组件包裹 -->
+    <numberList data-number=""></numberList>
+    <script src="xxx.js"></script>
+    <!-- 结束::第三方组件包裹 -->
+  </div>
+  <main>页面主题内容</main>
+  <footer>By DeathGhost</footer>
+
+
+  <script>
+    // const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+    // const observer = new MutationObserver(callBack);
+    // observer.observe(wrap, {
+    //   attributes: true,
+    //   childList: false,
+    //   characterData: false,
+    //   attributeFilter: ['data-number'],
+    //   attributeOldValue: true,
+    // });
+
+    // async function renderDOM() {
+    //   // Request && Render ...
+    // }
+    
+  </script>
+</body>
+
+</html>
+
+<!-- 点击查询时，我们将value赋值给numberList元素，xxx.js就会通过MutationObserver接口监听其属性值对其执行查询渲染。
+
+方法介绍
+disconnect() 阻止 MutationObserver 实例继续接收的通知，直到再次调用其observe()方法，该观察者对象包含的回调函数都不会再被调用。
+
+observe() 配置MutationObserver在DOM更改匹配给定选项时，通过其回调函数开始接收通知。
+
+takeRecords() 从MutationObserver的通知队列中删除所有待处理的通知，并将它们返回到MutationRecord对象的新Array中。
+
+MutationObserver特点
+等待所有脚本任务完成后，才会运行（即异步触发方式）。
+把 DOM 变动记录封装成一个数组进行处理，而不是一条条个别处理 DOM 变动。
+既可以观察 DOM 的所有类型变动，也可以指定只观察某一类变动。 -->

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <span class="dib-baseline"></span>
+  <span class="dib-baseline">x-baseline</span>
+  <div>vertical-align属性的默认值baseline在文本之类的内联元素那里就是字符x的下边缘, 对于替换元素则是替换元素的下边缘.</div>
+  <div>
+    如果是inline-block元素,则规则要复杂了: 一个inline-block元素,如果里面没有内联元素,或者overflow不是visible,则该元素的基线就是其margin底边缘;
+    否则其基线就是元素里面最后一行内联元素的基线.
+  </div>
+  <span class="dib-baseline">x</span>
+  <span class="dib-baseline">x-baseline</span>
+  <style>
+    .dib-baseline {
+      display: inline-block;
+      width: 150px;
+      height: 150px;
+      border: 1px solid red;
+      background: skyblue;
+    }
+  </style>
+</body>
+
+</html>

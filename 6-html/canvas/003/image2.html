@@ -1,0 +1,65 @@
+<body>
+    <canvas id="canvas"></canvas>
+    <img src="one.jpeg" />
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        canvas.width = 1000;
+        canvas.height = 1000;
+        const width = 1000;
+        const height = 1000;
+
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(0, 0, 1000, 1000);
+
+        function drawGrids() {
+            drawGrid('x');
+            drawGrid('y');
+        }
+
+        function drawGrid(direction) {
+            var i, maxLength, step = 100;
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+            if (direction == 'x') {
+                maxLength = height;
+            } else if (direction == 'y') {
+                maxLength = width;
+            }
+            ctx.beginPath();
+            for (i = 100; i < maxLength; i += step) {
+                if (direction == 'x') {
+                    ctx.moveTo(0, i);
+                    ctx.lineTo(width, i);
+                } else if (direction == 'y') {
+                    ctx.moveTo(i, 0);
+                    ctx.lineTo(i, height);
+                    console.log("画竖线:", i)
+                }
+            }
+            ctx.closePath();
+            ctx.stroke();
+        }
+        drawGrids()
+
+        let image = new Image();
+        image.src = "./one.jpeg";
+        image.onload = () => {
+            // ctx.drawImage(this, 100, 100, 300, 300);
+            // ctx.drawImage(image, 50, 50);
+            // ctx.drawImage(image, 50, 50, 200, 200);
+            // ctx.drawImage(image, 50, 50, 1000, 1000, 400, 400, 400, 400);
+            ctx.drawImage(image, 200, 200, 300, 300, 100, 100, 400, 200);
+
+
+
+            // ctx.translate(300, 300);
+            ctx.scale(2, 2);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = 'blue';
+            ctx.drawImage(image, 200, 200, 300, 300, 100, 100, 400, 200);
+            ctx.strokeRect(100, 100, 400, 200);
+
+        }
+    </script>
+</body>

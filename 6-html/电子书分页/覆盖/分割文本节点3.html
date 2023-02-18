@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>分割dom节点</title>
+  <script src="./dom.js"></script>
+</head>
+
+<body>
+  <div id="box">
+    <p>
+      <font>张</font>
+      <font>三</font>
+      <span>
+        <font>大</font>
+        <font>哥</font>
+        <font>大</font>
+        <font>爷</font>
+      </span>
+    </p>
+    <p>
+      <font>狂</font>
+      <font>徒</font>
+      <span>
+        <font id="split" style="color: red">法</font>
+        <font>外</font>
+        <font>西</font>
+        <font>装</font>
+        <font>暴</font>
+        <font>徒</font>
+      </span>
+      <span>
+        <font>后</font>
+      </span>
+    </p>
+  </div>
+  <footer class="box2">测试删除</footer>
+</body>
+<script>
+  window.onload = () => {
+
+    // 分割dom节点, 返回分割后的dom数组
+    function splitElement (box, split) {
+      // dom队列
+      let queue = [];
+      // 存储层级栈
+      let stack = [];
+
+      // 存储第一层dom
+      let boxCopy = box.cloneNode(false);
+      console.log("拷贝box:", boxCopy);
+      stack.push(boxCopy);
+
+      // 广度优先遍历
+      queue = Array.from(box.children);
+      console.log("当前队列", queue);
+      while (queue.length) {
+        let ele = queue.shift();
+        console.log("ele:", ele);
+
+        break;
+      }
+    }
+
+    let box = document.getElementById("box");
+    let split = document.getElementById("split");
+    let domList = splitElement(box, split);
+    console.log(domList);
+
+    // 预期目标
+
+    // <div>
+    //   <p>
+    //     <font>张</font>
+    //     <font>三</font>
+    //     <span>
+    //       <font>大</font>
+    //       <font>哥</font>
+    //       <font>大</font>
+    //       <font>爷</font>
+    //     </span>
+    //   </p>
+    //   <p>
+    //     <font>狂</font>
+    //     <font>徒</font>
+    //     <span>
+    //       <font>法</font>
+    //     </span>
+    //   </p>
+    // </div>
+
+    // <div>
+    //   <p>
+    //     <span>
+    //       <font>外</font>
+    //       <font>西</font>
+    //       <font>装</font>
+    //       <font>暴</font>
+    //       <font>徒</font>
+    //     </span>
+    //   </p>
+    // </div>
+  }
+</script>
+
+</html>

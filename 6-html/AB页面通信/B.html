@@ -1,0 +1,36 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B</title>
+  <button type="button" onclick="sendA()">发送A页面消息</button>
+</head>
+
+<body>
+  <h1>B 页面</h1>
+  <span></span>
+  <button type="button" onclick="sendA()">发送A页面消息</button>
+  <script>
+    window.name = 'B'
+    window.onbeforeunload = function (e) {
+      // 新窗口需要载入的 url 地址。
+      // strUrl可以是 web 上的 html 页面也可以是图片文件或者其他任何浏览器支持的文件格式。
+      // strWindowName === 新窗口的名称。
+      window.open('A.html#close', "A")
+      return '确定离开此页吗？';
+    }
+    function sendA() {
+      let targetWindow = window.opener
+      targetWindow.postMessage('Hello A', "http://localhost:3000");
+    }
+
+    var sharedworker = new SharedWorker('worker.js')
+    sharedworker.port.start()
+    sharedworker.port.postMessage('hello A')
+
+    navigator.serviceWorker.controller.postMessage('Hello A');
+  </script>
+</body>
+
+</html>

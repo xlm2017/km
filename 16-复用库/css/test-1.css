@@ -1,0 +1,35 @@
+.ell-1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+}
+
+.ell-2 {
+  /* 英文不换行拆单词 */
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* // 去掉滚动条 */
+.scroll-bar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ::-webkit-scrollbar — 整个滚动条
+
+::-webkit-scrollbar-button — 滚动条上的按钮 (上下箭头)
+
+::-webkit-scrollbar-thumb — 滚动条上的滚动滑块
+
+::-webkit-scrollbar-track — 滚动条轨道
+
+::-webkit-scrollbar-track-piece — 滚动条没有滑块的轨道部分
+
+::-webkit-scrollbar-corner — 当同时有垂直滚动条和水平滚动条时交汇的部分
+
+::-webkit-resizer — 某些元素的corner部分的部分样式(例:textarea的可拖动按钮) */

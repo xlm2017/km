@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="father">
+      <div class="child">子元素</div>
+    </div>
+  </div>
+</body>
+<style>
+  body {
+    height: 100%;
+    background: wheat;
+  }
+
+  .container {
+    position: relative;
+    height: 50%;
+    /* height: 300px; */
+    background: seagreen;
+    display: flow-root;
+  }
+
+  .child {
+    position: absolute;
+    height: 100%;
+    background: skyblue;
+  }
+</style>
+
+</html>

@@ -1,0 +1,60 @@
+<body>
+    <canvas id="canvas"></canvas>
+    <img id="image" src="one.jpeg" />
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        canvas.width = 800;
+        canvas.height = 600;
+        const width = 800;
+        const height = 600;
+        ctx.strokeStyle = "black"
+        // ctx.linewidth = 2;
+        ctx.strokeRect(0, 0, 800, 600);
+        function drawGrids() {
+            drawGrid('x');
+            drawGrid('y');
+        }
+
+        function drawGrid(direction) {
+            var i, maxLength, step = 100;
+            ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+            if (direction == 'x') {
+                maxLength = height;
+            } else if (direction == 'y') {
+                maxLength = width;
+            }
+            ctx.beginPath();
+            for (i = 0; i < maxLength; i += step) {
+                if (direction == 'x') {
+                    ctx.moveTo(0, i);
+                    ctx.lineTo(width, i);
+                } else if (direction == 'y') {
+                    ctx.moveTo(i, 0);
+                    ctx.lineTo(i, height);
+                }
+            }
+            ctx.closePath();
+            ctx.stroke();
+        }
+        drawGrids()
+
+
+        ctx.save();
+        ctx.linewidth = 2;
+        ctx.strokeStyle = 'blue';
+        // let image = new Image("./one.jpeg")
+        let image = new Image();
+        image.src = "./one.jpeg";
+        let image2 = document.getElementById("image")
+        // Uncaught TypeError: Failed to execute 'drawImage' on 'CanvasRenderingContext2D': 
+        // The provided value is not of type '(CSSImageValue or HTMLImageElement or SVGImageElement or
+        //  HTMLVideoElement or HTMLCanvasElement or ImageBitmap or OffscreenCanvas or VideoFrame)'
+
+        // ctx.drawImage(image, 400, 400, 400, 400);
+        // ctx.drawImage(image2, 400, 400, 400, 400);
+        ctx.drawImage(image, 0, 0)
+        ctx.strokeRect(200, 200, 200, 100);
+        ctx.restore();
+    </script>
+</body>

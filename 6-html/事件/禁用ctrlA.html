@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>禁止ctrl+a</title>
+</head>
+<body>
+  <div>测试document禁止事件</div>
+  <script>
+    console.log("read-book-slide:", document);
+    document.addEventListener('keydown', keyDownHandler)
+    function keyDownHandler (event) {
+      console.log('获得键盘信息:', event, event.ctrlKey, event.code);
+      if (event.ctrlKey && event.code === 'KeyA') {
+        console.log("ctrl + A");
+        event.preventDefault();
+      }
+
+      
+      if (event.metaKey && event.code === 'KeyA') {
+        console.log("ctrl + A");
+        event.preventDefault();
+      }
+    }
+        // document.onkeydown = function (event) {
+        //     if (event.ctrlKey && window.event.keyCode == 65) {   //禁用ctrl + a 功能
+        //       console.log("禁用ctrl + a 功能");
+        //       return false;
+        //     }
+
+        //     if (event.ctrlKey && window.event.keyCode == 67) {	//禁用ctrl + c 功能
+        //       return false;
+        //     }
+
+        //     if (event.ctrlKey && window.event.keyCode == 83) {	//禁用ctrl + s 功能
+        //       return false;
+        //     }
+
+        //     if (event.ctrlKey && window.event.keyCode == 86) {	//禁用ctrl + v 功能
+        //       return false;
+        //     }
+        // }
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="one">
+    <div class="two">111</div>
+    <span class="three">333</span>
+  </div>
+  <div>height的百分比生效, 其父级必须有一个可以生效的高度值</div>
+</body>
+
+</html>
+<style>
+  body {
+    height: 1000px;
+  }
+
+  .one {
+    /* height: 500px; */
+    height: 50%;
+  }
+
+  .two {
+    height: 50%;
+    background: red;
+  }
+
+  .three {
+    height: 50%;
+    background: yellow;
+  }
+</style>

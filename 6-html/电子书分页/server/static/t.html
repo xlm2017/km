@@ -1,0 +1,9 @@
+<script>
+  window.onload = ()=>{
+    console.log("加载完成")
+    let dom = document.querySelector('.text');
+    let step = document.body.clientWidth
+    let index = 1
+    dom.style = `transform: translateX(-${index * (step + 30)}px); transition: transform 0.5s;`
+  }
+</script>

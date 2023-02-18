@@ -1,0 +1,440 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+  <title>页容器</title>
+  <link href="flow0001.css" rel="stylesheet" type="text/css" />
+  <!-- <script src="./dom6.js"></script> -->
+
+  <!-- <script type="text/javascript" src="./extras/jquery.min.1.7.js"></script>
+  <script type="text/javascript" src="./extras/jquery-ui-1.8.20.custom.min.js"></script>
+  <script type="text/javascript" src="./extras/modernizr.2.5.3.min.js"></script>
+  <script type="text/javascript" src="./lib/hash.js"></script>
+  <script type="text/javascript" src="./lib/zoom.min.js"></script>
+  <script src="../js/turn.js"></script> -->
+  <style>
+    html, body{
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #book-iframe {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #book-iframe2 {
+      width: 100vw;
+      height: 100vh;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <!-- <div>测试修改html</div> -->
+  <!-- <iframe frameborder="0" src="./iframe6-html.html" id="book-iframe" width="100vw" height="100vh"></iframe> -->
+  <!-- <iframe frameborder="0" scrolling="no" src="./iframe6-html.html" id="book-iframe"></iframe> -->
+  <!-- <iframe frameborder="0" src="./iframe6-html.html" id="book-iframe"></iframe> -->
+  <script src="./html.js"></script>
+  <script>
+    window.onload = function () {
+
+
+      function handleHtml (htmlString) {
+        let s1 = "script>";
+        let strScript1 = "<script type='text/javascript' src='./jquery.min.1.7.js'></";
+        let strScript2 = "<script type='text/javascript' src='./turn.js'></";
+        let strScriptZoom = "<script type='text/javascript' src='./zoom.js'></";
+        let strScript3 = "<script type='text/javascript' src='./dom.js'></"
+        let strEnd = "</head>";
+        let val = strScript1 + s1 + '\n' + 
+          strScript2 + s1 + '\n' + 
+          strScriptZoom + s1 + '\n'+ 
+          strScript3 + s1 + '\n'+ 
+          strEnd;
+        htmlString = htmlString.replace("</head>", val)
+        return htmlString;
+      };
+
+      // let str = ifr.contentDocument.documentElement.outerHTML;
+      // console.log("str:", html);
+      let str = html;
+
+      str = handleHtml(str);
+
+      let cssStr = `
+        html,body { 
+          padding: 0;
+          margin: 0;
+          // background: red!important;
+
+          font-size: 1em;
+          text-align: justify;
+          line-height: 1.5;
+          word-break: break-all;
+        }
+        #page .turn-page {
+          background: #fff;
+        }
+        #page .p1,.page-item:nth-of-type(1) {
+          background-color: greenyellow;
+        }
+        #page .p2, .page-item:nth-of-type(2) {
+          background-color: red;
+        }
+        #page .p3, .page-item:nth-of-type(3) {
+          background-color: green;
+        }
+        #page .p3, .page-item:nth-of-type(3) {
+          background-color: blue;
+        }
+        #page .p4, .page-item:nth-of-type(4) {
+          background-color: skyblue;
+        }
+        #page .p5, .page-item:nth-of-type(5) {
+          background-color: salmon;
+        }
+        #page .p6, .page-item:nth-of-type(6) {
+          background-color: gold;
+        }
+        #page .p7, .page-item:nth-of-type(7) {
+          background-color: hotpink;
+        }
+        #page .p8, .page-item:nth-of-type(8) {
+          background-color: yellow;
+        }
+        #page .p9, .page-item:nth-of-type(9) {
+          background-color: turquoise;
+        }
+        #page .p10, .page-item:nth-of-type(10) {
+          background-color: rebeccapurple;
+        }
+        #page .p11, .page-item:nth-of-type(11) {
+          background-color: red;
+        }
+      `;
+
+      // css.innerHTML = "${cssStr}";
+
+      str = str.replace("</head>", `<style>${cssStr}</style></head>`);
+
+
+
+      let scriptString = `
+      <script>
+        console.log("注入完成");
+        window.onload = () => {
+          console.log("onload-操作");
+          setTimeout(() => {
+            // 注入css
+            let css = document.createElement("style");
+            css.type = "text/css";
+
+
+            
+
+            console.log('iframe-head源文件', document);
+            let head = document.getElementsByTagName("head")[0];
+            head.appendChild(css);
+            console.log('iframe-head:', head);
+
+
+
+            var o = document.getElementsByTagName("html");
+            var totalHeight = o[0].offsetHeight; //html总高度
+            var scrollHeight = o[0].scrollHeight; //html卷起来的高度
+            let pageHeight = getPageViewHeight() - 26;
+            console.log("页面高度:", pageHeight, totalHeight, scrollHeight);
+            console.dir(o[0]);
+            let body = document.body;
+            console.log('body:', body);
+            let totalPage = Math.ceil(totalHeight / pageHeight);
+
+            // 存储分页的div
+            let arr = new Array(totalPage).fill().map(() => new Array());
+
+            let curElement = body.firstElementChild;
+
+            // 元素自身高度
+            let elementHeight = curElement.getBoundingClientRect().height;
+            let top = curElement && curElement.getBoundingClientRect().top;
+            let index = Math.floor((top + elementHeight) / pageHeight);
+
+            while (curElement.nextElementSibling && curElement.nextElementSibling.tagName !== 'SCRIPT' &&
+              curElement.nextElementSibling.tagName !== 'STYLE') {
+              // console.log("进入循环");
+              let nextElementSibling = curElement.nextElementSibling;
+              let elementHeight2 = nextElementSibling.getBoundingClientRect().height;
+              // let elementHeight2 = 0;
+              let top2 = nextElementSibling.getBoundingClientRect().top;
+              // let top2 = getMonitorWallTop(nextElementSibling);
+              let index2 = Math.floor((top2 + elementHeight2) / pageHeight);
+
+              curElement = nextElementSibling;
+              if (index === index2) {
+                console.log(index);
+                // 收集当前元素
+                arr[index].push(curElement);
+                // break;
+                //
+              } else {
+                // console.log("下一页了", index2)
+                index = index2
+                // 收集下一页第一个div
+                arr[index2].push(curElement);
+              }
+            }
+            console.log("循环之前,当前分页:", arr);
+
+            // 处理最后一个元素的分页问题
+            // 第二页起, 第一个元素可能包含上一页的文字
+            for (let i = 1; i < arr.length; i++) {
+              let element = arr[i]; if (i == 2) { 
+                // debugger; 
+              } if (i>= 1) {
+                // 当前一个元素拆分的页
+                let newArr = [];
+                // 整个dom归属的页码
+                let endIndex = i;
+
+                // 推测元素的范围, 第一个元素的顶部的所在页
+                let startTop = element[0].getBoundingClientRect().top;
+                let startIndex = Math.floor((startTop) / pageHeight);
+                // 元素页码范围 0-1
+                if (endIndex === startIndex) {
+                  console.log("当前分页合理, 无需拆分");
+                  continue;
+                }
+                // 存储第一层dom
+                let stack = [];
+                let boxCopy = element[0].cloneNode();
+                stack.push(boxCopy);
+                let curPageDom = stack[0].cloneNode();
+
+                // 前一个元素所在页面的下标
+                let preElePageIndex = startIndex;
+
+                // 广度优先搜索
+                let queue = Array.from(element[0].children);
+                while (queue.length) {
+                  let ele = queue.shift();
+                  let tagName = ele.tagName;
+                  let length = ele.outerText.length;
+                  if (tagName === 'FONT' && length === 1) {
+                    // 当前元素底部所在页
+                    let index2 = getPageIndexByDom(ele, pageHeight);
+                    // console.log("最小单位了, 无需向内递归", index2);
+                    // 都是同一页
+                    if (index2 === preElePageIndex) {
+                      if (index2 !== startIndex) {
+                        // 不是头页的时候
+                        // curPageDom.style.margin = "0";
+                        curPageDom.style.textIndent = "0";
+
+                        // 将上一个div
+                      }
+                      curPageDom.append(' ');
+                      curPageDom.appendChild(ele.cloneNode(true));
+                      if (!queue.length) {
+                        // newArr[index2] = curPageDom;
+                        newArr.push(curPageDom);
+                        // console.log(i, "收集最后一次", curPageDom);
+                        // console.log("子元素遍历完成, 开始分页", i, newArr);
+                        // i == 2 可能分页结果 0 1 2
+                        for (let k = newArr.length - 1; k >= 0; k--) {
+                          if (k === newArr.length - 1) {
+                            // 当前页
+                            arr[i].shift();
+                            arr[i].unshift(newArr[k]);
+                          } else if (k > 0) {
+                            // 中间页
+                            arr[i - (newArr.length - 1 - k)] = newArr[k];
+                          } else if (k === 0) {
+                            // 头页
+                            arr[i - (newArr.length - 1)].push(newArr[k]);
+                          }
+                        }
+                        // console.log("子页分完之后的结果:", i, arr);
+                      }
+                    } else {
+                      // 不是同一页了, 第一件事就是收集好上一页的dom
+                      // newArr[preElePageIndex] = curPageDom;
+                      // console.log(i, "收集一次", curPageDom);
+                      newArr.push(curPageDom);
+                      curPageDom = stack[0].cloneNode();
+                      curPageDom.append(' ');
+                      curPageDom.appendChild(ele.cloneNode(true));
+                      preElePageIndex = index2;
+                    }
+
+                  } else {
+                    // 判断这个含有子元素节点的dom是否只在一个页面
+                    if (isOnePageElement(ele)) {
+                      // console.log("当前元素有子元素:", ele, '在一个页面内');
+                      curPageDom.appendChild(ele.cloneNode(true));
+                    } else {
+                      // console.log("当前元素不再一个页面内, 需要查找子元素递归");
+                      // 拷贝当前元素
+                      let eleCopy = ele.cloneNode(false);
+                      stack.push(eleCopy);
+                      // console.log("拷贝第二层:", eleCopy);
+                      // 拷贝第N层
+                    }
+                  }
+                }
+              }
+            }
+
+            // 全部结束后, 查看分页
+            console.log("全部结束后, 分页结果:", arr);
+            setTimeout(() => {
+              let page = document.getElementById("page");
+              for (let i = 0; i < arr.length; i++) {
+                let div = document.createElement('div');
+                // div.style.padding='0 16px' ; 
+                for (let j = 0; j < arr[i].length; j++) {
+                  div.appendChild(arr[i][j]);
+                }
+                // div.appendChild(...arr[i]);
+
+                // div.style.background = "wheat";
+
+                div.style.boxSizing = "border-box";
+                div.style.display = "flow-root";
+
+                div.className = "page-item";
+
+                if (i % 2 === 0) {
+                  // div.style.paddingLeft="36px" ; 
+                  // div.style.paddingRight="16px" ; 
+                }
+                else {
+                  // div.style.paddingRight="36px" ; 
+                  // div.style.paddingLeft="16px" ; 
+                }
+                // 会导致翻页的样式位置变化 
+                // div.style.paddingLeft="16px" ; 
+                // div.style.paddingRight="16px" ; 
+
+                page.appendChild(div);
+              }
+              // page.style.padding='0 16px' ; 
+
+              // return;
+
+              // let container = document.createElement('div');
+              // container.id = "container";
+              // container.appendChild(page);
+
+              document.body.innerHTML = "";
+              document.body.style.width = '100vw';
+
+              // document.body.style.padding = '0';
+              // document.body.style.boxSizing = 'border-box';
+
+              // document.body.appendChild(container);
+
+              document.body.appendChild(page);
+
+              // return;
+
+              // console.log("使用turn.js:");
+
+
+              // 使用turn.js 
+              // console.log("jquery", $, $("#page")); 
+              let width = document.body.clientWidth; 
+              let height = getPageViewHeight();
+              setTimeout(() => {
+                let page = $("#page");
+                console.log("page-dom:", page);
+                // debugger;
+                $("#page").turn({
+                  acceleration: true, //启用硬件加速,移动端有效
+                  display: 'single', //显示：single=单页，double=双页，默认双页
+                  duration: 1000, // 翻页撒开鼠标，页面的延迟
+                  page: 1, // 默认显示第几页
+                  gradients: true, // 折叠处的光泽渐变，主要体现翻页的立体感、真实感
+
+                  autoCenter: true, //
+
+                  // turnCorners: 'bl,br',
+
+                  width: '100vw',
+                  // width: '100%',
+                  height: height,
+                  // autoCenter: true
+                });
+
+
+                // 添加事件, zoom
+
+
+
+                // Using arrow keys to turn the page
+                $(document).keydown(function (e) {
+                  var previous = 37, next = 39, esc = 27;
+                  switch (e.keyCode) {
+                    case previous:
+                      // left arrow
+                      $('#page').turn('previous');
+                      e.preventDefault();
+                      break;
+                    case next:
+                      //right arrow
+                      $('#page').turn('next');
+                      e.preventDefault();
+
+                      break;
+                    case esc:
+                      // $('.magazine-viewport').zoom('zoomOut');
+                      e.preventDefault();
+                      break;
+                  }
+                });
+
+
+
+
+              }, 2000);
+            }, 1000);
+          }, 2000);
+        }
+      `
+
+      
+
+      function handleHtml2 (htmlString) {
+        let s1 = "script>";
+        let s2 = "</";
+        let strEnd = "</body>";
+        let val = scriptString + s2 + s1 + strEnd;
+        let str = htmlString.replace(strEnd, val)
+        return str;
+      };
+
+      // console.log("str:", str.slice(-1000));
+      str = handleHtml2(str);
+
+      let ifr2 = document.createElement('iframe');
+      ifr2.frameBorder = '0';
+      ifr2.id = 'book-iframe2';
+      ifr2.srcdoc = str;
+      // ifr2.width = '500';
+
+      // console.log("获得修改后的html:", str.slice(-20000));
+      console.log("获得修改后的html:", str);
+      document.body.innerHTML = ''
+      document.body.append(ifr2);
+      ifr2.onload = () => {
+        console.log('iframe2加载完成');
+      }
+
+    }
+  </script>
+</body>
+
+
+</html>
