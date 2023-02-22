@@ -32,16 +32,17 @@ var search = function(nums, target) {
   let left = 0;
   let right = nums.length - 1;
   while (left <= right) {
+    console.log('dddd');
     // while(left <= right) 的终止条件是 left == right + 1，写成区间的形式就是 [right + 1, right]，
     // 或者带个具体的数字进去 [3, 2]，可见这时候区间为空，因为没有数字既大于等于 3 又小于等于 2 的吧。
     // 所以这时候 while 循环终止是正确的，直接返回 -1 即可。
 
 
     // 死循环了
-    // let middle = Math.floor((left + right) / 2) + 1;
+    let middle = Math.floor((left + right) / 2) + 1;
 
     // 
-    let middle = Math.floor((left + right) / 2);
+    // let middle = Math.floor((left + right) / 2);
 
     // 防止 left + right 溢出
     // let middle = Math.floor(left + (right - left)/2);
