@@ -1,0 +1,88 @@
+<!--
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-02-24 13:55:30
+ * @LastEditTime: 2023-02-24 14:14:52
+ * @LastEditors: xlm
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <pre>
+      CSS 伪类 :not() 用来匹配不符合一组选择器的元素。由于它的作用是防止特定的元素被选中，它也被称为反选伪类（negation pseudo-class）。
+
+      /* 选择所有不是段落（p）的元素 */
+      :not(p) {
+        color: blue;
+      }
+      Copy to Clipboard
+      :not() 伪类有许多怪异、技巧和意料之外的结果，你在使用它之前应该意识到这些。
+
+      语法
+      :not() 伪类可以将一个或多个以逗号分隔的选择器列表作为其参数。选择器中不得包含另一个否定选择器或伪元素。
+
+      <!-- :not( <complex-selector-list> ) -->
+
+        你可以同时否定多个选择器。例如：:not(.foo, .bar) 等同于 :not(.foo):not(.bar)。
+    </pre>
+    <p></p>
+    <p>I am a paragraph.</p>
+    <p class="fancy">I am so very fancy!</p>
+    <div>I am NOT a paragraph.</div>
+    <h2>
+      <span class="foo">foo inside h2</span>
+      <span class="bar">bar inside h2</span>
+    </h2>
+
+    <style>
+      .fancy {
+        text-shadow: 2px 2px 3px gold;
+      }
+
+      /* 类名不是 `.fancy` 的 <p> 元素*/
+      p:not(.fancy) {
+        color: green;
+      }
+
+      /* pre未生效, 可能是标签太老了 */
+      body :not(pre) {
+        font-size: 30px;
+      }
+
+      /* 非 <p> 元素 */
+      body :not(pre, p) {
+        text-decoration: underline;
+      }
+
+      /* 既不是 <div> 也不是 <span> 的元素 */
+      body :not(div):not(span) {
+        font-weight: bold;
+      }
+
+      /* 不是 <div> 或 `.fancy` 的元素*/
+      body :not(pre, div, .fancy) {
+        text-decoration: overline underline;
+        color: blue;
+      }
+
+      /* <h2> 元素中不是有 `.foo` 类名的 <span> 元素 */
+      h2 :not(span.foo) {
+        color: red;
+      }
+
+    
+      /* 元素为空的时候的样式 */
+      p:empty{
+          background: red;
+      }
+    </style>
+  </div>
+</body>
+</html>

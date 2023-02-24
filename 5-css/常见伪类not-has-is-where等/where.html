@@ -1,0 +1,36 @@
+<!--
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-02-24 14:27:40
+ * @LastEditTime: 2023-02-24 14:28:09
+ * @LastEditors: xlm
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <pre>
+    /* Selects any paragraph inside a header, main
+   or footer element that is being hovered */
+
+    :where(header, main, footer) p:hover {
+      color: red;
+      cursor: pointer;
+    }
+
+    /* The above is equivalent to the following */
+
+    header p:hover,
+    main p:hover,
+    footer p:hover {
+      color: red;
+      cursor: pointer;
+    }
+  </pre>
+</body>
+</html>

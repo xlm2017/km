@@ -1,0 +1,56 @@
+<!--
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-02-24 14:16:58
+ * @LastEditTime: 2023-02-24 14:23:37
+ * @LastEditors: xlm
+-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+  <div>
+    <input class='border-radius' />
+    <input class='normal' />
+    <input class='test border-radius' />
+    <input class='another-normal' />
+    <input class='border-radius-5' />
+    <pre>
+
+      处理多个类
+
+      此外，如果您希望包含多个类，您可能需要考虑使用 contains 选择器 *= ，
+
+
+      ^=
+      因为之前的方法仅在第一个类属性以 “border-radius” 开头时才有效：
+
+
+      <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Attribute_selectors">属性选择器-mdn</a>
+    </pre>
+  </div>
+  <style>
+    input { margin: 10px}
+    input:not([class^="border-radius"]) {
+      background: yellow;
+    }
+    
+
+
+    input:not([class*="border-radius"]) {
+      background: red;
+    }
+
+  </style> 
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!--
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-02-24 14:30:20
+ * @LastEditTime: 2023-02-24 14:30:50
+ * @LastEditors: xlm
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <pre>
+    CSS 伪类 :is() 函数将选择器列表作为参数，并选择该列表中任意一个选择器可以选择的元素。这对于以更紧凑的形式编写大型选择器非常有用。
+
+/* 选择 header、main、footer 里的任意一个悬浮状态的段落 */
+:is(header, main, footer) p:hover {
+  color: red;
+  cursor: pointer;
+}
+
+/* 以上内容相当于以下内容 */
+header p:hover,
+main p:hover,
+footer p:hover {
+  color: red;
+  cursor: pointer;
+}
+Copy to Clipboard
+伪元素在 :is() 的选择器列表中无效。
+
+:is() 和 :where() 的区别
+两者的区别在于 :is() 计入整体选择器的优先级（它接受优先级最高参数的优先级），而 :where() 的优先级为 0。参考 :where() 页面上的示例，它证明了这一点。
+  </pre>
+</body>
+
+</html>

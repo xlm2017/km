@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: xlm
  * @Date: 2023-02-22 19:19:31
- * @LastEditTime: 2023-02-22 20:31:52
+ * @LastEditTime: 2023-02-24 10:55:43
  * @LastEditors: xlm
  */
 /**
@@ -93,4 +93,18 @@
 
 module.exports = { 
   Hook
+}
+
+
+// 若是咱们将 Hook 看做是一种和栈，队列同样的抽象数据类型（ADT），
+// 那么 Hook 的操做集合包含注册(Register) 和 调用(Call)。简单实现就是：
+
+// 注册钩子
+function regHook(hookName, hookFn) {
+  if (!hooks[hookName]) hooks[hookName] = []
+  hooks[hookName].push(hookFn)
+}
+// 调用钩子
+function callHook(hookName, ...args) {
+  hooks[hookName].forEach(fn => fn(...args))
 }
