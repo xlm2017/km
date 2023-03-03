@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: xlm
  * @Date: 2023-02-23 14:37:48
- * @LastEditTime: 2023-02-24 11:15:45
+ * @LastEditTime: 2023-02-28 17:32:31
  * @LastEditors: xlm
 -->
 
@@ -65,4 +65,37 @@ let rule  = '.red {background-color: red}';
 window.onload = function() {addCss(rule)};
 
 
+
+
+
+
+getSheet(){
+  var style = document.createElement("style");
+
+  // WebKit hack --> https://davidwalsh.name/add-rules-stylesheets
+  style.appendChild(document.createTextNode(""));
+
+  document.head.appendChild(style);
+
+  return style.sheet;
+}
+
+addStyleRules(selector, rulesArray){
+  var scope = "#" + this.id + " ";
+  var rules = "";
+
+  if(!this.sheet){
+    this.sheet = this.getSheet();
+  }
+
+  rulesArray.forEach(function(set) {
+    for (var prop in set) {
+      if(set.hasOwnProperty(prop)) {
+        rules += prop + ":" + set[prop] + ";";
+      }
+    }
+  });
+
+  this.sheet.insertRule(scope + selector + " {" + rules + "}", 0);
+}
 ```

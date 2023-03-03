@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-02-18 17:49:19
+ * @LastEditTime: 2023-03-02 17:47:59
+ * @LastEditors: xlm
+-->
 
 
 mac clash代理
@@ -14,7 +21,7 @@ http://ipe0.com/archives/20.html
 
 window clash代理
 
-set http_proxy=127.0.0.1:7890
+set http_proxy=127.0.0.1:7890  
 
 set https_proxy=127.0.0.1:7890
 
@@ -37,3 +44,17 @@ git config --global http.proxy 127.0.0.1:7890
 
 
 提示：clash开启的服务默认端口为7890
+
+# 淘宝镜像
+npm config set registry https://registry.npm.taobao.org 
+
+
+npm cache clean --force
+
+npm config get userconfig
+
+node:internal/modules/cjs/loader:926
+  throw err;
+
+#
+rimraf node_modules

@@ -1,0 +1,44 @@
+<!--
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-02-24 14:24:55
+ * @LastEditTime: 2023-02-27 10:41:17
+ * @LastEditors: xlm
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="div">
+    <video style="width:42.5vw;text-align:center;"
+      src="https://static.zgepub.cn/shanghairenminchubanshe/huozhong/video/001.mp4"
+      controls="controls"></video>
+    <div class="two">wwww</div> 
+  </div>
+  <style>
+    div:has(video:focus) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }  
+    .div:has(video) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      } 
+    .div:has(.two){
+      color: red;
+    }   
+  </style>
+</body>
+
+</html>
