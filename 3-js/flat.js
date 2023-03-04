@@ -11,5 +11,4 @@ console.log(arr.flat(Infinity));
 // ]
 
 
-console.log(arr.flat());
-// 只能展开一层
+console.log(arr.flat());// 只能展开一层
