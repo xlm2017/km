@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: xlm
  * @Date: 2023-02-18 17:49:19
- * @LastEditTime: 2023-03-02 17:47:59
+ * @LastEditTime: 2023-03-03 15:17:17
  * @LastEditors: xlm
 -->
 
@@ -56,5 +56,9 @@ npm config get userconfig
 node:internal/modules/cjs/loader:926
   throw err;
 
-#
+# 快速删除 node_modules
+
 rimraf node_modules
+
+
+npm i cross-env -g   npm i phantomjs -g

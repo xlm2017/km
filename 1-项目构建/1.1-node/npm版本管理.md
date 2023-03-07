@@ -25,7 +25,12 @@ npm init -y
 
 "prestart": "node example.js",
 
-"poststart": "node example.js"
+"poststart": "node example.js",
+
+// 历史遗留, install之后执行
+"legacy": "cross-env NODE_ENV=production LEGACY=true webpack --progress",
+
+"productionLegacy": "cross-env NODE_ENV=production MINIMIZE=true LEGACY=true webpack --progress",
 
 },
 

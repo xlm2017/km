@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: xlm
  * @Date: 2023-03-01 17:06:35
- * @LastEditTime: 2023-03-01 17:06:39
+ * @LastEditTime: 2023-03-03 11:01:13
  * @LastEditors: xlm
  */
 // Regular Expressions for parsing tags and attributes
@@ -35,3 +35,8 @@ const decodingMap = {
 }
 const encodedAttr = /&(?:lt|gt|quot|amp|#39);/g
 const encodedAttrWithNewLines = /&(?:lt|gt|quot|amp|#39|#10|#9);/g
+
+
+
+// 参考解析
+// https://blog.csdn.net/weixin_39801165/article/details/110794960

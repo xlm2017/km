@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: xlm
  * @Date: 2023-02-24 14:24:55
- * @LastEditTime: 2023-02-27 10:44:58
+ * @LastEditTime: 2023-03-07 15:23:40
  * @LastEditors: xlm
 -->
 <!DOCTYPE html>
@@ -29,11 +29,18 @@
       align-items: center;
       height: 100%;
     }  
+ 
+
+    /* :has 结合属性选择器, 目前不支持 */
+    p > img:has([style*="text-align: right"]) {
+      text-align: right;
+    }
   </style>
   <div class="div">
     <video style="width:42.5vw;text-align:center;"
       src="https://static.zgepub.cn/shanghairenminchubanshe/huozhong/video/001.mp4"
       controls="controls"></video>
+     qqqq 
     <div class="two">wwww</div> 
   </div>
 </body>
