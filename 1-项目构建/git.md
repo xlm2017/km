@@ -1,7 +1,3 @@
-# git
-
-## 提交文件流程
-
 ### 提交文件到暂存区
 
 - git add (文件名或者目录)
@@ -176,3 +172,16 @@ git config --global user.email "xxx"
 强制推送到gitlab
 
 *XMind - Trial Version*
+
+
+
+# submodule
+
+
+# 统计代码量
+
+git log branch_Back..branch --author="baby" --pretty=tformat: --numstat | grep configs | gawk '{ add += $1 ; subs += $2 ; loc += $1 + $2 } END { printf "added lines: %s removed lines : %s total lines: %s\n",add,subs,loc }'
+
+added lines: 2252 removed lines : 3 total lines: 2255
+
+原文链接：https://blog.csdn.net/O_Baby_9/article/details/82776175

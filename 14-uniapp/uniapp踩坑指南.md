@@ -44,3 +44,11 @@
 ## 分支主题 3
 
 *XMind - Trial Version*
+
+
+
+var pages = getCurrentPages();
+var prevPage = pages[pages.length - 2]; //上一个页面
+prevPage.$vm.real.bankName = 'aaa'
+
+这这种方式可以解决, 不要用setData
