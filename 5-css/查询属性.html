@@ -1,0 +1,71 @@
+<!--
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-03-13 20:06:48
+ * @LastEditTime: 2023-03-14 17:30:16
+ * @LastEditors: xlm
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <style>
+    .one{
+      text-align: center;
+    }
+  </style>
+  <div>
+    <div class="one">
+      qqqq
+    </div>
+    <div class="two">dddd</div>
+    
+
+    <iframe srcdoc='<div class="three" style="text-align: center;">tttt</div>'></iframe>
+
+  </div>
+  <script>
+    window.onload = ()=>{
+      const allTags = document.getElementsByTagName('*')
+      for (let i = 0; i < allTags.length; i++) {
+        const tag = allTags[i]
+        const style = tag.getAttribute('style')
+        const computedStyle = window.getComputedStyle(tag);
+        console.log(computedStyle.textAlign);
+        // 查询属性.html:35 start
+        // 查询属性.html:35 center
+        // 查询属性.html:35 start
+
+        // 属性修改
+        tag.style.textAlign = 'right';
+      }
+
+      const iframes = Array.from(document.getElementsByTagName('iframe'));
+      for (let k = 0; k < iframes.length; k++) {
+        const allTags = Array.from(iframes[k].contentWindow.document.getElementsByTagName('*'));
+        for (let i = 0; i < allTags.length; i++) {
+         let tag = allTags[i];
+         tag.style = `text-align: right;`;
+        }
+      }
+
+      // tag.style.width = `width:${newVal}px;`;  
+        // tag.style.cssText = `width:${newVal}px; !important;` + tag.style.cssText;
+        tag.style = tag.style.cssText + `width:${newVal}px; !important;`;
+
+      // 反过来才会生效, 前者被后者覆盖  
+    }
+  </script>
+</body>
+</html>
+
+
+<!-- https://developer.mozilla.org/zh-CN/docs/Web/API/Window/getComputedStyle -->
+
+
+<!-- getPropertyValue -->

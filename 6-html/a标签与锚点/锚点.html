@@ -1,0 +1,46 @@
+<!--
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-03-15 10:05:08
+ * @LastEditTime: 2023-03-15 10:15:46
+ * @LastEditors: xlm
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <ul>
+      <li><a href="#math">跳转数学</a></li>
+    </ul>
+  </div>  
+  <div>
+    <div class="t1">前端</div>
+    <div class="t2" id="hou">后端</div>
+    <div class="t3">音视频</div>
+    <div class="t4">c++</div>
+    <div class="t5" id="math">数学</div>
+    <div>
+      <ul>
+        <li><a href="#hou">跳转后端</a></li>
+      </ul>
+    </div>  
+  </div>
+  <style>
+
+   .t1,.t2,.t3,.t4,.t5{
+    background: green;
+    height: 60vh;
+   }
+   :is(.t1,.t2,.t3,.t4,.t5) {
+     margin-bottom: 30px;
+   }
+
+  </style>
+</body>
+</html>
