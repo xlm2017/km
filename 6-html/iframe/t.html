@@ -1,4 +1,27 @@
+<!--
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-03-24 18:21:39
+ * @LastEditTime: 2023-03-24 18:43:58
+ * @LastEditors: xlm
+-->
+
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <iframe srcdoc="" id="ifr" width="500" height="600"></iframe>
+  </div>
+  <script>
+    let color = 'red';
+    let str = `
+    <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -59,17 +82,23 @@
   </style>
   <script>
     
-    window.addEventListener('load', function(event) {
+    window.addEventListener('load', (event)=> {
       let color = 'red';
       setTimeout( function(){
         document.addEventListener("click", function (event) {
-          document.body.style.backgroundColor = `${color}`;
+          document.body.style.backgroundColor = \`${color}\`;
         })
 
         let body = document.querySelector("body");
         const styles = getComputedStyle(body);
       }, 2000);
     })    
+  \<\/script>
+</body>
+</html>
+    `
+    let ifr = document.getElementById('ifr');
+    ifr.srcdoc = str;
   </script>
 </body>
 </html>

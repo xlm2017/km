@@ -1,0 +1,20 @@
+{
+  "name": "one",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node test.js",
+    "devc": "node testc.cjs",
+    "dev2": "node test.cjs",
+    "build": "node ./scripts/build.cjs",
+    "build0": "node ./scripts/build0.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "rollup": "^3.20.0"
+  }
+}

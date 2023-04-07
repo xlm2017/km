@@ -1,0 +1,160 @@
+<!--
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-04-04 09:35:48
+ * @LastEditTime: 2023-04-04 10:00:24
+ * @LastEditors: xlm
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原生选区</title>
+  <style>
+  .selection-range-box {
+    width: 242.14px;
+    height: 107.14px;
+    background: #3A3C3E;
+    border-radius: 8.57px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .selection-range-box .background{
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 56px);
+    padding: 0 28px;
+    box-sizing: content-box;
+    border-bottom: 1px solid #6A7484;
+
+  }
+  .selection-range-box .background>div {
+    width: 19.29px;
+    height: 19.29px;
+    border-radius: 50%;
+    margin-top: 10px;
+    margin-bottom: 12.8px;
+    cursor: pointer;
+  }
+
+  .selection-range-box .background .cricle1 {
+    background: #FFB821;
+  }
+
+  .selection-range-box .background .cricle2 {
+    background: #B3DDFF;
+  }
+
+  .selection-range-box .background .cricle3 {
+    background: #5BEB54;
+  }
+
+  .selection-range-box .background .cricle4 {
+    background: #F6ACCA;
+  }
+
+  .selection-range-box .opr-list {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10.7px;
+
+  }
+  .selection-range-box .opr-list>div {
+    width: 55.18px;
+    padding-top: 33px;
+    font-weight: 400;
+    font-size: 12.86px;
+    color: #FFFFFF;
+    letter-spacing: 1.22px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .selection-range-box .opr-list > div::after {
+    width: 18.86px;
+    height: 18.86px;
+    background-size: 100%;
+    background-position: center center;
+    content: '';
+    display: block;
+    position: absolute;
+    top: 10px;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-9.43px);
+  }
+
+  .selection-range-box .opr-list .one::after {
+    background-image: url("./images/reader_icon22_notes@2x.png");
+  }
+
+  .selection-range-box .opr-list .two::after {
+    background-image: url("./images/reader_icon22_copy@2x.png");
+  }
+
+  .selection-range-box .opr-list .three::after {
+    background-image: url("./images/reader_icon22_search@2x.png");
+  }
+
+  .selection-range-box .opr-list .four::after {
+    background-image: url("./images/reader_icon22_share@2x.png");
+  }
+
+  .selection-range-box.top::after{
+    content: '';
+    display: block;
+    border: 10px solid transparent;
+    border-top-color: #3A3C3E;
+    position: absolute;
+    bottom: -19px;
+    z-index: 100;
+    left: 50%;
+    transform: translateX(-10px);
+  }
+  .selection-range-box.bottom::after{
+    content: '';
+    display: block;
+    border: 10px solid transparent;
+    border-bottom-color: #3A3C3E;
+    position: absolute;
+    top: -19px;
+    z-index: 100;
+    left: 50%;
+    transform: translateX(-10px);
+  }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class='dianzishu-note-window'></div>
+    <div class='dianzishu-note-window-triangle'></div>
+    <div class='selection-range-box'>
+      <div class='background'>
+        <div class='cricle1' onclick='handleBgColor(0)'></div>
+        <div class='cricle2'></div>
+        <div class='cricle3'></div>
+        <div class='cricle4'></div>
+      </div>
+      <div class="opr-list">
+        <div class="one" onclick="handleOpr(0)">笔记</div>
+        <div class="two" onclick="handleOpr(1)">复制</div>
+        <div class="three" onclick="handleOpr(2)">查询</div>
+        <div class="four" onclick="handleOpr(3)">分享</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // window.onload = ()=>{
+      function handleBgColor(index){
+        console.log(index)
+      }
+    // }
+
+
+  </script>
+</body>
+</html>

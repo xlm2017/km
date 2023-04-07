@@ -1,0 +1,49 @@
+<!--
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-04-06 17:00:51
+ * @LastEditTime: 2023-04-06 17:11:57
+ * @LastEditors: xlm
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="copy-success-div">
+    已复制到剪切板
+  </div>
+  <style>
+    .copy-success-div{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      box-sizing: border-box;
+      padding: 10px 20px;
+      width: 150px;
+      background: rgba(0, 0, 0, 0.85);
+      border-radius: 10px;
+      font-weight: 400;
+      font-size: 14px;
+      color: #FFFFFF;
+      letter-spacing: 0;
+
+      animation-name: hide2seconds;
+      opacity: 1;
+      animation-duration: 0.8s;
+      animation-delay: 1s;
+      animation-fill-mode: forwards;
+    }
+    @keyframes hide2seconds {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+  </style>
+</body>
+</html>

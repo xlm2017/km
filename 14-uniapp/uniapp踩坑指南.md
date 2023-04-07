@@ -52,3 +52,7 @@ var prevPage = pages[pages.length - 2]; //上一个页面
 prevPage.$vm.real.bankName = 'aaa'
 
 这这种方式可以解决, 不要用setData
+
+
+
+用yarn, npm初始化下载包有坑, 别问为什么有坑坑

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>子页面</title>
+</head>
+<body>
+  <div>子页面</div>
+</body>
+<script>
+  window.onload = function () {
+    console.log("子页面-onload");
+
+    console.dir(window.document);
+
+    // html
+    console.log("document:", window.document.documentElement);
+    
+    
+    console.log("document=parentNode:", window.document.documentElement.parentNode);
+
+
+    console.log("document-par:", window.parent);
+
+    console.log("document-par2:", window.parent.document);
+
+  }
+</script>
+</html>

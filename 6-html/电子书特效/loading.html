@@ -1,0 +1,60 @@
+<!--
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-04-06 17:36:29
+ * @LastEditTime: 2023-04-06 18:02:54
+ * @LastEditors: xlm
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="reader-loading-container">
+    <div class="reader-loading-content">
+      <div class="reader-loading-img"></div>
+      <div class="reader-loading-tip">书籍正在加载中...</div>
+    </div>
+  </div>
+  <style>
+    .reader-loading-container{
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.2);
+      
+    }
+    .reader-loading-container .reader-loading-content{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; 
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .reader-loading-container .reader-loading-content .reader-loading-img{
+      width: 32px;
+      height: 32px;
+      animation: spin 2s linear infinite;
+      background-image: url('./images/loading.png');
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+    .reader-loading-container .reader-loading-content .reader-loading-tip{
+      margin-top: 10px; 
+    }
+  </style>
+</body>
+</html>

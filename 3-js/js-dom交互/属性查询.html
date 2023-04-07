@@ -1,0 +1,31 @@
+<!--
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-04-04 17:11:45
+ * @LastEditTime: 2023-04-04 17:13:34
+ * @LastEditors: xlm
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>属性查询</title>
+</head>
+<body>
+  <script>
+    // getComputedStyle
+
+
+    function getComputedStyle(dom, attrName) {
+      let myDiv = document.getElementById('myDiv');
+      let computedStyle = getComputedStyle(myDiv);
+      let backgroundColor = computedStyle.backgroundColor;
+      console.log(backgroundColor); // 输出：rgb(255, 0, 0)
+      return getComputedStyle(dom)[attrName];
+    }
+
+  </script>
+</body>
+</html>
