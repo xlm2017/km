@@ -1,0 +1,97 @@
+<!--
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-04-11 15:20:25
+ * @LastEditTime: 2023-04-11 18:00:32
+ * @LastEditors: xlm
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p class="p1">
+    百度仔
+    <img src="../images/test1.jpg"/>
+    文字复制
+  </p>
+  <script>
+
+    document.addEventListener('mouseup', function () {
+      console.log("鼠标松开");
+      
+      const selection = window.getSelection();
+      const range = selection.getRangeAt(0);
+      var boundingRects = range.getClientRects();
+      console.log("boundingRects:", boundingRects);
+      let currentSelectionText = calcSelectionText(range);
+
+      console.log("currentSelectionText:", currentSelectionText);
+    })
+
+
+    // 计算选区中的文字内容
+    function calcSelectionText(range){
+      let parents = Array.from(document.body.querySelectorAll('*'));
+      // nodeName
+      parents = parents.filter((item)=>{
+        return item.nodeName !== 'SCRIPT'
+      })
+      let firstDiv = range.startContainer;
+      let secondDiv = range.endContainer;
+      console.log("选区范围:", range);
+
+      if(firstDiv === secondDiv){
+        let value = range.commonAncestorContainer.textContent.substring(range.startOffset, range.endOffset);
+        console.log("同一个div", value);
+        return value;
+      }else{
+        // 遍历父元素的子节点
+        console.log("parents:", parents);
+        let allElements = [];
+        var isBetweenDivs = false;
+        for (var i = 0; i < parents.length; i++) {
+          // var child = parents[i].innerText.replace(/^\s+|\s+$/g, '').replace(/\n/g, '');
+          var child = parents[i].innerText.replace(/\n/g, '');
+
+          console.log("child:", parents[i].nodeName, parents[i].innerText, firstDiv.textContent, secondDiv.textContent);
+
+          // 去掉两端空格和换行符
+          // str = str.replace(/^\s+|\s+$/g, '');
+          // // 去掉中间的换行符
+          // str = str.replace(/\n/g, '');
+
+          // 如果当前元素是第一个 Div，则设置 isBetweenDivs 变量为 true
+          // if (child === firstDiv.textContent.replace(/^\s+|\s+$/g, '').replace(/\n/g, '')) {
+          // if (child === firstDiv.textContent.replace(/\n/g, '')) {
+          if (child === firstDiv.innerText) {
+            var isBetweenDivs = true;
+            child = child.substring(range.startOffset);
+            allElements.push(child);
+            continue;
+          }
+          if(isBetweenDivs && child !== firstDiv.textContent && child !== secondDiv.textContent){
+            allElements.push(child);
+          }
+          
+          // 如果当前元素是第二个 Div，则中止循环
+          // if (child === secondDiv.textContent.replace(/^\s+|\s+$/g, '').replace(/\n/g, '')) {
+          if (child === secondDiv.innerText) {
+            // 如果当前元素在第一个和第二个 Div 之间，则将其添加到数组中
+            child = child.substring(0, range.endOffset)
+            allElements.push(child);
+            break;
+          }
+        }
+        allElements = [... new Set(allElements)];
+        console.log("集合:", allElements);
+        return allElements.join('');
+      }
+    }
+  </script>
+</body>
+</html>
