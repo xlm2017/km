@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-02-18 17:28:20
+ * @LastEditTime: 2023-04-26 10:31:12
+ * @LastEditors: xlm
+ */
 function foo(){// 第16行
   getName = function(){console.log(1)}
   return this
@@ -39,3 +46,6 @@ new new foo().getName()//3
 //先执行new foo()得到一个实例，然后在new 这个实例的getName方法,这个时候会执行这个方法，所以输出3
 
 //除了本地对象的方法，其他的函数都能new
+
+
+// new的优先级较高

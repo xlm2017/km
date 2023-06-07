@@ -1,0 +1,77 @@
+
+
+// 给出基数为 -2 的两个数 arr1 和 arr2，返回两数相加的结果。
+
+// 数字以 数组形式 给出：数组由若干 0 和 1 组成，按最高有效位到最低有效位的顺序排列。例如，arr = [1,1,0,1] 表示数字 (-2)^3 + (-2)^2 + (-2)^0 = -3。数组形式 中的数字 arr 也同样不含前导零：即 arr == [0] 或 arr[0] == 1。
+
+// 返回相同表示形式的 arr1 和 arr2 相加的结果。两数的表示形式为：不含前导零、由若干 0 和 1 组成的数组。
+
+
+
+// 示例 1：
+
+// 输入：arr1 = [1,1,1,1,1], arr2 = [1,0,1]
+// 输出：[1,0,0,0,0]
+// 解释：arr1 表示 11，arr2 表示 5，输出表示 16 。
+// 示例 2：
+
+// 输入：arr1 = [0], arr2 = [0]
+// 输出：[0]
+// 示例 3：
+
+// 输入：arr1 = [0], arr2 = [1]
+// 输出：[1]
+
+
+// 提示：
+
+// 1 <= arr1.length, arr2.length <= 1000
+// arr1[i] 和 arr2[i] 都是 0 或 1
+// arr1 和 arr2 都没有前导0
+
+
+/**
+ * @param {number[]} arr1
+ * @param {number[]} arr2
+ * @return {number[]}
+ */
+var addNegabinary = function (arr1, arr2) {
+
+  let num1 = BigInt(0);
+  for (let i = 0; i < arr1.length; i++) {
+    num1 += BigInt(Math.pow(-2, arr1.length - i - 1)) * BigInt(arr1[i]);
+  }
+  let num2 = BigInt(0);
+  for (let i = 0; i < arr2.length; i++) {
+    num2 += BigInt(Math.pow(-2, arr2.length - i - 1)) * BigInt(arr2[i]);
+  }
+  console.log(num1, num2);
+  // arr1 表示 11，arr2 表示 5，输出表示 16 
+  let res = BigInt(num1 + num2);
+  function decimalToNegativeBinary(decimalNumber) {
+    decimalNumber = BigInt(decimalNumber);
+    if (decimalNumber === 0) { return "0"; }
+    let result = "";
+    while (decimalNumber !== 0) {
+      // let remainder = Math.abs(decimalNumber % -2);
+      // decimalNumber = Math.ceil(decimalNumber / -2);
+      // result = remainder + result;
+
+        const quotient = BigInt(Math.ceil(decimalNumber / BigInt(-2)));
+        // 在 JavaScript 中，Math.ceil() 函数用于将数字向上舍入为最接近的整数。如果该数字是一个 BigInt 类型的值，则它将被自动转换为 Number 类型，然后进行处理，并返回一个 Number 类型的结果。
+
+        const remainder = Math.abs(decimalNumber % BigInt(-2));
+        result = remainder + result;
+        decimalNumber = quotient;
+    }
+
+    return result;
+  }
+  let v = decimalToNegativeBinary(res);
+  return v.split('').map(item => item * BigInt(1));
+};
+
+let arr1 = [1, 1, 1, 1, 1], arr2 = [1, 0, 1];
+// [ 1, 0, 0, 0, 0 ]
+
+console.log(addNegabinary(arr1, arr2));

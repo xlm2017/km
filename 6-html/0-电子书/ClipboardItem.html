@@ -1,0 +1,82 @@
+<!--
+ * @Description: 
+ * @Author: xlm
+ * @Date: 2023-05-04 09:38:30
+ * @LastEditTime: 2023-05-04 17:22:13
+ * @LastEditors: xlm
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div onclick="copy()">复制文字</div>
+  <script>
+    function copy () {
+      let currentSelectionText = '这是要复制的文字';
+      // 使用示例
+      const clipboard = new ClipboardAdapter();
+      clipboard.copyText('要复制的文本');
+
+      // var item = new ClipboardItem({ 'text/plain': new Blob([currentSelectionText], { type: 'text/plain' }) });
+      // // 将数据添加到系统剪贴板中
+      // navigator.clipboard.write([item]).then(function () {
+      //   console.log('已成功复制到剪贴板！');
+      // }, function (err) {
+      //   console.error('复制失败: ', err);
+      // });
+    }
+
+
+    // 适配器模式
+    // 剪切板适配器
+    class ClipboardAdapter {
+      constructor() {
+        if (!navigator.clipboard) {
+          // 如果浏览器支持 clipboard API，则直接使用
+          this.clipboard = navigator.clipboard;
+        } else {
+          console.log(document.execCommand)
+          // 否则尝试使用 document.execCommand('copy') 方法
+          this.clipboard = {
+            writeText: function (text) {
+              return new Promise(function (resolve, reject) {
+                var success = false;
+                try {
+                  success = document.execCommand('copy');
+                } catch (err) {
+                  console.error(err);
+                }
+                if (success) {
+                  resolve();
+                } else {
+                  reject();
+                }
+              });
+            }
+          };
+        }
+      }
+
+      // 将文本复制到剪切板
+      async copyText (text) {
+        try {
+          await this.clipboard.writeText(text);
+          console.log('已成功将文本复制到剪切板');
+        } catch (err) {
+          console.error('无法将文本复制到剪切板');
+        }
+      }
+    }
+
+
+  </script>
+</body>
+
+</html>
