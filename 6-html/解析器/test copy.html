@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* 居中容器 */
+    .center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* 包含盒子 */
+    .box {
+      width: 375px;
+      height: auto; /* 或者设置一个高度 */
+      background-color: lightgray;
+      padding: 20px;
+    }
+
+    /* 内部 div */
+    .inner-div {
+      width: 100vw;
+      height: 100px;
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div class="center-container">
+    <div class="box">
+      <div class="inner-div"></div>
+    </div>
+  </div>
+</body>
+</html>

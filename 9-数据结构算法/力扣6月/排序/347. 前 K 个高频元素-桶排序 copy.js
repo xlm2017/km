@@ -34,6 +34,7 @@ var topKFrequent = function (nums, k) {
   }
   if (k === map.size) return [...map.keys()];//k如果等于map.size，直接返回全部key
   console.log("map:", map);
+  // 桶
   let arr = [];
   map.forEach((value, key) => {
     //arr[i]存放频率为i的key数组
@@ -64,5 +65,5 @@ console.log(topKFrequent(nums, k));
 
 
 // map转为数组
-let list = Array.from(map).sort((a,b)=>b[1]-a[1])
-return list.slice(0,k).map(n=>n[0])
+// let list = Array.from(map).sort((a,b)=>b[1]-a[1])
+// return list.slice(0,k).map(n=>n[0])

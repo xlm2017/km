@@ -51,9 +51,10 @@ var reverseList = function(head) {
 let head1 = {
   val: 1,
   next: {
-    val: 1,
+    val: 2,
     next: {
-      val: 2
+      val: 3,
+      next: null
     }
   }
 }

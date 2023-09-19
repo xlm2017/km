@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* 包含盒子 */
+    .box {
+      position: relative;
+      width: 375px;
+      height: auto; /* 或者设置一个高度 */
+      background-color: lightgray;
+      padding: 20px;
+    }
+
+    /* 内部 div */
+    .inner-div {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%; /* 基于父级盒子宽度 */
+      height: 100px;
+      background-color: blue;
+      transform: translateX(0); /* 保持位置不变 */
+    }
+
+    /* 设置 vw 对应的值，这里是父级盒子的 20% */
+    .inner-div.vw-20 {
+      /* width: 20%; 20% 对应的父级盒子的宽度 */
+
+
+      width: 20vw; 
+    }
+  </style>
+</head>
+<body>
+  <!-- <div class="box">
+    <div class="inner-div vw-20"></div>
+  </div> -->
+  
+</body>
+</html>

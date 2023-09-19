@@ -28,10 +28,34 @@ set https_proxy=127.0.0.1:7890
 
 # git 设置代理
 
+ 
+git config --global http.proxy 'http://127.0.0.1:4780' 
+git config --global https.proxy 'http://127.0.0.1:4780'
+ 
+ 
+git config --global --get http.proxy
+git config --global --get https.proxy
+ 
+ 
+# 取消全局代理
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+
+取消全局代理
+命令行方式：git config --global --unset http.proxy
+ 
+
+# 查地址
+git remote -v
+origin  http://172.80.0.250/geeboo/ui-school.git (fetch)
+
 本地项目设置
 
 git config --local http.proxy 127.0.0.1:7890
 
+# 取消本地项目设置
+git config --local --unset http.proxy
+git config --local --unset https.proxy
 
 全局git设置
 
@@ -49,6 +73,17 @@ git config --global http.proxy 127.0.0.1:7890
 npm config set registry https://registry.npm.taobao.org 
 
 
+
+cnpm config get registry 
+cnpm config set registry https://registry.npm.taobao.org 
+
+## cnpm 替换成淘宝后，报错TypeError: randomUUID is not a function无法初始化, 版本问题
+npm uninstall -g cnpm
+npm install cnpm@7.1.0 -g
+
+
+
+
 npm cache clean --force
 
 npm config get userconfig
@@ -62,3 +97,22 @@ rimraf node_modules
 
 
 npm i cross-env -g   npm i phantomjs -g
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6月19日 09:33gitlab地址: http://172.80.0.250/geeboo/ui-school
+账号：lib
+密码：lib123456
+项目名称：ui-school
