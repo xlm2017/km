@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <div id="con" contenteditable="true">
+      <div id="one">测试</div>
+      <div id="two">测试span</div>
+      <div id="three">测试spandd
+        fg
+
+
+        公共
+
+
+        会尽快 更换基金
+      </div>
+    </div>
+
+    <button onclick="to()">粘贴文字到富文本</button>
+  </div>
+</body>
+
+</html>
+
+<script>
+
+  let con = document.getElementById("con");
+  console.log("con.innerText:", con.innerText);
+  console.log("con.textContent:", con.textContent);
+
+
+  function to() {
+    toPaste();
+    return;
+    let con = document.getElementById("con");
+    con.focus();
+    setTimeout(() => {
+      con.focus();
+      var inputEvent = new InputEvent('input', {
+        data: 'ceshi',
+        // inputType: 'insertText',
+        inputType: 'insertCompositionText',
+        bubbles: true,
+        composed: true,
+        isTrusted: true,
+      });
+      con.dispatchEvent(inputEvent);
+    }, 1000)
+  }
+
+  function toPaste() {
+    let con = document.getElementById("con");
+    con.focus();
+    // 创建一个新的 Range 对象
+    let range = document.createRange();
+    // 设置 Range 的开始和结束位
+    range.selectNodeContents(con);
+    // 获取 Selection 对象
+    let selection = window.getSelection();
+    // 清除所有的选定范围
+    selection.removeAllRanges();
+    // 将新的 Range 添加到 Selection
+    selection.addRange(range);
+
+    setTimeout(() => {
+      let data = new DataTransfer()
+      data.setData('text/plain', "测试修改11111");
+      var pasteEvent = new ClipboardEvent('paste', {
+        bubbles: true,
+        cancelable: true,
+        clipboardData: data,
+      });
+      con.focus();
+      con.dispatchEvent(pasteEvent);
+    }, 50)
+  }
+
+  // document事件监听器
+  document.addEventListener('paste', (e) => {
+    try {
+      let text = e.clipboardData.getData('text/plain');
+      console.warn('粘贴完成:', text, e);
+    } catch (error) {
+      console.log('粘贴异常', error);
+    }
+  }, true);
+
+  let con1 = document.getElementById("con");
+  con1.addEventListener('input', (e, b) => {
+    try {
+      console.warn('input完成:', e, b);
+    } catch (error) {
+      console.log('input异常', error);
+    }
+  }, true);
+</script>
